@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -10,6 +11,24 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const mulish = localFont({
+  src: "../public/fonts/Mulish,Plus_Jakarta_Sans/Mulish/Mulish-VariableFont_wght.ttf",
+  variable: "--font-mulish",
+  display: "swap",
+});
+
+const jakartaSans = localFont({
+  src: "../public/fonts/Mulish,Plus_Jakarta_Sans/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf",
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+const nunito = localFont({
+  src: "../public/fonts/Nunito/Nunito-VariableFont_wght.ttf",
+  variable: "--font-nunito",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +44,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${mulish.variable} ${jakartaSans.variable} ${nunito.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body suppressHydrationWarning className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }
