@@ -54,8 +54,8 @@ export default function NavBar() {
             alt="NexiFire Logo"
             width={240}
             height={64}
-            sizes="(max-width: 640px) 170px, (max-width: 1280px) 190px, 240px"
-            className="h-auto w-[170px] shrink-0 sm:w-[190px] xl:w-[240px]"
+            sizes="auto"
+            className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px] xl:h-[70px]"
             priority
           />
         </div>
