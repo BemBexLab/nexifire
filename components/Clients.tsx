@@ -57,31 +57,33 @@ export default function Clients() {
   }, [hasAnimated, isInView]);
 
   return (
-    <div ref={rootRef} className="flex flex-col gap-2">
+    <div
+      ref={rootRef}
+      className="flex w-full max-w-full flex-col items-center gap-3 px-2 pb-6 text-center md:px-0 md:pb-0 md:items-start md:text-left"
+    >
       {/* Label */}
-      <p className="font-nunito text-[16px] text-black tracking-wide font-medium">
+      <p className="font-nunito text-sm font-medium tracking-wide text-black md:text-[16px]">
         Trusted By Clients
       </p>
 
       {/* Avatars + Count */}
-      <div className="flex items-center gap-4">
+      <div className="flex w-full max-w-full flex-wrap items-center justify-center gap-3 md:justify-start md:gap-4">
         {/* Overlapping avatar stack */}
-        <div className="flex items-center">
+        <div className="flex max-w-full items-center pl-2 md:pl-0">
           {avatars.map((src, i) => (
             <img
               key={i}
               src={src}
               alt={`Client ${i + 1}`}
-              className="w-18 h-18 rounded-full object-cover border-[3px] border-[#f0f0f0]"
-              style={{ marginLeft: i === 0 ? 0 : "-14px", zIndex: i }}
+              className="h-12 w-12 rounded-full border-[3px] border-[#f0f0f0] object-cover md:h-16 md:w-16 xl:h-18 xl:w-18"
+              style={{ marginLeft: i === 0 ? 0 : "-12px", zIndex: i }}
             />
           ))}
         </div>
 
         {/* Count */}
         <span
-          className="text-[#1c1c1c] font-semibold"
-          style={{ fontSize: "32px", letterSpacing: "-0.5px" }}
+          className="font-jakarta text-[26px] font-semibold tracking-[-0.5px] text-[#1c1c1c] md:text-[32px]"
         >
           {animatedCount}+
         </span>

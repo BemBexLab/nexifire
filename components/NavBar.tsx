@@ -47,25 +47,28 @@ export default function NavBar() {
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="w-full py-3 flex items-center gap-62 justify-center">
-        <div className="flex items-center gap-2.5 min-w-[160px]">
-          <Image
-            src="/images/Group 427320850.png"
-            alt="NexiFire Logo"
-            width={230}
-            height={200}
-            className="w-auto h-auto"
-          />
+      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6 xl:px-10">
+        <div className="flex min-w-0 items-center gap-2.5 justify-self-start">
+          <div className="relative h-[60px] w-[200px] sm:h-[65px] sm:w-[220px] xl:h-[75px] xl:w-[280px]">
+            <Image
+              src="/images/Group 427320850.png"
+              alt="NexiFire Logo"
+              sizes="(max-width: 640px) 200px, (max-width: 1280px) 220px, 280px"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
         </div>
 
         {/* ── Desktop Nav Links ─────────────────────────────────────── */}
-        <ul className="hidden font-jakarta text-lg md:flex items-center gap-13">
+        <ul className="hidden flex-1 items-center justify-center gap-13 font-jakarta text-lg lg:flex">
           {navLinks.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
                 onClick={() => setActiveLink(link.label)}
-                className={`text-md transition-colors duration-150 whitespace-nowrap ${
+                className={`whitespace-nowrap text-md transition-colors duration-150 ${
                   activeLink === link.label
                     ? "text-black font-regular border-b-2 border-[#c0784a] pb-0.5"
                     : "text-[#777777] hover:text-[#1c1c1c] font-normal"
@@ -78,8 +81,8 @@ export default function NavBar() {
         </ul>
 
         {/* ── CTA Button ───────────────────────────────────────────── */}
-        <div className="hidden font-jakarta md:flex items-center min-w-[240px] min-h-[48px] justify-end">
-          <button className="flex items-center justify-center w-full gap-2 px-5 py-[9px] rounded-lg border border-[#c0784a] text-[#c0784a] text-md font-medium hover:bg-[#c0784a] hover:text-white transition-all duration-200">
+        <div className="hidden min-h-[48px] items-center justify-end font-jakarta lg:flex">
+          <button className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a] px-5 py-[9px] text-md font-medium text-[#c0784a] transition-all duration-200 hover:bg-[#c0784a] hover:text-white">
             Free Consultation
             <CalendarIcon />
           </button>
@@ -87,7 +90,7 @@ export default function NavBar() {
 
         {/* ── Mobile Hamburger ─────────────────────────────────────── */}
         <button
-          className="md:hidden flex flex-col gap-[5px] p-1"
+          className="flex flex-col gap-[5px] p-1 lg:hidden"
           onClick={() => setMobileOpen((p) => !p)}
           aria-label="Toggle menu"
         >
@@ -105,7 +108,7 @@ export default function NavBar() {
 
       {/* ── Mobile Dropdown ───────────────────────────────────────── */}
       {mobileOpen && (
-        <div className="md:hidden font-jakarta bg-[#f5f4f2] border-t border-[#e5e3df] px-6 py-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 border-t border-[#e5e3df] bg-[#f5f4f2] px-6 py-4 font-jakarta lg:hidden">
           {navLinks.map((link) => (
             <a
               key={link.label}

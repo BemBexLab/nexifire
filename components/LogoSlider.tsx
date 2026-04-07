@@ -21,11 +21,11 @@ const track = [...logos, ...logos];
 
 export default function LogoSlider() {
   return (
-    <div className="w-[920px] overflow-hidden relative py-6 bg-white">
+    <div className="relative mx-auto w-full overflow-hidden bg-white px-4 py-6 sm:px-6">
 
       {/* ── Blur / fade masks ── */}
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 sm:w-48"
+      {/* <div
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-24 lg:w-32 xl:w-48"
         style={{
           background:
             "linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.85) 40%, transparent 100%)",
@@ -36,7 +36,7 @@ export default function LogoSlider() {
         }}
       />
       <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 sm:w-48"
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-24 lg:w-32 xl:w-48"
         style={{
           background:
             "linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0.85) 40%, transparent 100%)",
@@ -45,11 +45,11 @@ export default function LogoSlider() {
           maskImage: "linear-gradient(to left, black 0%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to left, black 0%, transparent 100%)",
         }}
-      />
+      /> */}
 
       {/* ── Scrolling track ── */}
       <div
-        className="flex items-center gap-12 w-max"
+        className="flex w-max items-center gap-6 sm:gap-8 lg:gap-12"
         style={{ animation: "marquee 15s linear infinite" }}
       >
         {track.map((logo, i) => (
@@ -73,13 +73,13 @@ export default function LogoSlider() {
 // ─────────────────────────────────────────────────────────────────────────────
 function LogoCard({ name }: { name: string }) {
   return (
-    <div className="flex items-center justify-center h-12 px-6 bg-white select-none shrink-0 min-w-[120px]">
+    <div className="flex h-12 min-w-[96px] shrink-0 select-none items-center justify-center bg-white px-4 sm:min-w-[110px] sm:px-5 lg:min-w-[120px] lg:px-6">
       {/*
         ↓ Replace this placeholder with your logo:
         <img src={`/logos/${name.toLowerCase()}.svg`} alt={name} className="h-6 w-auto object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
       */}
       <span
-        className="text-[13px] font-medium text-[#888] tracking-wide"
+        className="text-[11px] font-medium tracking-wide text-[#888] sm:text-[12px] lg:text-[13px]"
         style={{ fontFamily: "'Georgia', serif" }}
       >
         {name}
