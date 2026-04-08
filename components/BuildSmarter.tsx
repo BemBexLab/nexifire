@@ -1,10 +1,60 @@
 "use client"
 
-import { motion } from "motion/react";
-import React from "react";
+import { motion, useInView } from "motion/react";
+import React, { useEffect, useRef, useState } from "react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 
+const stats = [
+  { value: 25, suffix: "K+", label: "Leads Generated" },
+  { value: 50, suffix: "+", label: "Brands Scaled" },
+  { value: 120, suffix: "+", label: "Campaigns Launched" },
+  { value: 8, suffix: "+", label: "Years Experience" },
+];
+
+function CountUpStat({
+  value,
+  suffix,
+  start,
+}: {
+  value: number;
+  suffix: string;
+  start: boolean;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+
+    const duration = 1200;
+    let startTime: number | null = null;
+    let rafId = 0;
+
+    const tick = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * value));
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [start, value]);
+
+  return (
+    <h3 className="text-[42px] leading-none font-semibold text-[#2d2d2d] md:text-[48px]">
+      {count}
+      {suffix}
+    </h3>
+  );
+}
+
 const BuildSmarter = () => {
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const statsInView = useInView(statsRef, { once: true, amount: 0.4 });
+
   return (
     <section className="flex justify-center bg-white px-4 py-8 md:px-6">
       <div className="w-full max-w-[1600px]">
@@ -73,54 +123,30 @@ const BuildSmarter = () => {
         </div>
 
         {/* STATS */}
-        <div className="grid grid-cols-2 gap-8 pt-8 text-center md:grid-cols-4 md:gap-0">
-          <div className="flex flex-col font-jakarta items-center md:border-r md:border-[#dfdfdf] md:px-6">
-            <div className="relative mb-3 flex flex-col items-center">
-              <h3 className="relative z-10 text-[42px] leading-none font-semibold text-[#2d2d2d] md:text-[48px]">
-                25K+
-              </h3>
-              <div className="absolute -bottom-3 h-5 w-28 rounded-full bg-black/35 blur-lg" />
+        <div
+          ref={statsRef}
+          className="grid grid-cols-2 gap-8 pt-8 text-center md:grid-cols-4 md:gap-0"
+        >
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`flex flex-col items-center font-jakarta md:px-6 ${
+                index < stats.length - 1 ? "md:border-r md:border-[#dfdfdf]" : ""
+              }`}
+            >
+              <div className="mb-3 flex flex-col items-center">
+                <CountUpStat
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  start={statsInView}
+                />
+                <div className="h-2 w-full rounded-full bg-black/50 blur-sm" />
+              </div>
+              <p className="text-[18px] font-light text-[#9a9a9a]">
+                {stat.label}
+              </p>
             </div>
-            <p className="mt-2 text-[18px] text-[#9a9a9a] font-light">
-              Leads Generated
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center md:border-r md:border-[#dfdfdf] md:px-6">
-            <div className="relative mb-3 flex flex-col items-center">
-              <h3 className="relative z-10 text-[42px] leading-none font-semibold text-[#2d2d2d] md:text-[48px]">
-                50+
-              </h3>
-              <div className="absolute -bottom-3 h-5 w-28 rounded-full bg-black/35 blur-lg" />
-            </div>
-            <p className="mt-2 text-[18px] text-[#9a9a9a] font-light">
-              Brands Scaled
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center md:border-r md:border-[#dfdfdf] md:px-6">
-            <div className="relative mb-3 flex flex-col items-center">
-              <h3 className="relative z-10 text-[42px] leading-none font-semibold text-[#2d2d2d] md:text-[48px]">
-                120+
-              </h3>
-              <div className="absolute -bottom-3 h-5 w-28 rounded-full bg-black/35 blur-lg" />
-            </div>
-            <p className="mt-2 text-[18px] text-[#9a9a9a] font-light">
-              Campaigns Launched
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center md:px-6">
-            <div className="relative mb-3 flex flex-col items-center">
-              <h3 className="relative z-10 text-[42px] leading-none font-semibold text-[#2d2d2d] md:text-[48px]">
-                8+
-              </h3>
-              <div className="absolute -bottom-3 h-5 w-28 rounded-full bg-black/35 blur-lg" />
-            </div>
-            <p className="mt-2 text-[18px] text-[#9a9a9a] font-light">
-              Years Experience
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>
