@@ -1,6 +1,8 @@
+import BuildSmarter from "@/components/BuildSmarter";
 import HomeHero from "@/components/HomeHero";
 import LogoSlider from "@/components/LogoSlider";
 import NavBar from "@/components/NavBar";
+import NotAnAgency from "@/components/NotAnAgency";
 import WhatWeDo from "@/components/WhatWeDo";
 
 export default function Home() {
@@ -22,6 +24,8 @@ export default function Home() {
         <div className="absolute right-0 top-[-132px] h-32 w-44 translate-x-8 bg-[#F6F6F6]/95 blur-3xl" />
       </div>
       <WhatWeDo />
+      <NotAnAgency />
+      <BuildSmarter />
     </section>
   );
 }
