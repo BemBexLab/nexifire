@@ -42,10 +42,10 @@ const blogs: BlogCard[] = [
 const LatestBlogs = () => {
   return (
     <LazyMotion features={domAnimation}>
-      <section className="w-full bg-white flex items-center justify-center py-15">
-        <div className="flex flex-col mx-auto max-w-3/4 px-4 sm:px-6 lg:px-8">
+      <section className="flex w-full items-center justify-center bg-white pb-16 sm:pb-20">
+        <div className="mx-auto flex w-full max-w-[1180px] flex-col px-4 sm:px-6 lg:px-8">
           <m.h2
-            className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text font-jakarta text-4xl text-center py-10 font-medium uppercase leading-tight text-transparent lg:text-5xl"
+            className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text py-8 text-center font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:py-10 sm:text-4xl lg:text-5xl"
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.6 }}
@@ -54,11 +54,11 @@ const LatestBlogs = () => {
             Our Latest Blogs
           </m.h2>
 
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog, index) => (
               <m.article
                 key={blog.id}
-                className="w-[390px] rounded-2xl border border-[#EEEEEE] bg-[#FEFEFE]"
+                className="w-full overflow-hidden rounded-2xl border border-[#EEEEEE] bg-[#FEFEFE]"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -68,7 +68,7 @@ const LatestBlogs = () => {
                   delay: index * 0.08,
                 }}
               >
-                <div className="relative h-[158px] w-full overflow-hidden rounded-t-2xl md:h-[160px]">
+                <div className="relative h-[190px] w-full overflow-hidden rounded-t-2xl sm:h-[210px] md:h-[180px] lg:h-[160px]">
                   <Image
                     src={blog.image}
                     alt={blog.title}
@@ -80,8 +80,8 @@ const LatestBlogs = () => {
                   />
                 </div>
 
-                <div className="px-4 pb-5 pt-4">
-                  <h3 className="min-h-[64px] text-[17px] font-normal leading-[1.45] text-[#444444]">
+                <div className="px-4 pb-5 pt-4 sm:px-5">
+                  <h3 className="min-h-[56px] text-[16px] font-normal leading-[1.45] text-[#444444] sm:min-h-[64px] sm:text-[17px]">
                     {blog.title}
                   </h3>
 

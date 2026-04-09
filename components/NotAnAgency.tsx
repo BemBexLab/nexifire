@@ -17,7 +17,7 @@ const slotStyles = {
   left: {
     x: -140,
     y: -36,
-    rotate: -6,
+    rotate: 0,
     scale: 0.92,
     zIndex: 1,
     width: 280,
@@ -35,7 +35,7 @@ const slotStyles = {
   right: {
     x: 140,
     y: -96,
-    rotate: 6,
+    rotate: 0,
     scale: 0.92,
     zIndex: 2,
     width: 280,

@@ -1,9 +1,12 @@
 import BuildSmarter from "@/components/BuildSmarter";
+import GetInTouchSection from "@/components/GetInTouch";
 import HomeHero from "@/components/HomeHero";
 import LazyLatestBlogs from "@/components/LazyLatestBlogs";
+import LazyTestimonials from "@/components/LazyTestimonials";
 import LogoSlider from "@/components/LogoSlider";
 import NavBar from "@/components/NavBar";
 import NotAnAgency from "@/components/NotAnAgency";
+import TestimonialsSection from "@/components/Testimonials";
 import WhatWeDo from "@/components/WhatWeDo";
 
 export default function Home() {
@@ -27,7 +30,9 @@ export default function Home() {
       <WhatWeDo />
       <NotAnAgency />
       <BuildSmarter />
+      <LazyTestimonials />
       <LazyLatestBlogs />
+      <GetInTouchSection />
     </section>
   );
 }
