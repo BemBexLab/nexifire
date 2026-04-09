@@ -25,9 +25,9 @@ const slotStyles = {
   },
   front: {
     x: 0,
-    y: 54,
+    y: 88,
     rotate: 0,
-    scale: 1,
+    scale: 1.15,
     zIndex: 3,
     width: 320,
     height: 420,
@@ -56,9 +56,9 @@ const NotAnAgency = () => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex min-h-[800px] sm:mt-6 w-full items-center justify-center bg-white px-6 lg:px-20">
+      <section className="flex min-h-[800px] sm:mt-6 w-full items-center justify-center px-6 lg:px-20">
         <div className="grid w-full max-w-7xl items-center gap-16 lg:grid-cols-2">
-          <div className="relative flex h-[500px] w-full items-center justify-center overflow-visible">
+          <div className="relative flex h-[500px] w-full items-center justify-center">
             {images.map((src, index) => {
               const slot =
                 slotCycle[
@@ -71,7 +71,7 @@ const NotAnAgency = () => {
                   key={src}
                   src={src}
                   alt={`img${index + 1}`}
-                  className="absolute rounded-2xl object-cover shadow-xl"
+                  className="absolute rounded-2xl object-fit shadow-none"
                   initial={{ opacity: 0, x: -80, y: 20, scale: 0.9 }}
                   animate={{
                     opacity: 1,

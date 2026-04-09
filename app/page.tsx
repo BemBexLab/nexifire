@@ -1,5 +1,6 @@
 import BuildSmarter from "@/components/BuildSmarter";
 import HomeHero from "@/components/HomeHero";
+import LazyLatestBlogs from "@/components/LazyLatestBlogs";
 import LogoSlider from "@/components/LogoSlider";
 import NavBar from "@/components/NavBar";
 import NotAnAgency from "@/components/NotAnAgency";
@@ -26,6 +27,7 @@ export default function Home() {
       <WhatWeDo />
       <NotAnAgency />
       <BuildSmarter />
+      <LazyLatestBlogs />
     </section>
   );
 }
