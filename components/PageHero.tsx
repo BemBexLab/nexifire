@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion, type Variants } from "motion/react";
 import TextFluxUnveil from "./TextFluxUnveil";
 
 type Logo = {
@@ -54,6 +55,59 @@ const defaultTitle = "A Global Ecosystem of\nIndustry Leaders.";
 const defaultDescription =
   "NexiFire is a strategic parent organization overseeing a diverse portfolio of specialized brands in media, technology, and digital growth. We provide the high level governance and operational infrastructure that allows our subsidiary companies to deliver world class execution and sustainable market leadership.";
 
+const heroContainerVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.14,
+    },
+  },
+};
+
+const heroItemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const logoBarVariants: Variants = {
+  hidden: { opacity: 0, y: 36, scaleX: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scaleX: 1,
+    transition: {
+      duration: 0.75,
+      delay: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const logoItemVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: (index: number) => ({
+    opacity: 0.7,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      delay: 0.65 + (index % 6) * 0.04,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
 const PageHero = ({
   eyebrow = defaultEyebrow,
   title = defaultTitle,
@@ -65,8 +119,14 @@ const PageHero = ({
   return (
     <section className="w-full bg-white">
       <div className="relative max-w-full">
-        <div className="shape-section flex min-h-[520px] flex-col items-center overflow-hidden bg-[#F6F6F6] px-4 pb-28 pt-34 text-black sm:min-h-[600px] sm:px-8 sm:pb-32 sm:pt-28 md:px-10 md:pb-36 lg:min-h-[550px] lg:px-14 lg:pb-40 lg:pt-60">
-          <div
+        <motion.div
+          className="shape-section flex min-h-[520px] flex-col items-center overflow-hidden bg-[#F6F6F6] px-4 pb-28 pt-34 text-black sm:min-h-[600px] sm:px-8 sm:pb-32 sm:pt-28 md:px-10 md:pb-36 lg:min-h-[550px] lg:px-14 lg:pb-40 lg:pt-60"
+          variants={heroContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            variants={heroItemVariants}
             className="font-mulish mx-auto w-fit rounded-[8px] px-4 py-3 text-sm sm:text-base md:px-5 md:text-xl"
             style={{
               background:
@@ -74,16 +134,27 @@ const PageHero = ({
             }}
           >
             <TextFluxUnveil text={eyebrow} />
-          </div>
-          <h1 className="font-jakarta mx-auto mt-5 max-w-[1040px] whitespace-pre-line text-center text-4xl font-medium uppercase leading-[1.08] text-black sm:text-5xl md:text-6xl lg:text-7xl">
+          </motion.div>
+          <motion.h1
+            variants={heroItemVariants}
+            className="font-jakarta mx-auto mt-5 max-w-[1540px] whitespace-pre-line text-center text-4xl font-medium uppercase leading-[1.08] [word-spacing:0.5rem]  text-black sm:text-5xl md:text-6xl lg:text-7xl"
+          >
             {title}
-          </h1>
-          <p className="font-jakarta mx-auto mt-4 max-w-[1120px] whitespace-pre-line text-center text-base leading-[1.7] text-[#777777] sm:text-lg md:leading-[1.65]">
+          </motion.h1>
+          <motion.p
+            variants={heroItemVariants}
+            className="font-jakarta mx-auto [word-spacing:0.3rem]  mt-4 max-w-[1120px] whitespace-pre-line text-center text-base leading-[1.7] text-[#777777] sm:text-lg md:leading-[1.65]"
+          >
             {description}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="absolute bottom-0 left-1/2 z-50 flex w-screen -translate-x-1/2 justify-center overflow-hidden">
+        <motion.div
+          className="absolute bottom-0 left-1/2 z-50 flex w-screen -translate-x-1/2 justify-center overflow-hidden"
+          variants={logoBarVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="logo-slider-cut relative h-[58px] w-screen overflow-hidden bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)] sm:h-[70px] md:h-[84px] lg:h-[98px]">
             <div className="logo-track flex h-full w-max items-center">
               {[0, 1].map((groupIndex) => (
@@ -93,9 +164,13 @@ const PageHero = ({
                   className="logo-group flex h-full shrink-0 items-center gap-5 px-5 sm:gap-7 sm:px-8 lg:gap-9 lg:px-10"
                 >
                   {marqueeLogos.map((logo, logoIndex) => (
-                    <div
+                    <motion.div
                       key={`${groupIndex}-${logo.id}-${logoIndex}`}
-                      className="flex min-w-[96px] shrink-0 items-center justify-center gap-2 opacity-70 sm:min-w-[112px] lg:min-w-[126px]"
+                      custom={logoIndex}
+                      variants={logoItemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="flex min-w-[96px] shrink-0 items-center justify-center gap-2 sm:min-w-[112px] lg:min-w-[126px]"
                     >
                       <img
                         src={logo.src}
@@ -106,13 +181,13 @@ const PageHero = ({
                       <span className="text-sm font-semibold text-[#A9A9A9] sm:text-base">
                         {logo.name}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <style jsx>{`
@@ -156,6 +231,12 @@ const PageHero = ({
           }
           100% {
             transform: translateX(-50%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .logo-track {
+            animation: none;
           }
         }
 

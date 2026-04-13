@@ -8,6 +8,7 @@ import NavBar from "@/components/NavBar";
 import NotAnAgency from "@/components/NotAnAgency";
 import TestimonialsSection from "@/components/Testimonials";
 import WhatWeDo from "@/components/WhatWeDo";
+import { whatWeDoCards } from "@/data/whatWeDoCards";
 
 export default function Home() {
   return (
@@ -24,7 +25,12 @@ export default function Home() {
         <div className="absolute left-[47%] top-[-120px] h-24 w-32 -translate-x-1/2 bg-[#F6F6F6]/90 blur-2xl" />
         <div className="absolute right-0 top-[-132px] h-32 w-44 translate-x-8 bg-[#F6F6F6]/95 blur-3xl" />
       </div>
-      <WhatWeDo />
+      <WhatWeDo
+        heading="What We Do"
+        description={`Through our brands, we deliver integrated solutions across key growth
+areas.`}
+        cards={whatWeDoCards}
+      />
       <NotAnAgency />
       <BuildSmarter
         title={`BUILD SMARTER.
