@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
+import FooterCTA from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,7 +50,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${mulish.variable} ${jakartaSans.variable} ${nunito.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <div className="relative z-[100]">
+          <NavBar />
+        </div>
         {children}
+        <FooterCTA />
       </body>
     </html>
   );

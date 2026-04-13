@@ -22,7 +22,7 @@ const contactPoints = [
     text: "(470) 470-7520",
   },
   {
-    href: "mailto:contact@nexfire.com",
+    href: "mailto:contact@nexifire.com",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ const contactPoints = [
         <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 3.24l-8 5-8-5V6l8 5 8-5v1.24z" />
       </svg>
     ),
-    text: "contact@nexfire.com",
+    text: "contact@nexifire.com",
   },
   {
     href: null,
@@ -62,7 +62,9 @@ export default function GetInTouchSection() {
 
   const selectedCountry = useMemo(
     () =>
-      countryPhoneOptions.find((country) => country.code === selectedCountryCode) ??
+      countryPhoneOptions.find(
+        (country) => country.code === selectedCountryCode
+      ) ??
       countryPhoneOptions.find((country) => country.code === "US") ??
       countryPhoneOptions[0],
     [selectedCountryCode]
@@ -112,77 +114,80 @@ export default function GetInTouchSection() {
   };
 
   return (
-    <section className="w-full pt-[48px] text-[#3f3f3f] md:py-[56px]">
-      <div className="mx-auto max-w-[1200px] px-4">
+    <section className="w-full px-5 pb-12 text-[#3f3f3f] sm:px-8 sm:pb-14 lg:px-12">
+      <div className="mx-auto max-w-[1200px]">
         <div className="text-center">
-          <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text font-jakarta text-4xl text-center py-5font-medium uppercase leading-tight text-transparent lg:text-5xl">
+          <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text py-4 text-center font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:text-4xl lg:text-5xl">
             GET IN TOUCH
           </h2>
 
-          <p className="mx-auto mt-[18px] max-w-[1050px] text-[14px] leading-[1.45] text-[#8a8a8a] md:text-lg">
+          <p className="mx-auto max-w-[1050px] text-sm leading-relaxed text-[#8a8a8a] sm:text-base md:text-lg">
             Your journey toward global growth starts with a single conversation.
-            Whether you’re looking to build a legacy through publishing or scale
+            Whether you're looking to build a legacy through publishing or scale
             your brand through high-performance digital infrastructure, our team
             is here to lead the way.
           </p>
         </div>
 
-        <div className="mt-[44px] grid grid-cols-1 items-start gap-[36px] lg:grid-cols-[1fr_520px] lg:gap-[44px]">
-          <div className="pt-[6px]">
-            <h3 className="text-xl font-medium uppercase text-[#333333]">
+        <div className="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,520px)] lg:gap-12 xl:gap-16">
+          <div className="w-full pt-[6px] text-center sm:text-left">
+            <h3 className="text-lg font-medium uppercase text-[#333333] sm:text-xl">
               WHY CONNECT WITH US?
             </h3>
 
             <div className="mt-[18px] space-y-0">
               <div className="border-b border-[#e8e8e8] pb-[10px]">
-                <p className="text-lg font-medium text-[#cc5d12]">
+                <p className="text-base font-medium text-[#cc5d12] sm:text-lg">
                   Strategic Consultation:
                 </p>
-                <p className="mt-[3px] text-md leading-[1.45] text-[#7f7f7f]">
+                <p className="mt-[3px] text-base leading-[1.45] text-[#7f7f7f]">
                   We don't just provide services; we build growth ecosystems.
                 </p>
               </div>
 
               <div className="border-b border-[#e8e8e8] py-[10px]">
-                <p className="text-lg] font-medium text-[#cc5d12]">
+                <p className="text-base font-medium text-[#cc5d12] sm:text-lg">
                   Specialized Expertise:
                 </p>
-                <p className="mt-[3px] text-md leading-[1.45] text-[#7f7f7f]">
+                <p className="mt-[3px] text-base leading-[1.45] text-[#7f7f7f]">
                   Direct access to our network of publishing and tech leaders.
                 </p>
               </div>
 
               <div className="py-[10px]">
-                <p className="text-lg] font-medium text-[#cc5d12]">
+                <p className="text-base font-medium text-[#cc5d12] sm:text-lg">
                   Global Reach:
                 </p>
-                <p className="mt-[3px] text-md leading-[1.45] text-[#7f7f7f]">
+                <p className="mt-[3px] text-base leading-[1.45] text-[#7f7f7f]">
                   Infrastructure designed to scale your brand across
                   international markets.
                 </p>
               </div>
             </div>
 
-            <p className="mt-[8px] max-w-[500px] text-md leading-[1.55] text-[#7f7f7f]">
+            <p className="mx-auto mt-[8px] max-w-[500px] text-base leading-[1.55] text-[#7f7f7f] sm:mx-0">
               Stop managing vendors. Start aligning with an ecosystem. Let's
               build something extraordinary.
             </p>
 
             <div className="mt-[15px] space-y-[10px]">
               {contactPoints.map((item, index) => (
-                <div key={index} className="flex items-center gap-[18px]">
+                <div
+                  key={index}
+                  className="flex items-start justify-start gap-[14px] sm:justify-start sm:gap-[18px]"
+                >
                   <div className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[6px] bg-[#B24002]">
                     {item.icon}
                   </div>
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="text-[14px] text-[#7f7f7f] transition-colors hover:text-[#B24002] md:text-[15px]"
+                      className="min-w-0 break-words text-sm text-[#7f7f7f] transition-colors hover:text-[#B24002] md:text-[15px]"
                     >
                       {item.text}
                     </a>
                   ) : (
-                    <p className="text-[14px] text-[#7f7f7f] md:text-[15px]">
+                    <p className="min-w-0 break-words text-sm text-[#7f7f7f] md:text-[15px]">
                       {item.text}
                     </p>
                   )}
@@ -191,8 +196,8 @@ export default function GetInTouchSection() {
             </div>
           </div>
 
-          <div className="rounded-[14px] w-[600px] h-full border border-[#e6e6e6] bg-[#f7f7f7] p-[18px] shadow-[0_10px_28px_rgba(0,0,0,0.05)]">
-            <h3 className="text-2xl py-2 font-semibold uppercase leading-[1.15] tracking-[-0.02em] text-[#333333]">
+          <div className="h-full w-full rounded-[8px] border border-[#e6e6e6] bg-[#f7f7f7] p-4 shadow-[0_10px_28px_rgba(0,0,0,0.05)] sm:p-[18px]">
+            <h3 className="py-2 text-xl font-semibold uppercase leading-[1.15] text-[#333333] sm:text-2xl">
               FILL THIS FORM TO GET FASTER RESPONSE
             </h3>
 
@@ -203,17 +208,17 @@ export default function GetInTouchSection() {
                 className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 
-              <div className="grid grid-cols-1 items-start gap-[16px] md:grid-cols-2">
+              <div className="grid grid-cols-1 items-start gap-[16px] sm:grid-cols-2">
                 <input
                   type="email"
                   placeholder="Email"
                   className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                 />
 
-                <div className="flex h-[48px] self-start items-center rounded-[6px] border border-[#a9a9a9] bg-transparent px-[10px]">
+                <div className="flex h-[48px] min-w-0 self-start rounded-[6px] border border-[#a9a9a9] bg-transparent px-[10px]">
                   <div
                     ref={countryMenuRef}
-                    className="relative flex h-full w-[55px] shrink-0 items-center"
+                    className="relative flex h-full w-[80px] shrink-0 items-center sm:w-[55px]"
                   >
                     <button
                       type="button"
@@ -237,7 +242,7 @@ export default function GetInTouchSection() {
                       <svg
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className={`ml-auto h-[24px] w-[45px] text-[#7d7d7d] transition-transform ${
+                        className={`ml-auto h-[20px] w-[20px] shrink-0 text-[#7d7d7d] transition-transform ${
                           isCountryMenuOpen ? "rotate-180" : ""
                         }`}
                         aria-hidden="true"
@@ -247,7 +252,7 @@ export default function GetInTouchSection() {
                     </button>
 
                     {isCountryMenuOpen ? (
-                      <div className="absolute left-0 top-[calc(100%+8px)] z-30 max-h-[260px] max-w-[260px] overflow-y-auto rounded-[10px] border border-[#dddddd] bg-white p-[6px] shadow-[0_14px_30px_rgba(0,0,0,0.12)]">
+                      <div className="absolute left-0 top-[calc(100%+8px)] z-30 max-h-[260px] w-[min(82vw,260px)] overflow-y-auto rounded-[8px] border border-[#dddddd] bg-white p-[6px] shadow-[0_14px_30px_rgba(0,0,0,0.12)]">
                         {countryPhoneOptions.map((country) => (
                           <button
                             key={`${country.code}-${country.dialCode}`}
@@ -275,12 +280,10 @@ export default function GetInTouchSection() {
                     ) : null}
                   </div>
 
-                  {/* <div className="mx-[10px] h-full w-px bg-[#cfcfcf]" /> */}
-
                   <input
                     type="tel"
                     placeholder="Phone Number"
-                    className="h-full w-full bg-transparent text-[13px] text-[#4d4d4d] pl-2 outline-none placeholder:text-[#9a9a9a]"
+                    className="h-full min-w-0 w-full bg-transparent pl-2 text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                   />
                 </div>
               </div>
@@ -295,7 +298,7 @@ export default function GetInTouchSection() {
                   background:
                     "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                 }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg py-3 mt-2 text-base font-light text-white sm:w-[200px] md:w-full md:text-lg"
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg py-3 text-base font-light text-white md:text-lg"
                 whileHover={{
                   y: -3,
                   scale: 1.02,
@@ -304,7 +307,7 @@ export default function GetInTouchSection() {
                 whileTap={{ y: 0, scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 320, damping: 20 }}
               >
-                Let’s Talk
+                Let's Talk
                 <motion.span
                   whileHover={{ x: 4, y: -2 }}
                   transition={{

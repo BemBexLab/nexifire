@@ -98,10 +98,10 @@ export default function TestimonialsSection() {
   }, [slides.length]);
 
   return (
-    <section className="w-full py-20">
-      <div className="mx-auto h-[500px] max-w-[1380px] px-4">
-        <div className="mb-[34px] text-center">
-          <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text font-jakarta text-4xl font-medium uppercase leading-tight text-transparent lg:text-5xl">
+    <section className="w-full py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-8 text-center sm:mb-[34px]">
+          <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:text-4xl lg:text-5xl">
             WHAT ARE THEY
             <br />
             SAYING ABOUT US?
@@ -119,13 +119,13 @@ export default function TestimonialsSection() {
             {slides.map((slide, slideIndex) => (
               <div
                 key={slideIndex}
-                className="grid w-full shrink-0 grid-cols-1 gap-[16px] rounded-[12px] px-[2px] md:grid-cols-3"
+                className="grid w-full shrink-0 grid-cols-1 gap-4 rounded-[12px] px-[2px] md:grid-cols-3"
                 style={{ width: `${100 / slides.length}%` }}
               >
                 {slide.map((item) => (
                   <article
                     key={item.id}
-                    className="rounded-[12px] border border-[#eaeaea] bg-white px-[16px] pb-[18px] pt-[14px]"
+                    className="rounded-[12px] border border-[#eaeaea] bg-white px-4 pb-[18px] pt-[14px]"
                     style={{
                       boxShadow:
                         "0 10px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)",
@@ -133,7 +133,7 @@ export default function TestimonialsSection() {
                   >
                     <Stars />
 
-                    <p className="min-h-[154px] text-md leading-[1.58] text-[#7a7a7a]">
+                    <p className="text-base leading-[1.58] text-[#7a7a7a] md:min-h-[154px]">
                       {item.review}
                     </p>
 

@@ -12,9 +12,6 @@ import WhatWeDo from "@/components/WhatWeDo";
 export default function Home() {
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="relative z-[100]">
-        <NavBar />
-      </div>
       <div className="relative z-30">
         <HomeHero />
       </div>
@@ -29,7 +26,21 @@ export default function Home() {
       </div>
       <WhatWeDo />
       <NotAnAgency />
-      <BuildSmarter />
+      <BuildSmarter
+        title={`BUILD SMARTER.
+GROW FASTER.`}
+        description={`Whether you're building a brand or scaling one, NexiFire\ngives you the structure, strategy, and execution to\nmove forward with clarity.`}
+        primaryButtonText="Let's Talk"
+        secondaryButtonText="See Our Work"
+        backgroundImageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
+        backgroundImageAlt="Team meeting"
+        stats={[
+          { value: 25, suffix: "K+", label: "Leads Generated" },
+          { value: 50, suffix: "+", label: "Brands Scaled" },
+          { value: 120, suffix: "+", label: "Campaigns Launched" },
+          { value: 8, suffix: "+", label: "Years Experience" },
+        ]}
+      />
       <LazyTestimonials />
       <LazyLatestBlogs />
       <GetInTouchSection />

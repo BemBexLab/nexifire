@@ -42,10 +42,10 @@ const blogs: BlogCard[] = [
 const LatestBlogs = () => {
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex w-full items-center justify-center bg-white pb-16 sm:pb-20">
+      <section className="flex w-full items-center justify-center bg-white pb-12 sm:pb-16 lg:pb-20">
         <div className="mx-auto flex w-full max-w-[1180px] flex-col px-4 sm:px-6 lg:px-8">
           <m.h2
-            className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text py-8 text-center font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:py-10 sm:text-4xl lg:text-5xl"
+            className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text pb-8 text-center font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:pb-10 sm:text-4xl lg:text-5xl"
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.6 }}
