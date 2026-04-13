@@ -1,4 +1,6 @@
 import BuildSmarter from "@/components/BuildSmarter";
+import FAQs from "@/components/FAQs";
+import LazyLatestBlogs from "@/components/LazyLatestBlogs";
 import OurValues from "@/components/OurValues";
 import PageHero from "@/components/PageHero";
 import WhoWeAre from "@/components/WhoWeAre";
@@ -24,6 +26,8 @@ const page = () => {
         backgroundImageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
         backgroundImageAlt="Team meeting"
       />
+      <FAQs />
+      <LazyLatestBlogs />
     </section>
   );
 };
