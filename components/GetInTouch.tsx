@@ -208,7 +208,7 @@ export default function GetInTouchSection() {
                 className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 
-              <div className="grid grid-cols-1 items-start gap-[16px] sm:grid-cols-2">
+              <div className="grid grid-cols-1 items-start gap-[16px] sm:grid-cols-[210px_minmax(0,1fr)]">
                 <input
                   type="email"
                   placeholder="Email"
@@ -218,14 +218,14 @@ export default function GetInTouchSection() {
                 <div className="flex h-[48px] min-w-0 self-start rounded-[6px] border border-[#a9a9a9] bg-transparent px-[10px]">
                   <div
                     ref={countryMenuRef}
-                    className="relative flex h-full w-[80px] shrink-0 items-center sm:w-[55px]"
+                    className="relative flex h-full w-fit max-w-[132px] shrink-0 items-center"
                   >
                     <button
                       type="button"
                       aria-label="Select country calling code"
                       aria-expanded={isCountryMenuOpen}
                       onClick={() => setIsCountryMenuOpen((open) => !open)}
-                      className="flex h-full w-full items-center gap-[4px] bg-transparent pr-[2px] text-[#6f6f6f] outline-none"
+                      className="flex h-full w-fit max-w-[132px] items-center gap-[5px] bg-transparent pr-[2px] text-[#6f6f6f] outline-none"
                     >
                       <span className="flex items-center justify-center">
                         {SelectedFlagIcon ? (
@@ -236,7 +236,7 @@ export default function GetInTouchSection() {
                           </span>
                         )}
                       </span>
-                      <span className="text-[13px] leading-none text-[#6f6f6f]">
+                      <span className="whitespace-nowrap text-[13px] leading-none text-[#6f6f6f]">
                         {selectedCountry?.dialCode ?? "+1"}
                       </span>
                       <svg
