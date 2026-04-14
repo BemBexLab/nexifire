@@ -155,7 +155,7 @@ const PageHero = ({
           initial="hidden"
           animate="visible"
         >
-          <div className="logo-slider-cut relative h-[58px] w-screen overflow-hidden bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)] sm:h-[70px] md:h-[84px] lg:h-[98px]">
+          <div className="logo-slider-cut relative h-[58px] w-screen overflow-hidden bg-white sm:h-[70px] md:h-[84px] lg:h-[98px]">
             <div className="logo-track flex h-full w-max items-center">
               {[0, 1].map((groupIndex) => (
                 <div
@@ -205,6 +205,7 @@ const PageHero = ({
         }
 
         .logo-slider-cut {
+          border: 0;
           clip-path: polygon(
             0 100%,
             0 100%,
@@ -215,6 +216,18 @@ const PageHero = ({
             100% 100%,
             100% 100%
           );
+        }
+
+        .logo-slider-cut::after {
+          position: absolute;
+          right: 0;
+          bottom: -1px;
+          left: 0;
+          z-index: 20;
+          height: 4px;
+          background: #ffffff;
+          content: "";
+          pointer-events: none;
         }
 
         .logo-track {
