@@ -35,6 +35,8 @@ const page = () => {
         image={{
           src: "/images/Rectangle 9.png",
           alt: "Who We Are",
+          loading: "eager",
+          priority: true,
         }}
         buttonLabel="Let's Talk"
         buttonHref="/contact"

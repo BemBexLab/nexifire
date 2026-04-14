@@ -130,13 +130,13 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
                 {getTextValue(card.title)}
               </p>
               {hasTextContent(card.description) && card.description && (
-                <p
+                <div
                   className={`whitespace-pre-line text-[14px] font-jakarta leading-relaxed text-gray-500 ${getTextClassName(
                     card.description,
                   )}`}
                 >
                   {getTextValue(card.description)}
-                </p>
+                </div>
               )}
             </m.div>
           ))}

@@ -120,7 +120,7 @@ const PageHero = ({
     <section className="w-full bg-white">
       <div className="relative max-w-full">
         <motion.div
-          className="shape-section flex min-h-[520px] flex-col items-center overflow-hidden bg-[#F6F6F6] px-4 pb-28 pt-34 text-black sm:min-h-[600px] sm:px-8 sm:pb-32 sm:pt-28 md:px-10 md:pb-36 lg:min-h-[550px] lg:px-14 lg:pb-40 lg:pt-60"
+          className="shape-section flex min-h-[520px] flex-col items-center overflow-hidden bg-[#F6F6F6] px-4 pb-28 pt-34 text-black sm:min-h-[600px] sm:px-8 sm:pb-32 sm:pt-28 md:px-10 md:pb-36 lg:min-h-[550px] lg:px-14 lg:pb-40 lg:pt-45"
           variants={heroContainerVariants}
           initial="hidden"
           animate="visible"

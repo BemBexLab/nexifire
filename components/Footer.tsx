@@ -119,10 +119,10 @@ const FooterCTA = () => {
               </h4>
               <ul className="list-inside list-disc space-y-2 text-base text-[#777777]">
                 <li>
-                  <a href="">Privacy policy</a>
+                  <a href="/privacy-policy">Privacy policy</a>
                 </li>
                 <li>
-                  <a href="">Terms & Conditions</a>
+                  <a href="/terms-condition">Terms & Conditions</a>
                 </li>
               </ul>
             </div>

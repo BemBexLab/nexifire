@@ -17,6 +17,8 @@ type WhoWeAreProps = {
   image: {
     src: string;
     alt: string;
+    priority?: boolean;
+    loading?: "eager" | "lazy";
   };
   buttonLabel: string;
   buttonHref: string;
@@ -30,12 +32,14 @@ const WhoWeAre = ({
   buttonHref,
 }: WhoWeAreProps) => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [shouldLoadImage, setShouldLoadImage] = useState(false);
+  const [shouldLoadImage, setShouldLoadImage] = useState(
+    image.priority || image.loading === "eager",
+  );
 
   useEffect(() => {
     const section = sectionRef.current;
 
-    if (!section || shouldLoadImage) {
+    if (!section || shouldLoadImage || image.priority || image.loading === "eager") {
       return;
     }
 
@@ -52,7 +56,7 @@ const WhoWeAre = ({
     observer.observe(section);
 
     return () => observer.disconnect();
-  }, [shouldLoadImage]);
+  }, [image.loading, image.priority, shouldLoadImage]);
 
   return (
     <section
@@ -114,7 +118,8 @@ const WhoWeAre = ({
             alt={image.alt}
             fill
             sizes="(max-width: 640px) 420px, (max-width: 768px) 520px, (max-width: 1024px) 600px, (max-width: 1280px) 520px, 660px"
-            loading="lazy"
+            loading={image.loading ?? "lazy"}
+            priority={image.priority}
             className="object-cover"
           />
         )}
