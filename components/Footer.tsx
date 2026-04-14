@@ -64,13 +64,13 @@ const FooterCTA = () => {
                   <a href="/">Home</a>
                 </li>
                 <li>
-                  <a href="">About us</a>
+                  <a href="/about">About us</a>
                 </li>
                 <li>
-                  <a href="">Services</a>
+                  <a href="/services">Services</a>
                 </li>
                 <li>
-                  <a href="">Career</a>
+                  <a href="/careers">Career</a>
                 </li>
                 <li>
                   <a href="">Our Brands</a>
@@ -79,7 +79,7 @@ const FooterCTA = () => {
                   <a href="">Blogs</a>
                 </li>
                 <li>
-                  <a href="">Contact</a>
+                  <a href="/contact">Contact</a>
                 </li>
               </ul>
             </div>

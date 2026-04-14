@@ -1,22 +1,36 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "#" },
-  { label: "Career", href: "#" },
+  { label: "Services", href: "/services" },
+  { label: "Career", href: "/careers" },
   { label: "Our Brands", href: "#" },
   { label: "Blog", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function NavBar() {
-  const [activeLink, setActiveLink] = useState("Home");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const pathname = usePathname();
+
+  const isActiveLink = (href: string) => {
+    if (href === "#") {
+      return false;
+    }
+
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -62,21 +76,28 @@ export default function NavBar() {
 
         {/* ── Desktop Nav Links ─────────────────────────────────────── */}
         <ul className="hidden flex-1 items-center justify-center gap-13 font-jakarta text-lg lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                onClick={() => setActiveLink(link.label)}
-                className={`whitespace-nowrap text-md transition-colors duration-150 ${
-                  activeLink === link.label
-                    ? "text-black font-regular border-b-2 border-[#c0784a] pb-0.5"
-                    : "text-[#777777] hover:text-[#1c1c1c] font-normal"
-                }`}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = isActiveLink(link.href);
+            const className = `whitespace-nowrap text-md transition-colors duration-150 ${
+              isActive
+                ? "text-black font-regular border-b-2 border-[#c0784a] pb-0.5"
+                : "text-[#777777] hover:text-[#1c1c1c] font-normal"
+            }`;
+
+            return (
+              <li key={link.label}>
+                {link.href === "#" ? (
+                  <a href={link.href} className={className}>
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link href={link.href} className={className}>
+                    {link.label}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         {/* ── CTA Button ───────────────────────────────────────────── */}
@@ -108,23 +129,34 @@ export default function NavBar() {
       {/* ── Mobile Dropdown ───────────────────────────────────────── */}
       {mobileOpen && (
         <div className="flex flex-col gap-3 border-t border-[#e5e3df] bg-[#f5f4f2] px-6 py-4 font-jakarta lg:hidden">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => {
-                setActiveLink(link.label);
-                setMobileOpen(false);
-              }}
-              className={`text-sm py-1 transition-colors duration-150 ${
-                activeLink === link.label
-                  ? "text-[#c0784a] font-semibold"
-                  : "text-[#5a5a5a] hover:text-[#1c1c1c]"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = isActiveLink(link.href);
+            const className = `text-sm py-1 transition-colors duration-150 ${
+              isActive
+                ? "text-[#c0784a] font-semibold"
+                : "text-[#5a5a5a] hover:text-[#1c1c1c]"
+            }`;
+
+            return link.href === "#" ? (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={className}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={className}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <button className="font-jakarta mt-2 flex items-center gap-2 px-5 py-2 rounded-full border border-[#c0784a] text-[#c0784a] text-sm font-medium w-fit hover:bg-[#c0784a] hover:text-white transition-all duration-200">
             Free Consultation
             <CalendarIcon />
