@@ -9,7 +9,7 @@ const WhyYouBelongHere = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="w-full pb-14 md:pb-20">
+    <section className="w-full font-jakarta pb-14 md:pb-20">
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-start gap-12 px-6 md:px-8 lg:grid-cols-2 lg:gap-16">
         {/* Left Content */}
         <div className="max-w-[520px]">

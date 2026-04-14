@@ -1,5 +1,6 @@
 "use client";
 
+import { LazyMotion, domAnimation, m } from "motion/react";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -70,59 +71,75 @@ const FAQs = () => {
   };
 
   return (
-    <section className="w-full py-10 sm:py-12 md:py-14 lg:py-16">
-      <div className="mx-auto max-w-[1260px] px-4 sm:px-6 lg:px-8 xl:px-0">
-        <h2 className="font-jakarta mx-auto mb-6 max-w-[760px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-center text-3xl font-regular uppercase leading-[1.08] text-transparent sm:text-4xl md:mb-8 md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-6xl">
-          Frequently Asked Questions
-        </h2>
+    <LazyMotion features={domAnimation}>
+      <section className="w-full py-10 sm:py-12 md:py-14 lg:py-16">
+        <div className="mx-auto max-w-[1260px] px-4 sm:px-6 lg:px-8 xl:px-0">
+          <m.h2
+            className="font-jakarta mx-auto mb-6 max-w-[760px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-center text-3xl font-regular uppercase leading-[1.08] text-transparent sm:text-4xl md:mb-8 md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-6xl"
+            initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+          >
+            Frequently Asked Questions
+          </m.h2>
 
-        <div className="space-y-3 sm:space-y-[14px]">
-          {faqData.map((item, index) => {
-            const isOpen = openIndex === index;
+          <div className="space-y-3 sm:space-y-[14px]">
+            {faqData.map((item, index) => {
+              const isOpen = openIndex === index;
 
-            return (
-              <div
-                key={index}
-                className="overflow-hidden rounded-[6px] border border-[#ececec] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleFAQ(index)}
-                  className="flex min-h-[58px] w-full items-center justify-between gap-4 px-4 py-4 text-left sm:min-h-[62px] sm:px-5 md:px-6"
-                  aria-expanded={isOpen}
+              return (
+                <m.div
+                  key={index}
+                  className="overflow-hidden rounded-[6px] border border-[#ececec] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{
+                    duration: 0.42,
+                    delay: Math.min(index * 0.04, 0.24),
+                    ease: "easeOut",
+                  }}
                 >
-                  <span className="min-w-0 flex-1 text-base font-medium leading-[1.4] text-[#282828] sm:text-[17px] md:text-lg">
-                    {item.question}
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => toggleFAQ(index)}
+                    className="flex min-h-[58px] w-full items-center justify-between gap-4 px-4 py-4 text-left sm:min-h-[62px] sm:px-5 md:px-6"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="min-w-0 flex-1 text-base font-medium leading-[1.4] text-[#282828] sm:text-[17px] md:text-lg">
+                      {item.question}
+                    </span>
 
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] text-[#eb6a1f] sm:h-8 sm:w-8">
-                    {isOpen ? (
-                      <ChevronUp className="h-4 w-4 stroke-[1.75] sm:h-[17px] sm:w-[17px]" />
-                    ) : (
-                      <ChevronDown className="h-4 w-4 stroke-[1.75] sm:h-[17px] sm:w-[17px]" />
-                    )}
-                  </span>
-                </button>
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] text-[#eb6a1f] sm:h-8 sm:w-8">
+                      {isOpen ? (
+                        <ChevronUp className="h-4 w-4 stroke-[1.75] sm:h-[17px] sm:w-[17px]" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 stroke-[1.75] sm:h-[17px] sm:w-[17px]" />
+                      )}
+                    </span>
+                  </button>
 
-                <div
-                  className={`grid transition-all duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-4 pb-5 pt-0 sm:px-5 md:px-6 md:pr-14">
-                      <p className="max-w-[1120px] text-sm leading-[1.7] text-[#666666] sm:text-base md:text-[17px]">
-                        {item.answer}
-                      </p>
+                  <div
+                    className={`grid transition-all duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-4 pb-5 pt-0 sm:px-5 md:px-6 md:pr-14">
+                        <p className="max-w-[1120px] text-sm leading-[1.7] text-[#666666] sm:text-base md:text-[17px]">
+                          {item.answer}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                </m.div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </LazyMotion>
   );
 };
 

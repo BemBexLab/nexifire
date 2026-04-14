@@ -10,7 +10,7 @@ import { SlLocationPin } from "react-icons/sl";
 
 const FooterCTA = () => {
   return (
-    <section className="w-full bg-[#F3F3F3] px-5 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+    <section className="w-full font-jakarta bg-[#F3F3F3] px-5 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
       <div className="mx-auto flex w-full max-w-[1600px] flex-col">
         <div className="grid w-full grid-cols-1 justify-items-center gap-16 xl:grid-cols-[minmax(0,700px)_minmax(0,725px)] xl:items-start xl:justify-center xl:gap-20 2xl:gap-28">
           {/* Left Col div */}
@@ -113,7 +113,7 @@ const FooterCTA = () => {
               </ul>
             </div>
 
-            <div className="w-full">
+            <div className="w-[170px]">
               <h4 className="mb-2 text-lg font-medium text-[#B24002]">
                 Support
               </h4>

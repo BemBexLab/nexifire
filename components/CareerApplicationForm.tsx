@@ -48,7 +48,7 @@ const CareerApplicationForm = () => {
   }, []);
 
   return (
-    <section className="w-full pb-16 pt-8 md:pb-20">
+    <section className="w-full font-jakarta pb-16 pt-8 md:pb-20">
       <div className="mx-auto max-w-[860px] px-4 sm:px-6">
         <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-center font-jakarta text-3xl font-medium uppercase leading-tight text-transparent sm:text-4xl lg:text-5xl">
           Looking for Growth
