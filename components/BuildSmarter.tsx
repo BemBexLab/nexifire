@@ -91,8 +91,8 @@ const BuildSmarter = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/15 md:bg-gradient-to-r md:from-black/90 md:via-black/45 md:to-transparent" />
 
           {/* Left Content */}
-          <div className="relative md:-bottom-20 z-10 flex min-h-[560px] items-end sm:min-h-[520px] md:min-h-[600px] md:items-center lg:min-h-[630px]">
-            <div className="w-fit max-w-full px-5 pb-8 font-jakarta sm:px-8 sm:pb-10 md:px-12 md:pb-0">
+          <div className="relative z-10 flex min-h-[560px] items-end py-8 sm:min-h-[520px] sm:py-10 md:min-h-[600px] md:items-center md:py-16 lg:min-h-[630px]">
+            <div className="w-fit max-w-full px-5 pt-16 font-jakarta sm:px-8 md:px-12 md:pt-24 lg:pt-[120px]">
               <h1 className="whitespace-pre-line text-[36px] font-normal uppercase leading-[1.08] text-white sm:text-[44px] md:text-[56px] md:leading-[1.05] lg:text-[60px]">
                 {title}
               </h1>
