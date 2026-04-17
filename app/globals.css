@@ -36,3 +36,15 @@ body {
 .font-nunito {
   font-family: var(--font-nunito), Arial, Helvetica, sans-serif;
 }
+
+@keyframes loaderSlide {
+  0% {
+    transform: translateX(-110%);
+  }
+  50% {
+    transform: translateX(60%);
+  }
+  100% {
+    transform: translateX(210%);
+  }
+}
