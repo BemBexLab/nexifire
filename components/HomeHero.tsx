@@ -8,6 +8,65 @@ import Image from "next/image";
 import Clients from "./Clients";
 import RichTextLetterReveal from "./RichTextLetterReveal";
 
+type TriangleParticleProps = {
+  className: string;
+  delay?: number;
+  filterId: string;
+  rotate?: number;
+  scale?: number;
+};
+
+const TriangleParticle = ({
+  className,
+  delay = 0,
+  filterId,
+  rotate = 0,
+  scale = 1,
+}: TriangleParticleProps) => (
+  <motion.svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="43"
+    height="41"
+    viewBox="0 0 43 41"
+    fill="none"
+    className={`pointer-events-none absolute z-30 h-[31px] w-[33px] md:h-[41px] md:w-[43px] ${className}`}
+    initial={{ opacity: 0, scale: scale * 0.55, rotate: rotate - 12 }}
+    animate={{ opacity: 1, scale, rotate }}
+    transition={{ duration: 0.45, ease: "easeOut", delay }}
+    aria-hidden="true"
+  >
+    <g filter={`url(#${filterId})`}>
+      <path
+        d="M39.5389 2.70002L32.7081 20.2105L25.8782 37.7201L14.2886 23.9467L2.69992 10.1743L21.1185 6.43712L39.5389 2.70002Z"
+        fill="#DA682A"
+      />
+    </g>
+    <defs>
+      <filter
+        id={filterId}
+        x="-4.88758e-05"
+        y="1.21593e-05"
+        width="42.239"
+        height="40.4201"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape"
+        />
+        <feGaussianBlur
+          stdDeviation="1.35"
+          result="effect1_foregroundBlur_279_717"
+        />
+      </filter>
+    </defs>
+  </motion.svg>
+);
+
 const HomeHero = () => {
   const [animatedCount, setAnimatedCount] = useState(0);
   const [cardTiltDone, setCardTiltDone] = useState(false);
@@ -328,12 +387,35 @@ const HomeHero = () => {
               </div>
             </div>
 
-            {/* Bottom Div container fully animated */}
-            <div
-              className="relative flex min-h-[320px] w-full overflow-hidden rounded-3xl bg-black font-jakarta px-5 pb-[170px] pt-6 md:min-h-[360px] md:px-8 md:pb-[210px] md:pt-8 xl:min-h-[280px] xl:px-8 xl:pb-[170px] xl:pt-8 2xl:h-[200px] 2xl:min-h-0 2xl:px-10 2xl:pb-10 2xl:pt-10"
-              onMouseMove={handlePanelMouseMove}
-              onMouseLeave={handlePanelMouseLeave}
-            >
+            <div className="relative overflow-visible">
+              <TriangleParticle
+                filterId="graph-particle-right-top"
+                className="-right-4 top-4 sm:-right-4 sm:top-4 md:-right-5 md:top-6 lg:-right-5 lg:top-6 xl:-right-5 xl:top-5 2xl:-right-6 2xl:top-4"
+                rotate={120}
+                scale={0.86}
+                delay={0.65}
+              />
+              <TriangleParticle
+                filterId="graph-particle-right-middle"
+                className="right-30 top-[174px] sm:right-34 sm:top-[174px] md:right-46 md:top-[182px] lg:right-46 lg:top-[182px] xl:right-40 xl:top-[128px] 2xl:right-46 2xl:top-[32px]"
+                rotate={-18}
+                scale={0.5}
+                delay={0.78}
+              />
+              <TriangleParticle
+                filterId="graph-particle-right-bottom"
+                className="right-20 -bottom-5 sm:right-24 sm:-bottom-5 md:right-30 md:-bottom-5 lg:right-30 lg:-bottom-5 xl:right-26 xl:-bottom-5 2xl:right-29 2xl:-bottom-7"
+                rotate={-28}
+                scale={0.54}
+                delay={0.9}
+              />
+
+              {/* Bottom Div container fully animated */}
+              <div
+                className="relative flex h-[320px] w-full overflow-hidden rounded-3xl bg-black font-jakarta px-5 pb-[170px] pt-6 sm:h-[320px] md:h-[340px] md:px-8 md:pb-[210px] md:pt-8 lg:h-[340px] xl:h-auto xl:min-h-[280px] xl:px-8 xl:pb-[170px] xl:pt-8 2xl:h-[200px] 2xl:min-h-0 2xl:px-10 2xl:pb-10 2xl:pt-10"
+                onMouseMove={handlePanelMouseMove}
+                onMouseLeave={handlePanelMouseLeave}
+              >
               {/* Text Overlapping Div */}
               <div className="relative z-20 flex w-full flex-col gap-y-4 xl:w-full xl:gap-y-5 2xl:w-1/2 2xl:gap-y-6">
                 <div className="flex gap-x-3 items-center">
@@ -431,25 +513,33 @@ const HomeHero = () => {
               </motion.svg>
 
               {/* Graph col div */}
-              <div className="absolute bottom-0 right-5 flex h-[140px] w-[min(220px,calc(100%-2.5rem))] items-end justify-end gap-2 md:right-8 md:h-[180px] md:w-[260px] md:gap-3 xl:right-8 xl:h-[170px] xl:w-[240px] 2xl:right-5 2xl:h-[220px] 2xl:w-[280px]">
+              <div className="absolute bottom-0 right-5 flex h-[140px] w-[min(210px,calc(100%-2.5rem))] items-end justify-end gap-2 md:right-8 md:h-[180px] md:w-[250px] md:gap-3 xl:right-8 xl:h-[170px] xl:w-[232px] 2xl:right-5 2xl:h-[170px] 2xl:w-[240px]">
+                <TriangleParticle
+                  filterId="graph-particle-inside-left"
+                  className="-left-1 top-[54px] sm:-left-1 sm:top-[54px] md:-left-1 md:top-[72px] lg:-left-1 lg:top-[72px] xl:-left-1 xl:top-[62px] 2xl:-left-2 2xl:top-[50px]"
+                  rotate={-12}
+                  scale={0.6}
+                  delay={0.72}
+                />
                 <motion.div
-                  className="h-[52px] w-full max-w-[64px] origin-bottom rounded-t-xl bg-[#DA682A] md:h-[84px] md:max-w-[78px] xl:h-[58px] xl:max-w-[72px] 2xl:h-[70px] 2xl:max-w-[86.602px]"
+                  className="h-[52px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#DA682A] md:h-[84px] md:max-w-[74px] xl:h-[58px] xl:max-w-[68px] 2xl:h-[74px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.2 }}
                 />
                 <motion.div
-                  className="h-[84px] w-full max-w-[64px] origin-bottom rounded-t-xl bg-[#C65416] md:h-[126px] md:max-w-[78px] xl:h-[92px] xl:max-w-[72px] 2xl:h-[110px] 2xl:max-w-[86.602px]"
+                  className="h-[84px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#C65416] md:h-[126px] md:max-w-[74px] xl:h-[92px] xl:max-w-[68px] 2xl:h-[108px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.35 }}
                 />
                 <motion.div
-                  className="h-[118px] w-full max-w-[64px] origin-bottom rounded-t-xl bg-[#B24002] md:h-[168px] md:max-w-[78px] xl:h-[132px] xl:max-w-[72px] 2xl:h-[160px] 2xl:max-w-[86.602px]"
+                  className="h-[118px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#B24002] md:h-[168px] md:max-w-[74px] xl:h-[132px] xl:max-w-[68px] 2xl:h-[132px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.5 }}
                 />
+              </div>
               </div>
             </div>
 
