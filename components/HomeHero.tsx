@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TextFluxUnveil from "./TextFluxUnveil";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import Image from "next/image";
 import Clients from "./Clients";
@@ -11,6 +17,7 @@ import RichTextLetterReveal from "./RichTextLetterReveal";
 type TriangleParticleProps = {
   className: string;
   delay?: number;
+  enabled?: boolean;
   filterId: string;
   rotate?: number;
   scale?: number;
@@ -19,6 +26,7 @@ type TriangleParticleProps = {
 const TriangleParticle = ({
   className,
   delay = 0,
+  enabled = true,
   filterId,
   rotate = 0,
   scale = 1,
@@ -31,7 +39,11 @@ const TriangleParticle = ({
     fill="none"
     className={`pointer-events-none absolute z-30 h-[31px] w-[33px] md:h-[41px] md:w-[43px] ${className}`}
     initial={{ opacity: 0, scale: scale * 0.55, rotate: rotate - 12 }}
-    animate={{ opacity: 1, scale, rotate }}
+    animate={
+      enabled
+        ? { opacity: 1, scale, rotate }
+        : { opacity: 0, scale: scale * 0.55, rotate: rotate - 12 }
+    }
     transition={{ duration: 0.45, ease: "easeOut", delay }}
     aria-hidden="true"
   >
@@ -70,6 +82,10 @@ const TriangleParticle = ({
 const HomeHero = () => {
   const [animatedCount, setAnimatedCount] = useState(0);
   const [cardTiltDone, setCardTiltDone] = useState(false);
+  const [loaderComplete, setLoaderComplete] = useState(false);
+  const heroRef = useRef<HTMLElement | null>(null);
+  const isHeroInView = useInView(heroRef, { amount: 0.25, once: true });
+  const shouldAnimate = loaderComplete && isHeroInView;
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   const heroDescription =
@@ -90,6 +106,23 @@ const HomeHero = () => {
   ];
 
   useEffect(() => {
+    const handleLoaderComplete = () => setLoaderComplete(true);
+
+    if (document.documentElement.dataset.nexifireLoaderComplete === "true") {
+      setLoaderComplete(true);
+    }
+
+    window.addEventListener("nexifire:loader-complete", handleLoaderComplete);
+    return () =>
+      window.removeEventListener(
+        "nexifire:loader-complete",
+        handleLoaderComplete,
+      );
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimate) return;
+
     const target = 230;
     const duration = 1400;
     let start: number | null = null;
@@ -106,7 +139,7 @@ const HomeHero = () => {
 
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, []);
+  }, [shouldAnimate]);
 
   const lineX = useSpring(useTransform(cursorX, (v) => v * 0.25), {
     stiffness: 180,
@@ -148,7 +181,7 @@ const HomeHero = () => {
   };
 
   return (
-    <section>
+    <section ref={heroRef}>
       <div
         className="relative flex min-h-[1080px] justify-center overflow-visible bg-[#F6F6F6] px-4 pt-24 text-[#1f1f1f] md:px-6 md:pt-32 xl:overflow-hidden xl:pt-70 xl:[clip-path:polygon(0%_0%,100%_0%,100%_100%,48%_100%,44%_92%,0%_92%)]"
       >
@@ -164,7 +197,10 @@ const HomeHero = () => {
                     "linear-gradient(90deg, rgba(178, 64, 2, 0.13) 0%, rgba(178, 64, 2, 0.00) 79.96%)",
                 }}
               >
-                <TextFluxUnveil text="Welcome to NexiFire" />
+                <TextFluxUnveil
+                  text="Welcome to NexiFire"
+                  enabled={shouldAnimate}
+                />
               </div>
 
               {/* Main text Area */}
@@ -172,7 +208,11 @@ const HomeHero = () => {
                 <h1 className="mt-2 w-full max-w-[670px] font-jakarta text-[42px] uppercase leading-[0.98] text-black md:text-[58px] xl:text-[68px] 2xl:text-[80px]">
                   <motion.span
                     initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    animate={
+                      shouldAnimate
+                        ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                        : { opacity: 0, y: 12, filter: "blur(6px)" }
+                    }
                     transition={{ duration: 0.45, ease: "easeOut", delay: 0.12 }}
                     className="inline-block mr-3"
                   >
@@ -180,7 +220,11 @@ const HomeHero = () => {
                   </motion.span>{" "}
                   <motion.span
                     initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    animate={
+                      shouldAnimate
+                        ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                        : { opacity: 0, y: 12, filter: "blur(6px)" }
+                    }
                     transition={{ duration: 0.45, ease: "easeOut", delay: 0.28 }}
                     className="relative inline-block xl:whitespace-nowrap"
                   >
@@ -195,7 +239,11 @@ const HomeHero = () => {
                   </motion.span>{" "}
                   <motion.span
                     initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    animate={
+                      shouldAnimate
+                        ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                        : { opacity: 0, y: 12, filter: "blur(6px)" }
+                    }
                     transition={{ duration: 0.45, ease: "easeOut", delay: 0.42 }}
                     className="inline-block xl:whitespace-nowrap"
                   >
@@ -203,7 +251,11 @@ const HomeHero = () => {
                   </motion.span>{" "}
                   <motion.span
                     initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    animate={
+                      shouldAnimate
+                        ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                        : { opacity: 0, y: 12, filter: "blur(6px)" }
+                    }
                     transition={{ duration: 0.45, ease: "easeOut", delay: 0.54 }}
                     className="inline-block"
                   >
@@ -211,7 +263,10 @@ const HomeHero = () => {
                   </motion.span>
                 </h1>
                 <p className="mt-5 w-full max-w-[620px] font-jakarta text-base text-[#777777] md:text-lg">
-                  <RichTextLetterReveal text={heroDescription} />
+                  <RichTextLetterReveal
+                    text={heroDescription}
+                    enabled={shouldAnimate}
+                  />
                 </p>
               </div>
 
@@ -290,7 +345,7 @@ const HomeHero = () => {
                       style={{ left: piece.x, top: piece.y }}
                       initial={{ opacity: 0, scale: 0.2, y: 8, rotate: 0 }}
                       animate={
-                        cardTiltDone
+	                        shouldAnimate && cardTiltDone
                           ? {
                               opacity: [0, 1, 1],
                               scale: [0.2, piece.scale * 1.1, piece.scale],
@@ -315,7 +370,7 @@ const HomeHero = () => {
                 <motion.div
                   className="flex h-full min-h-[300px] w-full flex-col rounded-3xl bg-[#E6E6E6] px-5 py-7 font-jakarta shadow-lg md:h-[350px] md:w-[290px] xl:w-[250px] xl:px-4 xl:py-6 2xl:w-[290px] 2xl:px-5 2xl:py-7"
                   initial={{ rotate: 0 }}
-                  animate={{ rotate: -5 }}
+	                  animate={{ rotate: shouldAnimate ? -5 : 0 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
                   onAnimationComplete={() => setCardTiltDone(true)}
                   style={{ transformOrigin: "left bottom" }}
@@ -334,7 +389,7 @@ const HomeHero = () => {
                     <motion.div
                       className="h-full bg-[#B24002]"
                       initial={{ width: "0%" }}
-                      animate={{ width: "80%" }}
+	                      animate={{ width: shouldAnimate ? "80%" : "0%" }}
                       transition={{ duration: 1, ease: "easeOut", delay: 0.25 }}
                     />
                   </div>
@@ -359,7 +414,9 @@ const HomeHero = () => {
                     fill="none"
                     className="z-20 h-8 w-8 md:h-12 md:w-12"
                     initial={{ y: 14, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
+	                    animate={
+                        shouldAnimate ? { y: 0, opacity: 1 } : { y: 14, opacity: 0 }
+                      }
                     transition={{ duration: 0.35, ease: "easeOut" }}
                   >
                     <motion.path
@@ -369,7 +426,11 @@ const HomeHero = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       initial={{ pathLength: 0, opacity: 1 }}
-                      animate={{ pathLength: 1, opacity: 1 }}
+	                      animate={
+                        shouldAnimate
+                          ? { pathLength: 1, opacity: 1 }
+                          : { pathLength: 0, opacity: 1 }
+                      }
                       transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
                     />
                     <motion.path
@@ -379,7 +440,11 @@ const HomeHero = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       initial={{ pathLength: 0, opacity: 1 }}
-                      animate={{ pathLength: 1, opacity: 1 }}
+	                      animate={
+                        shouldAnimate
+                          ? { pathLength: 1, opacity: 1 }
+                          : { pathLength: 0, opacity: 1 }
+                      }
                       transition={{ duration: 0.35, ease: "easeInOut", delay: 0.8 }}
                     />
                   </motion.svg>
@@ -392,23 +457,26 @@ const HomeHero = () => {
                 filterId="graph-particle-right-top"
                 className="-right-4 top-4 sm:-right-4 sm:top-4 md:-right-5 md:top-6 lg:-right-5 lg:top-6 xl:-right-5 xl:top-5 2xl:-right-6 2xl:top-4"
                 rotate={120}
-                scale={0.86}
-                delay={0.65}
-              />
+	                scale={0.86}
+	                delay={0.65}
+	                enabled={shouldAnimate}
+	              />
               <TriangleParticle
                 filterId="graph-particle-right-middle"
                 className="right-30 top-[174px] sm:right-34 sm:top-[174px] md:right-46 md:top-[182px] lg:right-46 lg:top-[182px] xl:right-40 xl:top-[128px] 2xl:right-46 2xl:top-[32px]"
                 rotate={-18}
-                scale={0.5}
-                delay={0.78}
-              />
+	                scale={0.5}
+	                delay={0.78}
+	                enabled={shouldAnimate}
+	              />
               <TriangleParticle
                 filterId="graph-particle-right-bottom"
                 className="right-20 -bottom-5 sm:right-24 sm:-bottom-5 md:right-30 md:-bottom-5 lg:right-30 lg:-bottom-5 xl:right-26 xl:-bottom-5 2xl:right-29 2xl:-bottom-7"
                 rotate={-28}
-                scale={0.54}
-                delay={0.9}
-              />
+	                scale={0.54}
+	                delay={0.9}
+	                enabled={shouldAnimate}
+	              />
 
               {/* Bottom Div container fully animated */}
               <div
@@ -442,7 +510,10 @@ const HomeHero = () => {
                 </div>
 
                 <p className="w-full max-w-[240px] text-[20px] font-medium leading-tight text-white md:max-w-[290px] md:text-[26px] xl:max-w-[320px] 2xl:absolute 2xl:mt-8">
-                  <RichTextLetterReveal text={businessHeading} />
+	                  <RichTextLetterReveal
+                      text={businessHeading}
+                      enabled={shouldAnimate}
+                    />
                 </p>
               </div>
 
@@ -518,25 +589,26 @@ const HomeHero = () => {
                   filterId="graph-particle-inside-left"
                   className="-left-1 top-[54px] sm:-left-1 sm:top-[54px] md:-left-1 md:top-[72px] lg:-left-1 lg:top-[72px] xl:-left-1 xl:top-[62px] 2xl:-left-2 2xl:top-[50px]"
                   rotate={-12}
-                  scale={0.6}
-                  delay={0.72}
-                />
+	                  scale={0.6}
+	                  delay={0.72}
+	                  enabled={shouldAnimate}
+	                />
                 <motion.div
                   className="h-[52px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#DA682A] md:h-[84px] md:max-w-[74px] xl:h-[58px] xl:max-w-[68px] 2xl:h-[74px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
+	                  animate={{ scaleY: shouldAnimate ? 1 : 0 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.2 }}
                 />
                 <motion.div
                   className="h-[84px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#C65416] md:h-[126px] md:max-w-[74px] xl:h-[92px] xl:max-w-[68px] 2xl:h-[108px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
+	                  animate={{ scaleY: shouldAnimate ? 1 : 0 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.35 }}
                 />
                 <motion.div
                   className="h-[118px] w-full max-w-[60px] origin-bottom rounded-t-xl bg-[#B24002] md:h-[168px] md:max-w-[74px] xl:h-[132px] xl:max-w-[68px] 2xl:h-[132px] 2xl:max-w-[74px]"
                   initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
+	                  animate={{ scaleY: shouldAnimate ? 1 : 0 }}
                   transition={{ duration: 0.45, ease: "easeOut", delay: 0.5 }}
                 />
               </div>

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const FIRST_VISIT_KEY = "nexifire-loader-seen";
+const LOADER_COMPLETE_EVENT = "nexifire:loader-complete";
 
 type LoaderOverlayProps = {
   label?: string;
@@ -58,6 +58,8 @@ const SiteLoadingScreen = () => {
   const showTimer = useRef<number | null>(null);
   const hideTimer = useRef<number | null>(null);
   const maxTimer = useRef<number | null>(null);
+  const previousPathname = useRef(pathname);
+  const pendingNavigation = useRef(false);
 
   const clearTimers = () => {
     [showTimer, hideTimer, maxTimer].forEach((timer) => {
@@ -68,6 +70,12 @@ const SiteLoadingScreen = () => {
     });
   };
 
+  const completeLoading = () => {
+    setVisible(false);
+    document.documentElement.dataset.nexifireLoaderComplete = "true";
+    window.dispatchEvent(new Event(LOADER_COMPLETE_EVENT));
+  };
+
   useEffect(() => {
     const hasSeenLoader = window.sessionStorage.getItem(FIRST_VISIT_KEY);
 
@@ -75,7 +83,9 @@ const SiteLoadingScreen = () => {
       window.sessionStorage.setItem(FIRST_VISIT_KEY, "true");
       setLabel("Preparing the ecosystem");
       setVisible(true);
-      hideTimer.current = window.setTimeout(() => setVisible(false), 1450);
+      hideTimer.current = window.setTimeout(completeLoading, 1450);
+    } else {
+      window.requestAnimationFrame(completeLoading);
     }
 
     return clearTimers;
@@ -107,9 +117,13 @@ const SiteLoadingScreen = () => {
       if (!isSameOrigin || isSamePath) return;
 
       clearTimers();
+      pendingNavigation.current = true;
       setLabel("Loading the next page");
       showTimer.current = window.setTimeout(() => setVisible(true), 180);
-      maxTimer.current = window.setTimeout(() => setVisible(false), 2600);
+      maxTimer.current = window.setTimeout(() => {
+        pendingNavigation.current = false;
+        completeLoading();
+      }, 2600);
     };
 
     document.addEventListener("click", handleDocumentClick, true);
@@ -118,15 +132,23 @@ const SiteLoadingScreen = () => {
   }, []);
 
   useEffect(() => {
+    if (previousPathname.current === pathname) return;
+    previousPathname.current = pathname;
+
     if (showTimer.current !== null) {
       window.clearTimeout(showTimer.current);
       showTimer.current = null;
     }
 
-    if (visible) {
-      hideTimer.current = window.setTimeout(() => setVisible(false), 520);
+    if (pendingNavigation.current) {
+      pendingNavigation.current = false;
+      if (visible) {
+        hideTimer.current = window.setTimeout(completeLoading, 420);
+      } else {
+        completeLoading();
+      }
     }
-  }, [pathname]);
+  }, [pathname, visible]);
 
   if (!visible) return null;
 

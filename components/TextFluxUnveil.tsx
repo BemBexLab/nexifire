@@ -6,6 +6,7 @@ type TextFluxUnveilProps = {
   text: string;
   className?: string;
   baseDelay?: number;
+  enabled?: boolean;
   stepDelay?: number;
 };
 
@@ -13,6 +14,7 @@ export default function TextFluxUnveil({
   text,
   className,
   baseDelay = 0.05,
+  enabled = true,
   stepDelay = 0.04,
 }: TextFluxUnveilProps) {
   const chars = text.split("");
@@ -34,7 +36,11 @@ export default function TextFluxUnveil({
         <motion.span
           key={`${char}-${index}`}
           initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          animate={
+            enabled
+              ? { opacity: 1, y: 0, filter: "blur(0px)" }
+              : { opacity: 0, y: 6, filter: "blur(4px)" }
+          }
           transition={{
             duration: 0.35,
             ease: "easeOut",
@@ -48,4 +54,3 @@ export default function TextFluxUnveil({
     </span>
   );
 }
-

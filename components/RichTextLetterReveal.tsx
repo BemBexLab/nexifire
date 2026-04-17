@@ -6,12 +6,14 @@ import { createElement, useEffect, useMemo, useState, type ReactNode } from "rea
 type RichTextLetterRevealProps = {
   text: string;
   baseDelay?: number;
+  enabled?: boolean;
   stepDelay?: number;
 };
 
 export default function RichTextLetterReveal({
   text,
   baseDelay = 0.2,
+  enabled = true,
   stepDelay = 0.018,
 }: RichTextLetterRevealProps) {
   const [mounted, setMounted] = useState(false);
@@ -23,7 +25,7 @@ export default function RichTextLetterReveal({
   const normalizedText = useMemo(() => text.replaceAll("\\n", "\n"), [text]);
 
   const animatedNodes = useMemo(() => {
-    if (!mounted) return null;
+    if (!enabled || !mounted) return null;
 
     const doc = new DOMParser().parseFromString(
       `<div>${normalizedText.replaceAll("\n", "<br />")}</div>`,
@@ -82,7 +84,11 @@ export default function RichTextLetterReveal({
     return Array.from(root.childNodes).map((node, i) =>
       renderNode(node, `root-${i}`),
     );
-  }, [baseDelay, mounted, normalizedText, stepDelay]);
+  }, [baseDelay, enabled, mounted, normalizedText, stepDelay]);
+
+  if (!enabled) {
+    return <span className="whitespace-pre-line opacity-0">{normalizedText}</span>;
+  }
 
   if (!mounted || !animatedNodes) {
     return <span className="whitespace-pre-line">{normalizedText}</span>;
@@ -90,4 +96,3 @@ export default function RichTextLetterReveal({
 
   return <>{animatedNodes}</>;
 }
-
