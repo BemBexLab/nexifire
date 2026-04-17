@@ -1,127 +1,218 @@
 "use client";
-import React, { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 
 const sections = [
-    { id: 'use-website', title: 'Use of Website' },
-    { id: 'intellectual-property', title: 'Intellectual Property' },
-    { id: 'information-accuracy', title: 'Information Accuracy' },
-    { id: 'ecosystem-brand-links', title: 'Ecosystem Brand Links' },
-    { id: 'limitation-of-liability', title: 'Limitation of Liability' },
-    { id: 'changes-to-terms', title: 'Changes to Terms' },
-    { id: 'contact', title: 'Contact' },
+  { id: "use-website", title: "Use of Website" },
+  { id: "intellectual-property", title: "Intellectual Property" },
+  { id: "information-accuracy", title: "Information Accuracy" },
+  { id: "ecosystem-brand-links", title: "Ecosystem Brand Links" },
+  { id: "limitation-of-liability", title: "Limitation of Liability" },
+  { id: "changes-to-terms", title: "Changes to Terms" },
+  { id: "contact", title: "Contact" },
 ];
 
 const TermsContent = () => {
-    const [activeTab, setActiveTab] = useState('use-website');
+  const [activeTab, setActiveTab] = useState(sections[0].id);
+  const activeIndex = sections.findIndex((section) => section.id === activeTab);
 
-    return (
-        <div className="max-w-7xl mx-auto px-6 py-20 bg-white">
-            <div className="flex flex-col md:flex-row gap-16">
+  useEffect(() => {
+    let frameId = 0;
 
-                <aside className="md:w-1/4 md:sticky md:top-20 md:self-start">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-6">Table Of Content</h2>
-                    <div className="flex flex-col space-y-2 md:max-h-[calc(100vh-5rem)] md:overflow-auto">
-                        {sections.map((section) => (
-                            <a
-                                key={section.id}
-                                href={`#${section.id}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const el = document.getElementById(section.id);
-                                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                    setActiveTab(section.id);
-                                }}
-                                className={`text-left px-4 py-2.5 rounded-lg text-sm transition-all duration-200 border border-transparent
-                  ${activeTab === section.id
-                                        ? 'bg-[#B24002] text-white shadow-lg shadow-orange-200'
-                                        : 'bg-white text-gray-500 hover:bg-gray-50 border-gray-100'
-                                    }`}
-                            >
-                                {section.title}
-                            </a>
-                        ))}
-                    </div>
-                </aside>
+    const updateActiveTab = () => {
+      const activationLine = window.innerHeight * 0.35;
+      const currentSection = sections.reduce((activeSection, section) => {
+        const heading = document.querySelector(`#${section.id} h2`);
+        if (!heading) return activeSection;
 
-                <main className="md:w-3/4 space-y-5 md:space-y-10">
+        const { top } = heading.getBoundingClientRect();
+        if (top <= activationLine) return section.id;
 
-                    <section id="use-website">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Use of Website</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            This website is intended to provide information about NexiFire, its ecosystem, brands, and related content. You agree to use this website only for lawful purposes and in a manner that does not disrupt or damage the website or its content.
-                        </p>
-                    </section>
+        return activeSection;
+      }, sections[0].id);
 
-                    <section id="intellectual-property">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Intellectual Property</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            All content on this website, including text, branding, logos, graphics, design elements, and other materials, is the property of NexiFire unless otherwise stated. No content may be copied, reproduced, distributed, or used without prior written permission.
-                        </p>
-                    </section>
+      setActiveTab(currentSection);
+    };
 
-                    <section id="information-accuracy">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Information Accuracy</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            We aim to keep all information accurate and up to date. However, NexiFire does not guarantee that all website content will always be complete, current, or error-free.
-                        </p>
-                    </section>
+    const handleScroll = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateActiveTab);
+    };
 
-                    <section id="ecosystem-brand-links">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Ecosystem Brand Links</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            This website may contain links to the official websites of brands operating within the NexiFire ecosystem. While these brands are part of our broader network, each website may include content, terms, or policies specific to its respective operations.
-                        </p>
-                    </section>
+    updateActiveTab();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
-                    <section id="limitation-of-liability">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Limitation of Liability</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            NexiFire shall not be held liable for any direct, indirect, incidental, consequential, or punitive damages arising from your access to, use of, or inability to use this website or any linked sites, or reliance on information provided on the website.
-                        </p>
-                    </section>
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
 
-                    <section id="changes-to-terms">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Changes to Terms</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            We reserve the right to update or modify these Terms and Conditions at any time. Continued use of the website after changes indicates acceptance of the revised terms.
-                        </p>
-                    </section>
+  return (
+    <div className="font-jakarta mx-auto max-w-7xl bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-6 lg:py-20">
+      <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+        {/* --- Sidebar (Table of Contents) --- */}
+        <aside className="w-full lg:sticky lg:top-24 lg:w-[360px] lg:self-start">
+          <h2 className="border-b border-[#ECECEC] pb-2 text-[20px] font-semibold leading-none tracking-[-0.01em] text-[#3E3E3E] md:text-[21px]">
+            Table Of Content
+          </h2>
+          <div className="mt-[18px] flex flex-col gap-[10px] sm:gap-[12px]">
+            {sections.map((section, index) => {
+              const isActive = activeTab === section.id;
+              const distanceFromActive = Math.abs(index - activeIndex);
+              const isNearActive = distanceFromActive === 1;
+              const inactiveGlassEffect = isNearActive
+                ? index < activeIndex
+                  ? "bg-white/80 backdrop-blur-[2px] shadow-[inset_0_-13px_20px_-20px_rgba(178,64,2,0.9)]"
+                  : "bg-white/80 backdrop-blur-[2px] shadow-[inset_0_13px_20px_-20px_rgba(178,64,2,0.9)]"
+                : "bg-white";
 
-                    <section id="contact">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Contact</h2>
-                        <p className="text-gray-500 text-sm mb-8">
-                            If you have any questions regarding these Terms and Conditions, please contact us through our official contact page.
-                        </p>
+              return (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(section.id);
+                    if (el)
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    setActiveTab(section.id);
+                  }}
+                  className={`flex min-h-[36px] items-center rounded-[5px] border px-[14px] py-2 text-[14px] font-normal leading-tight tracking-[0.01em] transition-all duration-200 sm:px-[18px] sm:text-[15px]
+                  ${
+                    isActive
+                      ? "border-[#B24002] bg-[#B24002] text-white "
+                      : `border-[#EFEFEF] text-[#7A7A7A] ${inactiveGlassEffect} hover:border-[#E8E8E8] hover:bg-white hover:text-[#5F5F5F]`
+                  }`}
+                >
+                  {section.title}
+                </a>
+              );
+            })}
+          </div>
+        </aside>
 
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <Phone size={18} />
-                                </div>
-                                <a href="tel:+14703751520" className="text-sm text-gray-500 hover:underline">(470) 375 - 1520</a>
-                            </div>
+        <main className="w-full space-y-8 lg:w-3/4 lg:space-y-10">
+          <section id="use-website">
+            <h2 className="mb-4 text-[28px] leading-tight bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium sm:text-3xl lg:mb-6 lg:text-4xl">
+              Use of Website
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              This website is intended to provide information about NexiFire,
+              its ecosystem, brands, and related content. You agree to use this
+              website only for lawful purposes and in a manner that does not
+              disrupt or damage the website or its content.
+            </p>
+          </section>
 
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <Mail size={18} />
-                                </div>
-                                <a href="mailto:contact@nexifire.com" className="text-sm text-gray-500 hover:underline">contact@nexifire.com</a>
-                            </div>
+          <section id="intellectual-property">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">
+              Intellectual Property
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              All content on this website, including text, branding, logos,
+              graphics, design elements, and other materials, is the property of
+              NexiFire unless otherwise stated. No content may be copied,
+              reproduced, distributed, or used without prior written permission.
+            </p>
+          </section>
 
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <MapPin size={18} />
-                                </div>
-                                <span className="text-sm text-gray-500 uppercase">2500 Lakeview Pkwy, Alpharetta, GA 30009</span>
-                            </div>
-                        </div>
-                    </section>
+          <section id="information-accuracy">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">
+              Information Accuracy
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              We aim to keep all information accurate and up to date. However,
+              NexiFire does not guarantee that all website content will always
+              be complete, current, or error-free.
+            </p>
+          </section>
 
-                </main>
+          <section id="ecosystem-brand-links">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">
+              Ecosystem Brand Links
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              This website may contain links to the official websites of brands
+              operating within the NexiFire ecosystem. While these brands are
+              part of our broader network, each website may include content,
+              terms, or policies specific to its respective operations.
+            </p>
+          </section>
+
+          <section id="limitation-of-liability">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">
+              Limitation of Liability
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              NexiFire shall not be held liable for any direct, indirect,
+              incidental, consequential, or punitive damages arising from your
+              access to, use of, or inability to use this website or any linked
+              sites, or reliance on information provided on the website.
+            </p>
+          </section>
+
+          <section id="changes-to-terms">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">
+              Changes to Terms
+            </h2>
+            <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
+              We reserve the right to update or modify these Terms and
+              Conditions at any time. Continued use of the website after changes
+              indicates acceptance of the revised terms.
+            </p>
+          </section>
+
+          <section id="contact">
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">Contact</h2>
+            <p className="mb-6 text-base text-gray-500 sm:text-lg lg:mb-8">
+              If you have any questions regarding these Terms and Conditions,
+              please contact us through our official contact page.
+            </p>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                  <FaPhoneAlt color="#FFFFFF" size={18} />
+                </div>
+                <a
+                  href="tel:+14703751520"
+                  className="text-base text-gray-500 hover:underline sm:text-lg"
+                >
+                  (470) 375 - 1520
+                </a>
+              </div>
+
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                  <MdEmail color="#FFFFFF" size={18} />
+                </div>
+                <a
+                  href="mailto:contact@nexifire.com"
+                  className="break-all text-base text-gray-500 hover:underline sm:text-lg"
+                >
+                  contact@nexifire.com
+                </a>
+              </div>
+
+              <div className="flex items-start gap-3 sm:items-center sm:gap-4">
+                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                  <FaLocationDot color="#FFFFFF" size={18} />
+                </div>
+                <span className="text-base text-gray-500 uppercase sm:text-lg">
+                  2500 Lakeview Pkwy, Alpharetta, GA 30009
+                </span>
+              </div>
             </div>
-        </div>
-    );
+          </section>
+        </main>
+      </div>
+    </div>
+  );
 };
 
 export default TermsContent;

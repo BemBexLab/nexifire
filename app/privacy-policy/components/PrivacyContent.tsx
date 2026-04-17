@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { FaLocationDot } from 'react-icons/fa6';
 
 const sections = [
     { id: 'info-collect', title: 'Information We Collect' },
@@ -15,16 +17,63 @@ const sections = [
 
 const PrivacyContent = () => {
     const [activeTab, setActiveTab] = useState('info-collect');
+    const activeIndex = sections.findIndex((section) => section.id === activeTab);
+
+    useEffect(() => {
+        let frameId = 0;
+
+        const updateActiveTab = () => {
+            const activationLine = window.innerHeight * 0.35;
+            const currentSection = sections.reduce((activeSection, section) => {
+                const heading = document.querySelector(`#${section.id} h2`);
+                if (!heading) return activeSection;
+
+                const { top } = heading.getBoundingClientRect();
+                if (top <= activationLine) return section.id;
+
+                return activeSection;
+            }, sections[0].id);
+
+            setActiveTab(currentSection);
+        };
+
+        const handleScroll = () => {
+            cancelAnimationFrame(frameId);
+            frameId = requestAnimationFrame(updateActiveTab);
+        };
+
+        updateActiveTab();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+
+        return () => {
+            cancelAnimationFrame(frameId);
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, []);
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-20 bg-white">
-            <div className="flex flex-col md:flex-row gap-16">
+        <div className="font-jakarta mx-auto max-w-7xl bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-6 lg:py-20">
+            <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
 
                 {/* --- Sidebar (Table of Contents) --- */}
-                <aside className="md:w-1/4 md:sticky md:top-20 md:self-start">
-                    <h2 className="text-xl font-semibold text-gray-800 mb-6">Table Of Content</h2>
-                    <div className="flex flex-col space-y-2 md:max-h-[calc(100vh-5rem)] md:overflow-auto">
-                        {sections.map((section) => (
+                <aside className="w-full lg:sticky lg:top-24 lg:w-[360px] lg:self-start">
+                    <h2 className="border-b border-[#ECECEC] pb-2 text-[20px] font-semibold leading-none tracking-[-0.01em] text-[#3E3E3E] md:text-[21px]">
+                        Table Of Content
+                    </h2>
+                    <div className="mt-[18px] flex flex-col gap-[10px] sm:gap-[12px]">
+                        {sections.map((section, index) => {
+                            const isActive = activeTab === section.id;
+                            const distanceFromActive = Math.abs(index - activeIndex);
+                            const isNearActive = distanceFromActive === 1;
+                            const inactiveGlassEffect = isNearActive
+                                ? index < activeIndex
+                                    ? 'bg-white/80 backdrop-blur-[2px] shadow-[inset_0_-13px_20px_-20px_rgba(178,64,2,0.9)]'
+                                    : 'bg-white/80 backdrop-blur-[2px] shadow-[inset_0_13px_20px_-20px_rgba(178,64,2,0.9)]'
+                                : 'bg-white';
+
+                            return (
                             <a
                                 key={section.id}
                                 href={`#${section.id}`}
@@ -34,24 +83,25 @@ const PrivacyContent = () => {
                                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                     setActiveTab(section.id);
                                 }}
-                                className={`text-left px-4 py-2.5 rounded-lg text-sm transition-all duration-200 border border-transparent
-                  ${activeTab === section.id
-                                        ? 'bg-[#B24002] text-white shadow-lg shadow-orange-200'
-                                        : 'bg-white text-gray-500 hover:bg-gray-50 border-gray-100'
+                                className={`flex min-h-[36px] items-center rounded-[5px] border px-[14px] py-2 text-[14px] font-normal leading-tight tracking-[0.01em] transition-all duration-200 sm:px-[18px] sm:text-[15px]
+                  ${isActive
+                                        ? 'border-[#B24002] bg-[#B24002] text-white '
+                                        : `border-[#EFEFEF] text-[#7A7A7A] ${inactiveGlassEffect} hover:border-[#E8E8E8] hover:bg-white hover:text-[#5F5F5F]`
                                     }`}
                             >
                                 {section.title}
                             </a>
-                        ))}
+                            );
+                        })}
                     </div>
                 </aside>
 
                 {/* --- Main Content Area --- */}
-                <main className="md:w-3/4 space-y-5 md:space-y-10">
+                <main className="w-full space-y-8 lg:w-3/4 lg:space-y-10">
 
                     <section id="info-collect">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Information We Collect</h2>
-                        <div className="text-gray-500 text-sm leading-relaxed space-y-4">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Information We Collect</h2>
+                        <div className="space-y-4 text-base leading-relaxed text-gray-500 sm:text-lg">
                             <p>
                                 We may collect personal information that you voluntarily provide to us, such as your name, email
                                 address, phone number, company details, or any information submitted through contact forms,
@@ -65,8 +115,8 @@ const PrivacyContent = () => {
                     </section>
 
                     <section id="how-use">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">How We Use Your Information</h2>
-                        <div className="text-gray-500 text-sm leading-relaxed space-y-4">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">How We Use Your Information</h2>
+                        <div className="space-y-4 text-base leading-relaxed text-gray-500 sm:text-lg">
                             <p>
                                 The information we collect is used to respond to your inquiries, improve our services, manage
                                 communication, process applications, and enhance website functionality.
@@ -79,8 +129,8 @@ const PrivacyContent = () => {
                     </section>
 
                     <section id="sharing">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Information Sharing</h2>
-                        <div className="text-gray-500 text-sm leading-relaxed space-y-4">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Information Sharing</h2>
+                        <div className="space-y-4 text-base leading-relaxed text-gray-500 sm:text-lg">
                             <p>NexiFire does not sell, trade, or rent your personal information to third parties.</p>
                             <p>
                                 However, information may be shared internally within our ecosystem of specialized brands where
@@ -90,8 +140,8 @@ const PrivacyContent = () => {
                     </section>
 
                     <section id="security">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Data Security</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Data Security</h2>
+                        <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
                             We take reasonable steps to protect your information from unauthorized access, misuse, or
                             disclosure. While no digital platform can guarantee complete security, we are committed to
                             maintaining secure systems and processes.
@@ -99,16 +149,16 @@ const PrivacyContent = () => {
                     </section>
 
                     <section id="cookies">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Cookies and Tracking</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Cookies and Tracking</h2>
+                        <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
                             Our website may use cookies and similar technologies to improve user experience, analyze traffic,
                             and optimize website performance.
                         </p>
                     </section>
 
                     <section id="brand-links">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Brand Page Links</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Brand Page Links</h2>
+                        <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
                             Our website may contain links to the official pages of brands operating within the NexiFire
                             ecosystem. While these pages are part of our broader network, each brand may maintain its own
                             content, policies, and practices related to its operations.
@@ -116,38 +166,38 @@ const PrivacyContent = () => {
                     </section>
 
                     <section id="updates">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Updates to This Policy</h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Updates to This Policy</h2>
+                        <p className="text-base leading-relaxed text-gray-500 sm:text-lg">
                             NexiFire may update this Privacy Policy from time to time. Any changes will be reflected on this page.
                         </p>
                     </section>
 
                     <section id="contact">
-                        <h2 className="text-3xl font-medium text-gray-800 mb-6">Contact</h2>
-                        <p className="text-gray-500 text-sm mb-8">
+                        <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight sm:text-3xl lg:mb-6 lg:text-4xl">Contact</h2>
+                        <p className="mb-6 text-base text-gray-500 sm:text-lg lg:mb-8">
                             If you have any questions regarding this Privacy Policy, please contact us through our official contact page.
                         </p>
 
                         <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <Phone size={18} />
+                            <div className="flex items-center gap-3 sm:gap-4">
+                                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                                    <FaPhoneAlt color='#FFFFFF' size={18} />
                                 </div>
-                                <a href="tel:+14703751520" className="text-sm text-gray-500 hover:underline">(470) 375 - 1520</a>
+                                <a href="tel:+14703751520" className="text-base text-gray-500 hover:underline sm:text-lg">(470) 375 - 1520</a>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <Mail size={18} />
+                            <div className="flex items-center gap-3 sm:gap-4">
+                                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                                    <MdEmail color='#FFFFFF' size={18} />
                                 </div>
-                                <a href="mailto:contact@nexifire.com" className="text-sm text-gray-500 hover:underline">contact@nexifire.com</a>
+                                <a href="mailto:contact@nexifire.com" className="break-all text-base text-gray-500 hover:underline sm:text-lg">contact@nexifire.com</a>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="bg-[#B24002] p-2 rounded text-white">
-                                    <MapPin size={18} />
+                            <div className="flex items-start gap-3 sm:items-center sm:gap-4">
+                                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                                    <FaLocationDot color='#FFFFFF' size={18} />
                                 </div>
-                                <span className="text-sm text-gray-500 uppercase">2500 Lakeview Pkwy, Alpharetta, GA 30009</span>
+                                <span className="text-base text-gray-500 uppercase sm:text-lg">2500 Lakeview Pkwy, Alpharetta, GA 30009</span>
                             </div>
                         </div>
                     </section>

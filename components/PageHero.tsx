@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, type Variants } from "motion/react";
 import TextFluxUnveil from "./TextFluxUnveil";
+import Image from "next/image";
 
 type Logo = {
   id: number;
@@ -50,10 +51,10 @@ const defaultLogos: Logo[] = [
   },
 ];
 
-const defaultEyebrow = "About NexiFire";
-const defaultTitle = "A Global Ecosystem of\nIndustry Leaders.";
+const defaultEyebrow = "";
+const defaultTitle = "Default";
 const defaultDescription =
-  "NexiFire is a strategic parent organization overseeing a diverse portfolio of specialized brands in media, technology, and digital growth. We provide the high level governance and operational infrastructure that allows our subsidiary companies to deliver world class execution and sustainable market leadership.";
+  "This is Default Text Fix the Hero Section";
 
 const heroContainerVariants: Variants = {
   hidden: { opacity: 0, y: 28, scale: 0.985 },
@@ -114,6 +115,7 @@ const PageHero = ({
   description = defaultDescription,
   logos = defaultLogos,
 }: PageHeroProps) => {
+  const hasEyebrow = eyebrow.trim().length > 0;
   const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
@@ -125,20 +127,30 @@ const PageHero = ({
           initial="hidden"
           animate="visible"
         >
-          <motion.div
-            variants={heroItemVariants}
-            className="font-mulish mx-auto w-fit rounded-[8px] px-4 py-3 text-sm sm:text-base md:px-5 md:text-xl"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(178, 64, 2, 0.13) 0%, rgba(178, 64, 2, 0.00) 79.96%)",
-            }}
-          >
-            <TextFluxUnveil text={eyebrow} />
-          </motion.div>
+          {hasEyebrow && (
+            <motion.div
+              variants={heroItemVariants}
+              className="font-mulish mx-auto w-fit rounded-[8px] px-4 py-3 text-sm sm:text-base md:px-5 md:text-xl"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(178, 64, 2, 0.13) 0%, rgba(178, 64, 2, 0.00) 79.96%)",
+              }}
+            >
+              <TextFluxUnveil text={eyebrow} />
+            </motion.div>
+          )}
           <motion.h1
             variants={heroItemVariants}
-            className="font-jakarta mx-auto mt-5 max-w-[1540px] whitespace-pre-line text-center text-4xl font-medium uppercase leading-[1.08] [word-spacing:0.5rem]  text-black sm:text-5xl md:text-6xl lg:text-7xl"
+            className="font-jakarta relative isolate mx-auto mt-5 max-w-[1540px] whitespace-pre-line text-center text-4xl font-medium uppercase leading-[1.08] [word-spacing:0.5rem] text-black sm:text-5xl md:text-6xl lg:text-7xl"
           >
+            <Image
+              src="/images/Ellipse 19.png"
+              alt=""
+              width={500}
+              height={500}
+              className="pointer-events-none rotate-2 absolute left-1/2 top-10 -z-10 w-[260px] max-w-none -translate-x-1/2 -translate-y-1/2 sm:w-[350px] md:w-[350px] lg:w-[400px]"
+              aria-hidden="true"
+            />
             {title}
           </motion.h1>
           <motion.p

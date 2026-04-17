@@ -1,15 +1,15 @@
 
-import Hero from "../privacy-policy/components/Hero";
-import TermsContent from "./components/TermsContent";
+import PageHero from "@/components/PageHero";
+import LazyTermsContent from "./components/LazyTermsContent";
 
 const page = () => {
   return (
-    <section className="bg-white">
-      <Hero
-        title="Terms and Conditions"
-        description="Welcome to NexiFire. By accessing or using our website, you agree to comply with the following terms and conditions."
+    <section className="overflow-x-clip bg-white">
+      <PageHero
+        title={`Terms and Conditions`}
+        description={`Welcome to NexiFire. By accessing or using our website, you agree to comply with the following terms and conditions.`}
       />
-      <TermsContent />
+      <LazyTermsContent />
     </section>
   );
 };

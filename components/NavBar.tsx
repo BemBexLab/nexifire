@@ -57,11 +57,11 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`fixed py-5 inset-x-0 top-0 z-[100] w-full transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[100] w-full py-5 transition-transform duration-300 ${
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6 xl:px-10">
+      <div className="flex w-full items-center justify-between gap-4 bg-[#F6F6F6] px-4 py-3 md:px-6 xl:px-10">
         <div className="flex shrink-0 items-center gap-2.5 justify-self-start">
           <Image
             src="/images/Group 427320850.png"
@@ -81,7 +81,7 @@ export default function NavBar() {
             const className = `whitespace-nowrap text-md transition-colors duration-150 ${
               isActive
                 ? "text-black font-regular border-b-2 border-[#c0784a] pb-0.5"
-                : "text-[#777777] hover:text-[#1c1c1c] font-normal"
+                : "text-[#5f5f5f] hover:text-[#1c1c1c] font-normal"
             }`;
 
             return (
@@ -102,7 +102,7 @@ export default function NavBar() {
 
         {/* ── CTA Button ───────────────────────────────────────────── */}
         <div className="hidden min-h-[48px] items-center justify-end font-jakarta lg:flex">
-          <button className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a] px-5 py-[9px] text-md font-medium text-[#c0784a] transition-all duration-200 hover:bg-[#c0784a] hover:text-white">
+          <button className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/24 px-5 py-[9px] text-md font-medium text-[#c0784a] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white hover:shadow-[0_10px_24px_rgba(178,64,2,0.24)]">
             Free Consultation
             <CalendarIcon />
           </button>
@@ -110,7 +110,7 @@ export default function NavBar() {
 
         {/* ── Mobile Hamburger ─────────────────────────────────────── */}
         <button
-          className="flex flex-col gap-[5px] p-1 lg:hidden"
+          className="flex flex-col gap-[5px] rounded-lg border border-white/45 bg-white/25 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl lg:hidden"
           onClick={() => setMobileOpen((p) => !p)}
           aria-label="Toggle menu"
         >
@@ -128,7 +128,7 @@ export default function NavBar() {
 
       {/* ── Mobile Dropdown ───────────────────────────────────────── */}
       {mobileOpen && (
-        <div className="flex flex-col gap-3 border-t border-[#e5e3df] bg-[#f5f4f2] px-6 py-4 font-jakarta lg:hidden">
+        <div className="mx-3 mt-2 flex flex-col gap-3 rounded-lg border border-white/55 bg-white/72 px-6 py-4 font-jakarta shadow-[0_18px_45px_rgba(31,31,31,0.13),inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl backdrop-saturate-150 sm:mx-4 md:mx-6 lg:hidden">
           {navLinks.map((link) => {
             const isActive = isActiveLink(link.href);
             const className = `text-sm py-1 transition-colors duration-150 ${
@@ -157,7 +157,7 @@ export default function NavBar() {
               </Link>
             );
           })}
-          <button className="font-jakarta mt-2 flex items-center gap-2 px-5 py-2 rounded-full border border-[#c0784a] text-[#c0784a] text-sm font-medium w-fit hover:bg-[#c0784a] hover:text-white transition-all duration-200">
+          <button className="font-jakarta mt-2 flex w-fit items-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/20 px-5 py-2 text-sm font-medium text-[#c0784a] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white">
             Free Consultation
             <CalendarIcon />
           </button>
