@@ -57,11 +57,11 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-[100] w-full bg-[#F6F6F6] py-[5px] transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[100] w-full bg-[#F6F6F6] rounded-b-4xl py-[5px] transition-transform duration-300 ${
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="flex w-full items-center justify-between gap-4 bg-[#F6F6F6] px-4 py-3 md:px-6 xl:px-10">
+      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6 xl:px-10">
         <div className="flex shrink-0 items-center gap-2.5 justify-self-start">
           <Image
             src="/images/Group 427320850.png"
@@ -102,10 +102,13 @@ export default function NavBar() {
 
         {/* ── CTA Button ───────────────────────────────────────────── */}
         <div className="hidden min-h-[48px] items-center justify-end font-jakarta lg:flex">
-          <button className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/24 px-5 py-[9px] text-md font-medium text-[#c0784a] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white hover:shadow-[0_10px_24px_rgba(178,64,2,0.24)]">
+          <Link
+            href="/contact"
+            className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/24 px-5 py-[9px] text-md font-medium text-[#c0784a] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white hover:shadow-[0_10px_24px_rgba(178,64,2,0.24)]"
+          >
             Free Consultation
             <CalendarIcon />
-          </button>
+          </Link>
         </div>
 
         {/* ── Mobile Hamburger ─────────────────────────────────────── */}
@@ -157,10 +160,14 @@ export default function NavBar() {
               </Link>
             );
           })}
-          <button className="font-jakarta mt-2 flex w-fit items-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/20 px-5 py-2 text-sm font-medium text-[#c0784a] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white">
+          <Link
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="font-jakarta mt-2 flex w-fit items-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/20 px-5 py-2 text-sm font-medium text-[#c0784a] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white"
+          >
             Free Consultation
             <CalendarIcon />
-          </button>
+          </Link>
         </div>
       )}
     </nav>

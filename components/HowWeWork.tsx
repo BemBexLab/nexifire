@@ -13,7 +13,7 @@ const HowWeWork = () => {
         <div className="flex justify-center lg:justify-start">
           <div className="relative h-[260px] w-full max-w-[450px] overflow-hidden rounded-[14px] sm:h-[300px] sm:max-w-[390px] md:h-[430px] md:max-w-[530px]">
             <Image
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+              src="/images/Rectangle 9 (2).png"
               alt="How we work team"
               fill
               className="object-cover"

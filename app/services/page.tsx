@@ -33,7 +33,7 @@ const page = () => {
           "What this means for you is simple: faster execution, more reliable performance, and systems that are created for long-term growth, not short-term success. You gain clarity across your operations, confidence in your strategy, and a structure that’s designed to grow with your business.",
         ]}
         image={{
-          src: "/images/Rectangle 9.png",
+          src: "/images/Rectangle 9 (1).png",
           alt: "Who We Are",
           loading: "eager",
           priority: true,
@@ -49,7 +49,7 @@ const page = () => {
         description={`We design and deploy the system that makes sure each service is handled\nby a specialist.`}
         primaryButtonText="Consult With NexiFire"
         secondaryButtonText="Visit Our Brands"
-        backgroundImageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
+        backgroundImageSrc="/images/Frame 419.png"
         backgroundImageAlt="Team meeting"
       />
       <FAQs />

@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import React, { useState } from "react";
-import { FiPlus, FiArrowUpRight } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { TfiArrowTopRight } from "react-icons/tfi";
 
 const WhyYouBelongHere = () => {
@@ -85,19 +85,61 @@ const WhyYouBelongHere = () => {
                 <div className="overflow-hidden">
                   <div className="border-t border-[#f0f0f0] px-8 pb-6 pt-5">
                     <p className="text-[14px] leading-[1.7] text-[#777777]">
-                      Join our Spring 2026 Internship Cohort and work alongside
-                      a focused team that values growth, responsibility, and
-                      real contribution. This program is designed for people who
-                      want hands-on experience, faster learning, and meaningful
-                      exposure to real projects.
+                      Join the elite pipeline of global-level talent. We are
+                      looking for geniuses to join our Production, Tech, and
+                      People teams for the Spring 2026 Immersive Internship
+                      Cohort.
                     </p>
 
-                    <p className="mt-3 text-[14px] leading-[1.7] text-[#8a8a8a]">
-                      You will get the opportunity to build practical skills,
-                      understand real workflows, and contribute to projects that
-                      matter while being guided in a performance-driven
-                      environment.
+                    <p className="text-[14px] mt-3 font-semibold leading-[1.7] text-[#777777]">
+                      Open Roles:
                     </p>
+
+                    <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#8a8a8a] marker:text-[#8a8a8a]">
+                      <li>
+                        Video Editor: Focus on high-retention storytelling and
+                        cinematic edits.
+                      </li>
+                      <li>
+                        Graphic Designer: Crafting premium visual identities and
+                        high-end brand assets.
+                      </li>
+                      <li>
+                        Content Writer: Writing persuasive, SEO-optimized copy
+                        for an international audience.
+                      </li>
+                      <li>
+                        SEO Intern: Dominating search engine rankings through
+                        data-driven research.
+                      </li>
+                      <li>
+                        WordPress Intern: Building responsive, high-performance
+                        websites.
+                      </li>
+                      <li>
+                        QA (Quality Assurance): Ensuring pixel-perfect delivery
+                        through rigorous testing.
+                      </li>
+                      <li>
+                        Talent Acquisition: Sourcing the next generation of
+                        Koresys talent.
+                      </li>
+                    </ul>
+
+                    <p className="text-[14px] mt-3 font-semibold leading-[1.7] text-[#777777]">
+                      Perks:
+                    </p>
+
+                    <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#8a8a8a] marker:text-[#8a8a8a]">
+                      <li>Real projects</li>
+                      <li>Real international clients from Day 1</li>
+                      <li>Internship Certificate from Nexifire</li>
+                      <li>
+                        Learn the ropes directly from our department leads
+                      </li>
+                      <li>We hire our best interns</li>
+                      <li>High-performers move to Full-Time roles</li>
+                    </ul>
 
                     <motion.button
                       style={{

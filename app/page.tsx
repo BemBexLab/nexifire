@@ -38,7 +38,7 @@ GROW FASTER.`}
         description={`Whether you're building a brand or scaling one, NexiFire\ngives you the structure, strategy, and execution to\nmove forward with clarity.`}
         primaryButtonText="Let's Talk"
         secondaryButtonText="See Our Work"
-        backgroundImageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
+        backgroundImageSrc="/images/Frame 417.png"
         backgroundImageAlt="Team meeting"
         stats={[
           { value: 25, suffix: "K+", label: "Leads Generated" },

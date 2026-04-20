@@ -40,7 +40,7 @@ const page = () => {
         description={`Stop searching for a vendor and start partnering with an ecosystem. Let the\nNexiFire Group provide the specialized expertise and strategic\ninfrastructure your brand needs to lead its industry.`}
         primaryButtonText="Explore Our Portfolio"
         secondaryButtonText="Consult with the Head Office"
-        backgroundImageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
+        backgroundImageSrc="/images/Frame 418.png"
         backgroundImageAlt="Team meeting"
       />
       <FAQs />
