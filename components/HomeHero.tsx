@@ -83,6 +83,7 @@ const HomeHero = () => {
   const [animatedCount, setAnimatedCount] = useState(0);
   const [cardTiltDone, setCardTiltDone] = useState(false);
   const [loaderComplete, setLoaderComplete] = useState(false);
+  const [isDesktopLayout, setIsDesktopLayout] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
   const isHeroInView = useInView(heroRef, { amount: 0.25, once: true });
   const shouldAnimate = loaderComplete && isHeroInView;
@@ -118,6 +119,17 @@ const HomeHero = () => {
         "nexifire:loader-complete",
         handleLoaderComplete,
       );
+  }, []);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1280px)");
+    const updateDesktopLayout = () => setIsDesktopLayout(desktopQuery.matches);
+
+    updateDesktopLayout();
+    desktopQuery.addEventListener("change", updateDesktopLayout);
+
+    return () =>
+      desktopQuery.removeEventListener("change", updateDesktopLayout);
   }, []);
 
   useEffect(() => {
@@ -183,15 +195,15 @@ const HomeHero = () => {
   return (
     <section ref={heroRef}>
       <div
-        className="relative flex min-h-[1080px] justify-center overflow-visible bg-[#F6F6F6] px-4 pt-24 text-[#1f1f1f] md:px-6 md:pt-32 xl:overflow-hidden xl:pt-70 xl:[clip-path:polygon(0%_0%,100%_0%,100%_100%,48%_100%,44%_92%,0%_92%)]"
+        className="relative flex justify-center overflow-hidden bg-[#F6F6F6] px-4 pb-12 pt-24 text-[#1f1f1f] sm:px-6 md:pb-16 md:pt-30 lg:px-8 lg:pb-18 xl:min-h-[1080px] xl:px-4 xl:pb-0 xl:pt-70 xl:[clip-path:polygon(0%_0%,100%_0%,100%_100%,48%_100%,44%_92%,0%_92%)]"
       >
-        <div className="mx-auto flex w-full max-w-[1420px] flex-col items-center gap-14 xl:flex-row xl:items-start xl:justify-center xl:gap-x-16 2xl:gap-x-48">
+        <div className="mx-auto flex w-full max-w-[1420px] flex-col items-center gap-12 md:gap-14 xl:flex-row xl:items-start xl:justify-center xl:gap-x-16 2xl:gap-x-48">
           {/* Column # 01 */}
-          <div className="flex w-full max-w-[600px] shrink-0 flex-col xl:max-w-[520px] 2xl:max-w-[600px]">
+          <div className="flex w-full max-w-[680px] shrink-0 flex-col text-center xl:max-w-[520px] xl:text-left 2xl:max-w-[600px]">
             <div className="h-full w-full lg:self-stretch">
               {/* Welcome to Nexifire Text */}
               <div
-                className="font-mulish h-13 w-fit rounded-[10px] px-4 py-3 text-base md:px-5 md:text-xl"
+                className="font-mulish mx-auto h-13 w-fit rounded-[10px] px-4 py-3 text-base md:px-5 md:text-xl xl:mx-0"
                 style={{
                   background:
                     "linear-gradient(90deg, rgba(178, 64, 2, 0.13) 0%, rgba(178, 64, 2, 0.00) 79.96%)",
@@ -205,7 +217,7 @@ const HomeHero = () => {
 
               {/* Main text Area */}
               <div className="relative">
-                <h1 className="mt-2 w-full max-w-[670px] font-jakarta text-[42px] uppercase leading-[0.98] text-black md:text-[58px] xl:text-[68px] 2xl:text-[80px]">
+                <h1 className="mx-auto mt-3 w-full max-w-[670px] font-jakarta text-[36px] uppercase leading-[1.02] text-black sm:text-[44px] md:text-[58px] xl:mx-0 xl:text-[68px] 2xl:text-[80px]">
                   <motion.span
                     initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
                     animate={
@@ -262,7 +274,7 @@ const HomeHero = () => {
                     Growth
                   </motion.span>
                 </h1>
-                <p className="mt-5 w-full max-w-[620px] font-jakarta text-base text-[#777777] md:text-lg">
+                <p className="mx-auto mt-5 w-full max-w-[620px] font-jakarta text-base leading-[1.65] text-[#777777] md:text-lg xl:mx-0">
                   <RichTextLetterReveal
                     text={heroDescription}
                     enabled={shouldAnimate}
@@ -272,7 +284,7 @@ const HomeHero = () => {
 
               {/* Buttons Div */}
               <div className="w-full">
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row xl:justify-start">
                   <motion.button
                     style={{
                       background:
@@ -327,11 +339,11 @@ const HomeHero = () => {
           </div>
 
           {/* Column # 02 */}
-          <div className="flex w-full max-w-[645px] shrink-0 flex-col gap-y-7 xl:max-w-[560px] 2xl:max-w-[645px]">
+          <div className="flex w-full max-w-[720px] shrink-0 flex-col gap-y-7 xl:max-w-[560px] 2xl:max-w-[645px]">
             {/* Top row 2 divs */}
-            <div className="flex w-full flex-col gap-6 md:flex-row md:items-start">
+            <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-[minmax(0,290px)_minmax(0,1fr)] md:items-start xl:flex xl:flex-row">
               {/* Left Card */}
-              <div className="relative h-auto min-h-[300px] w-full md:h-[350px] md:w-[290px] xl:h-[320px] xl:w-[250px] 2xl:h-[350px] 2xl:w-[290px]">
+	              <div className="relative h-auto min-h-[250px] w-full md:h-[350px] md:min-h-0 xl:h-[320px] xl:w-[250px] 2xl:h-[350px] 2xl:w-[290px]">
                 <div className="pointer-events-none absolute inset-0">
                   {giftRibbonShapes.map((piece, index) => (
                     <motion.svg
@@ -368,14 +380,14 @@ const HomeHero = () => {
                   ))}
                 </div>
                 <motion.div
-                  className="flex h-full min-h-[300px] w-full flex-col rounded-3xl bg-[#E6E6E6] px-5 py-7 font-jakarta shadow-lg md:h-[350px] md:w-[290px] xl:w-[250px] xl:px-4 xl:py-6 2xl:w-[290px] 2xl:px-5 2xl:py-7"
+                  className="flex h-full min-h-[250px] w-full flex-col rounded-3xl bg-[#E6E6E6] px-5 py-6 font-jakarta shadow-lg sm:px-6 sm:py-7 md:h-[350px] xl:w-[250px] xl:px-4 xl:py-6 2xl:w-[290px] 2xl:px-5 2xl:py-7"
                   initial={{ rotate: 0 }}
-	                  animate={{ rotate: shouldAnimate ? -5 : 0 }}
+		                  animate={{ rotate: shouldAnimate && isDesktopLayout ? -5 : 0 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
                   onAnimationComplete={() => setCardTiltDone(true)}
                   style={{ transformOrigin: "left bottom" }}
                 >
-                <p className="text-center tabular-nums text-[64px] text-black md:text-8xl xl:text-[72px] 2xl:text-8xl 2xl:pb-3">
+	                <p className="text-center tabular-nums text-[56px] leading-none text-black sm:text-[64px] md:text-8xl xl:text-[72px] 2xl:text-8xl 2xl:pb-3">
                   {animatedCount}+
                 </p>
                 <p className="w-full text-[#5C5D5F] xl:text-[15px] 2xl:text-base">
@@ -398,8 +410,8 @@ const HomeHero = () => {
               </div>
 
               {/* Right div */}
-              <div
-                className="relative overflow-hidden rounded-3xl h-[300px] w-full md:h-[350px] md:w-[370px] xl:w-[286px] 2xl:w-[370px] bg-cover bg-center bg-no-repeat"
+	              <div
+                className="relative h-[270px] w-full overflow-hidden rounded-3xl bg-cover bg-center bg-no-repeat sm:h-[320px] md:h-[350px] xl:w-[286px] 2xl:w-[370px]"
                 style={{ backgroundImage: "url('/images/Rectangle 23805.png')" }}
                 role="img"
                 aria-label="Second Col Corporate image"
@@ -452,7 +464,7 @@ const HomeHero = () => {
               </div>
             </div>
 
-            <div className="relative overflow-visible">
+              <div className="relative overflow-visible">
               <TriangleParticle
                 filterId="graph-particle-right-top"
                 className="-right-4 top-4 sm:-right-4 sm:top-4 md:-right-5 md:top-6 lg:-right-5 lg:top-6 xl:-right-5 xl:top-5 2xl:-right-6 2xl:top-4"
@@ -480,7 +492,7 @@ const HomeHero = () => {
 
               {/* Bottom Div container fully animated */}
               <div
-                className="relative flex h-[320px] w-full overflow-hidden rounded-3xl bg-black font-jakarta px-5 pb-[170px] pt-6 sm:h-[320px] md:h-[340px] md:px-8 md:pb-[210px] md:pt-8 lg:h-[340px] xl:h-auto xl:min-h-[280px] xl:px-8 xl:pb-[170px] xl:pt-8 2xl:h-[200px] 2xl:min-h-0 2xl:px-10 2xl:pb-10 2xl:pt-10"
+	                className="relative flex h-[300px] w-full overflow-hidden rounded-3xl bg-black px-5 pb-[150px] pt-6 font-jakarta sm:h-[320px] md:h-[340px] md:px-8 md:pb-[200px] md:pt-8 xl:h-auto xl:min-h-[280px] xl:px-8 xl:pb-[170px] xl:pt-8 2xl:h-[200px] 2xl:min-h-0 2xl:px-10 2xl:pb-10 2xl:pt-10"
                 onMouseMove={handlePanelMouseMove}
                 onMouseLeave={handlePanelMouseLeave}
               >
@@ -615,7 +627,7 @@ const HomeHero = () => {
               </div>
             </div>
 
-            <div className="flex w-full justify-center sm:pb-5 md:pb-5 pt-8 md:pt-15 xl:justify-start">
+	            <div className="flex w-full justify-center pt-6 sm:pb-5 md:pb-5 md:pt-10 xl:justify-start xl:pt-8">
               <Clients />
             </div>
           </div>
