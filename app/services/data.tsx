@@ -12,7 +12,7 @@ export const serviceWhatWeDoCards: WhatWeDoCard[] = [
     title: "Strategic Direction ",
     description: (
       <>
-        <ul className="list-disc list-inside">
+        <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#444444] marker:text-[#444444]">
           <li>Business analysis</li>
           <li>Growth roadmap</li>
           <li>System design</li>
@@ -93,7 +93,7 @@ export const serviceWhatWeDoCards: WhatWeDoCard[] = [
     title: "Specialized Deployment",
     description: (
       <>
-        <ul className="list-disc list-inside">
+        <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#444444] marker:text-[#444444]">
           <li>Assign the right brand(s) for each function</li>
           <li>Each brand focuses on one area only</li>
         </ul>
@@ -169,7 +169,7 @@ export const serviceWhatWeDoCards: WhatWeDoCard[] = [
     title: "Coordinated Execution",
     description: (
       <>
-        <ul className="list-disc list-inside">
+        <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#444444] marker:text-[#444444]">
           <li>Central oversight by NexiFire</li>
           <li>Alignment across all moving parts</li>
         </ul>
@@ -297,7 +297,7 @@ export const serviceWhatWeDoCards: WhatWeDoCard[] = [
     title: "Optimization & Scaling",
     description: (
       <>
-        <ul className="list-disc list-inside">
+        <ul className="list-outside list-disc space-y-1 pl-5 text-[14px] leading-[1.7] text-[#444444] marker:text-[#444444]">
           <li>Data tracking</li>
           <li>Continuous improvement</li>
           <li>Scaling what works</li>

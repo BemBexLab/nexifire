@@ -16,6 +16,12 @@ const flagIcons = FlagIcons as unknown as Record<string, FlagIconComponent>;
 const CareerApplicationForm = () => {
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [resumeName, setResumeName] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const countryDropdownRef = useRef<HTMLDivElement>(null);
   const selectedCountry =
     countryPhoneOptions.find((country) => country.code === selectedCountryCode) ??
@@ -47,6 +53,34 @@ const CareerApplicationForm = () => {
     };
   }, []);
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+
+    const response = await fetch("/api/careers", {
+      method: "POST",
+      body: new FormData(event.currentTarget),
+    });
+    const result = (await response.json().catch(() => ({}))) as {
+      error?: string;
+    };
+
+    if (response.ok) {
+      event.currentTarget.reset();
+      setSelectedCountryCode("US");
+      setResumeName("");
+      setSubmitStatus("success");
+      setSubmitMessage("Thanks. Your application has been sent.");
+    } else {
+      setSubmitStatus("error");
+      setSubmitMessage(result.error || "Unable to send your application right now.");
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <section className="w-full font-jakarta pb-16 pt-8 md:pb-20">
       <div className="mx-auto max-w-[860px] px-4 sm:px-6">
@@ -57,24 +91,30 @@ const CareerApplicationForm = () => {
         </h2>
 
         <div className="mx-auto mt-4 max-w-[680px] rounded-[14px] border border-[#e8e8e8] p-5 shadow-[0_6px_20px_rgba(0,0,0,0.05)] md:mt-4 md:p-6">
-          <form className="space-y-3">
+          <form className="space-y-3" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
+                name="firstName"
                 type="text"
                 placeholder="First Name"
+                required
                 className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
               <input
+                name="lastName"
                 type="text"
                 placeholder="Last Name"
+                required
                 className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
             </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
+                name="email"
                 type="email"
                 placeholder="Email"
+                required
                 className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
 
@@ -117,8 +157,10 @@ const CareerApplicationForm = () => {
                   value={selectedCountry.dialCode}
                 />
                 <input
+                  name="phone"
                   type="tel"
                   placeholder="Phone"
+                  required
                   className="h-full min-w-0 flex-1 bg-transparent px-2 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
                 />
 
@@ -174,14 +216,22 @@ const CareerApplicationForm = () => {
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
+                name="salaryExpectation"
                 type="text"
                 placeholder="Salary Expectation"
                 className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
 
               <div className="relative">
-                <select className="h-[40px] w-full appearance-none rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#9a9a9a] outline-none">
-                  <option>Choose Your Position</option>
+                <select
+                  name="position"
+                  required
+                  defaultValue=""
+                  className="h-[40px] w-full appearance-none rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#9a9a9a] outline-none"
+                >
+                  <option value="" disabled>
+                    Choose Your Position
+                  </option>
                   <option>Frontend Developer</option>
                   <option>Backend Developer</option>
                   <option>UI/UX Designer</option>
@@ -193,8 +243,14 @@ const CareerApplicationForm = () => {
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="relative">
-                <select className="h-[40px] w-full appearance-none rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#9a9a9a] outline-none">
-                  <option>Are You Currently employed?</option>
+                <select
+                  name="employmentStatus"
+                  defaultValue=""
+                  className="h-[40px] w-full appearance-none rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#9a9a9a] outline-none"
+                >
+                  <option value="" disabled>
+                    Are You Currently employed?
+                  </option>
                   <option>Yes</option>
                   <option>No</option>
                 </select>
@@ -202,6 +258,7 @@ const CareerApplicationForm = () => {
               </div>
 
               <input
+                name="joinTimeline"
                 type="text"
                 placeholder="How Soon Can You Join?"
                 className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
@@ -209,26 +266,50 @@ const CareerApplicationForm = () => {
             </div>
 
             <input
+              name="portfolio"
               type="text"
               placeholder="Link Your Portfolio"
               className="h-[40px] w-full rounded-[5px] border border-[#cfcfcf] bg-transparent px-3 text-[12px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
             />
 
             <label className="flex min-h-[106px] w-full cursor-pointer flex-col items-center justify-center rounded-[4px] border border-dashed border-[#cfcfcf] bg-transparent text-center">
-              <input type="file" className="hidden" />
+              <input
+                name="resume"
+                type="file"
+                accept=".pdf,.doc,.docx"
+                className="hidden"
+                onChange={(event) =>
+                  setResumeName(event.currentTarget.files?.[0]?.name ?? "")
+                }
+              />
               <span className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#d85a05] text-white">
                 <FiPlus className="text-[12px]" />
               </span>
               <span className="mt-3 text-[12px] text-[#8e8e8e]">
-                Upload Resume
+                {resumeName || "Upload Resume"}
+              </span>
+              <span className="mt-1 text-[11px] text-[#a0a0a0]">
+                PDF, DOC, or DOCX up to 5MB
               </span>
             </label>
 
+            {submitMessage ? (
+              <p
+                className={`text-sm ${
+                  submitStatus === "success" ? "text-[#247a39]" : "text-[#b3261e]"
+                }`}
+              >
+                {submitMessage}
+              </p>
+            ) : null}
+
             <motion.button
+              type="submit"
+              disabled={isSubmitting}
               style={{
                 background: "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
               }}
-              className="mt-5 flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-4xl px-5 py-1 text-center text-base font-light text-white md:text-lg"
+              className="mt-5 flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-4xl px-5 py-1 text-center text-base font-light text-white disabled:cursor-not-allowed disabled:opacity-70 md:text-lg"
               whileHover={{
                 y: -3,
                 scale: 1.02,
@@ -237,7 +318,7 @@ const CareerApplicationForm = () => {
               whileTap={{ y: 0, scale: 0.98 }}
               transition={{ type: "spring", stiffness: 320, damping: 20 }}
             >
-              Let's Talk
+              {isSubmitting ? "Sending..." : "Let's Talk"}
               <motion.span
                 whileHover={{ x: 4, y: -2 }}
                 transition={{
