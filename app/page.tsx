@@ -37,7 +37,9 @@ areas.`}
 GROW FASTER.`}
         description={`Whether you're building a brand or scaling one, NexiFire\ngives you the structure, strategy, and execution to\nmove forward with clarity.`}
         primaryButtonText="Let's Talk"
+        primaryButtonHref="/contact"
         secondaryButtonText="See Our Work"
+        secondaryButtonHref="/brands"
         backgroundImageSrc="/images/Frame 417.png"
         backgroundImageAlt="Team meeting"
         stats={[

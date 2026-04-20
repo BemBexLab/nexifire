@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { LazyMotion, domAnimation, m, motion } from "motion/react";
 import { TfiArrowTopRight } from "react-icons/tfi";
+import Link from "next/link";
 
 const images = [
   "/images/Rectangle 45.png",
@@ -140,31 +141,34 @@ const NotAnAgency = () => {
               We do not chase trends. We build systems that scale.
             </m.p>
 
-            <motion.button
-              style={{
-                background: "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
-              }}
-              className="flex mt-5 w-full items-center justify-center gap-2 rounded-lg py-2 text-base font-light text-white sm:w-[200px] md:text-lg"
-              whileHover={{
-                y: -3,
-                scale: 1.02,
-                boxShadow: "0 10px 24px rgba(178,64,2,0.35)",
-              }}
-              whileTap={{ y: 0, scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 320, damping: 20 }}
-            >
-              Learn More
-              <motion.span
-                whileHover={{ x: 4, y: -2 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 18,
+            <Link href="/about">
+              <motion.button
+                style={{
+                  background:
+                    "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                 }}
+                className="flex mt-5 w-full items-center justify-center gap-2 rounded-lg py-2 text-base font-light text-white sm:w-[200px] md:text-lg"
+                whileHover={{
+                  y: -3,
+                  scale: 1.02,
+                  boxShadow: "0 10px 24px rgba(178,64,2,0.35)",
+                }}
+                whileTap={{ y: 0, scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 320, damping: 20 }}
               >
-                <TfiArrowTopRight size={20} />
-              </motion.span>
-            </motion.button>
+                Learn More
+                <motion.span
+                  whileHover={{ x: 4, y: -2 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 18,
+                  }}
+                >
+                  <TfiArrowTopRight size={20} />
+                </motion.span>
+              </motion.button>
+            </Link>
           </div>
         </div>
       </section>

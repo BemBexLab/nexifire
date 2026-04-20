@@ -39,7 +39,9 @@ const page = () => {
         title={`Ready to Align with\na Higher Standard\nof Growth?`}
         description={`Stop searching for a vendor and start partnering with an ecosystem. Let the\nNexiFire Group provide the specialized expertise and strategic\ninfrastructure your brand needs to lead its industry.`}
         primaryButtonText="Explore Our Portfolio"
+        primaryButtonHref="/brands"
         secondaryButtonText="Consult with the Head Office"
+        secondaryButtonHref="/contact"
         backgroundImageSrc="/images/Frame 418.png"
         backgroundImageAlt="Team meeting"
       />

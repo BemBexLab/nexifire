@@ -48,7 +48,9 @@ const page = () => {
         title={`Get a Custom Growth\nSystem and Build Your\nEcosystem`}
         description={`We design and deploy the system that makes sure each service is handled\nby a specialist.`}
         primaryButtonText="Consult With NexiFire"
+        primaryButtonHref="/contact"
         secondaryButtonText="Visit Our Brands"
+        secondaryButtonHref="/brands"
         backgroundImageSrc="/images/Frame 419.png"
         backgroundImageAlt="Team meeting"
       />

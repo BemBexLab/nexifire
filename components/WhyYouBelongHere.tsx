@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { TfiArrowTopRight } from "react-icons/tfi";
+import Link from "next/link";
 
 const WhyYouBelongHere = () => {
   const [open, setOpen] = useState(false);
@@ -28,31 +29,33 @@ const WhyYouBelongHere = () => {
             noticed, and your potential is taken seriously.
           </p>
 
-          <motion.button
-            style={{
-              background: "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
-            }}
-            className="flex mt-5 min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-lg px-5 py-1 text-center text-base font-light text-white sm:w-fit sm:min-w-[200px] md:text-lg"
-            whileHover={{
-              y: -3,
-              scale: 1.02,
-              boxShadow: "0 10px 24px rgba(178,64,2,0.35)",
-            }}
-            whileTap={{ y: 0, scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 320, damping: 20 }}
-          >
-            Let's Talk
-            <motion.span
-              whileHover={{ x: 4, y: -2 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 18,
+          <Link href="/contact">
+            <motion.button
+              style={{
+                background: "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
               }}
+              className="flex mt-5 min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-lg px-5 py-1 text-center text-base font-light text-white sm:w-fit sm:min-w-[200px] md:text-lg"
+              whileHover={{
+                y: -3,
+                scale: 1.02,
+                boxShadow: "0 10px 24px rgba(178,64,2,0.35)",
+              }}
+              whileTap={{ y: 0, scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 320, damping: 20 }}
             >
-              <TfiArrowTopRight size={20} />
-            </motion.span>
-          </motion.button>
+              Let's Talk
+              <motion.span
+                whileHover={{ x: 4, y: -2 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 18,
+                }}
+              >
+                <TfiArrowTopRight size={20} />
+              </motion.span>
+            </motion.button>
+          </Link>
         </div>
 
         {/* Right Dropdown Card */}

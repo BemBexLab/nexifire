@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useInView } from "motion/react";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 
@@ -14,7 +15,9 @@ type BuildSmarterProps = {
   title: string;
   description: string;
   primaryButtonText: string;
+  primaryButtonHref?: string;
   secondaryButtonText: string;
+  secondaryButtonHref?: string;
   backgroundImageSrc: string;
   backgroundImageAlt: string;
   stats?: BuildSmarterStat[];
@@ -65,7 +68,9 @@ const BuildSmarter = ({
   title,
   description,
   primaryButtonText,
+  primaryButtonHref = "/contact",
   secondaryButtonText,
+  secondaryButtonHref = "/contact",
   backgroundImageSrc,
   backgroundImageAlt,
   stats = [],
@@ -102,12 +107,8 @@ const BuildSmarter = ({
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 md:mt-8">
-                <motion.button
-                  style={{
-                    background:
-                      "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
-                  }}
-                  className="flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-lg px-5 py-3 text-center text-base font-light text-white sm:w-fit sm:min-w-[200px] md:text-lg"
+                <motion.div
+                  className="w-full sm:w-fit"
                   whileHover={{
                     y: -3,
                     scale: 1.02,
@@ -116,23 +117,35 @@ const BuildSmarter = ({
                   whileTap={{ y: 0, scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 320, damping: 20 }}
                 >
-                  {primaryButtonText}
-                  <motion.span
-                    whileHover={{ x: 4, y: -2 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 18,
+                  <Link
+                    href={primaryButtonHref}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                     }}
+                    className="flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-lg px-5 py-3 text-center text-base font-light text-white sm:w-fit sm:min-w-[200px] md:text-lg"
                   >
-                    <TfiArrowTopRight size={20} />
-                  </motion.span>
-                </motion.button>
+                    {primaryButtonText}
+                    <motion.span
+                      whileHover={{ x: 4, y: -2 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 18,
+                      }}
+                    >
+                      <TfiArrowTopRight size={20} />
+                    </motion.span>
+                  </Link>
+                </motion.div>
 
-                <button className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-[8px] border border-white/40 bg-white/5 px-5 py-3 text-center text-sm font-medium text-white backdrop-blur-[2px] transition hover:bg-white/10 sm:w-auto md:text-base">
+                <Link
+                  href={secondaryButtonHref}
+                  className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 whitespace-pre-line rounded-[8px] border border-white/40 bg-white/5 px-5 py-3 text-center text-sm font-medium text-white backdrop-blur-[2px] transition hover:bg-white/10 sm:w-auto md:text-base"
+                >
                   {secondaryButtonText}
                   <TfiArrowTopRight size={20} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

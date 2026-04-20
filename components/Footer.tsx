@@ -23,7 +23,7 @@ const FooterCTA = () => {
               Nexifire is here to guide you to the right strategy and the right
               system.
             </p>
-            <Link href="/" className="mt-4 w-full sm:w-fit">
+            <Link href="/contact" className="mt-4 w-full sm:w-fit">
               <motion.button
                 style={{
                   background:
