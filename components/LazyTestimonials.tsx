@@ -14,7 +14,7 @@ const TestimonialsSection = dynamic(() => import("./Testimonials"), {
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
-              className="rounded-[12px] border border-[#eaeaea] bg-white px-[16px] pb-[18px] pt-[14px]"
+              className="flex min-h-[338px] flex-col rounded-[12px] border border-[#eaeaea] bg-white px-[16px] pb-[18px] pt-[14px]"
               style={{
                 boxShadow:
                   "0 10px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)",
@@ -37,7 +37,7 @@ const TestimonialsSection = dynamic(() => import("./Testimonials"), {
                 <div className="h-4 w-8/12 animate-pulse rounded bg-[#e7e7e7]" />
               </div>
 
-              <div className="mt-[18px] flex items-center gap-[12px]">
+              <div className="mt-auto flex items-center gap-[12px] pt-[18px]">
                 <div className="h-[64px] w-[64px] animate-pulse rounded-full bg-[#dddddd]" />
                 <div className="h-5 w-32 animate-pulse rounded bg-[#e7e7e7]" />
               </div>

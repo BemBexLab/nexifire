@@ -57,7 +57,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-[100] w-full bg-[#F6F6F6] py-5 transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[100] w-full bg-[#F6F6F6] py-[5px] transition-transform duration-300 ${
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

@@ -13,23 +13,23 @@ const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Hannah Bertin",
-    avatar: "https://i.pravatar.cc/100?img=1",
+    avatar: "/images/Ellipse 16.png",
     review:
-      "Nexfire has brought a level of structure I never realized I was missing. I am an author and worked with one of Nexfire's brands, Ink Founders. I must say they are very professional. Everything was aligned under one system. They helped me in editing, marketing, and publishing my book. I appreciated.",
+      "Nexifire has brought a level of structure I never realized I was missing. I am an author and worked with one of Nexifre's brands, Ink Founders. I must say they are very professional. Everything was aligned under one system. They helped me in editing, marketing, and publishing my book. I appreciated.",
   },
   {
     id: 2,
     name: "Benjamin Paul",
-    avatar: "https://i.pravatar.cc/100?img=2",
+    avatar: "/images/Ellipse 16 (1).png",
     review:
-      "I was worried about my website development because I wanted it to be unique and responsive across all devices. It is not false that the Nexfire's brand Web Founders helped me a lot in that. Web Founders keep everything connected from strategy to execution. It felt like a complete growth system.",
+      "I was worried about my website development because I wanted it to be unique and responsive across all devices. It is not false that the Nexifire’s brand Web Founders helped me a lot in that. Web Founders keep everything connected from strategy to execution. It felt like a complete growth system.",
   },
   {
     id: 3,
     name: "John Alex",
-    avatar: "https://i.pravatar.cc/100?img=3",
+    avatar: "/images/Ellipse 16 (2).png",
     review:
-      "I was looking for the service creating my book website and book publishing, and the Nexfire brand, which is the Storyloom complete system I have worked with. No doubt they brought clarity and confidence. Everything is handled carefully, whether my author website or my book publishing on different platforms. Every step is well managed.",
+      "I was looking for the service creating my book website and book publishing, and the Nexifire brand, which is the Storyloom complete system I have worked with. No doubt they brought clarity and confidence. Everything is handled carefully, whether my author website or my book publishing on different platforms. Every step is well managed.",
   },
   {
     id: 4,
@@ -41,14 +41,14 @@ const testimonials: Testimonial[] = [
   {
     id: 5,
     name: "Marcus Lee",
-    avatar: "https://i.pravatar.cc/100?img=5",
+    avatar: "https://i.pravatar.cc/100?img=6",
     review:
-      "From branding to launch, everything felt organized and intentional. I appreciated how responsive the team was and how they connected every part of the work into one clear strategy.",
+    "From branding to launch, everything felt organized and intentional. I appreciated how responsive the team was and how they connected every part of the work into one clear strategy.",
   },
   {
     id: 6,
     name: "Elena Cruz",
-    avatar: "https://i.pravatar.cc/100?img=6",
+    avatar: "https://i.pravatar.cc/100?img=5",
     review:
       "Working with them made the whole journey stress-free. They handled details carefully, communicated well, and delivered a polished result that felt aligned with my goals.",
   },
@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
                 {slide.map((item) => (
                   <article
                     key={item.id}
-                    className="rounded-[12px] border border-[#eaeaea] bg-white px-4 pb-[18px] pt-[14px]"
+                    className="flex h-full min-h-[338px] flex-col rounded-[12px] border border-[#eaeaea] bg-white px-4 pb-[18px] pt-[14px]"
                     style={{
                       boxShadow:
                         "0 10px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)",
@@ -133,11 +133,11 @@ export default function TestimonialsSection() {
                   >
                     <Stars />
 
-                    <p className="text-base leading-[1.58] text-[#7a7a7a] md:min-h-[154px]">
+                    <p className="text-base leading-[1.58] text-[#7a7a7a]">
                       {item.review}
                     </p>
 
-                    <div className="mt-[18px] flex items-center gap-[12px]">
+                    <div className="mt-auto flex items-center gap-[12px] pt-[18px]">
                       <img
                         src={item.avatar}
                         alt={item.name}
