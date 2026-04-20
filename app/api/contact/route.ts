@@ -43,6 +43,7 @@ function getTransporter() {
   if (!transporter) {
     const host = getRequiredEnv("SMTP_HOST");
     const port = Number(process.env.SMTP_PORT || "465");
+    const timeout = Number(process.env.SMTP_CONNECTION_TIMEOUT || "10000");
 
     transporter = nodemailer.createTransport({
       host,
@@ -54,6 +55,9 @@ function getTransporter() {
         user: getRequiredEnv("SMTP_USER"),
         pass: getSmtpPassword(host),
       },
+      connectionTimeout: timeout,
+      greetingTimeout: timeout,
+      socketTimeout: timeout,
     });
   }
 
@@ -83,6 +87,15 @@ function isSmtpAuthError(error: unknown) {
     error !== null &&
     "code" in error &&
     error.code === "EAUTH"
+  );
+}
+
+function isSmtpConnectionError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error.code === "ESOCKET" || error.code === "ETIMEDOUT")
   );
 }
 
@@ -157,6 +170,16 @@ export async function POST(request: Request) {
         {
           error:
             "SMTP login failed. For Gmail, use a Google App Password in SMTP_PASSWORD, then restart the dev server.",
+        },
+        { status: 500 },
+      );
+    }
+
+    if (isSmtpConnectionError(error)) {
+      return Response.json(
+        {
+          error:
+            "SMTP server is unreachable. Check SMTP_HOST, SMTP_PORT, and SMTP_SECURE in .env.",
         },
         { status: 500 },
       );
