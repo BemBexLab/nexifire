@@ -7,7 +7,7 @@ import Image from "next/image";
 
 type Logo = {
   id: number;
-  name: string;
+  name?: string;
   src: string;
 };
 
@@ -21,33 +21,35 @@ type PageHeroProps = {
 const defaultLogos: Logo[] = [
   {
     id: 1,
-    name: "Vercel",
-    src: "https://cdn.simpleicons.org/vercel/A9A9A9",
+    src: "/clients/clients01.webp",
   },
   {
     id: 2,
-    name: "Stripe",
-    src: "https://cdn.simpleicons.org/stripe/A9A9A9",
+    src: "/clients/clients02.webp",
   },
   {
     id: 3,
-    name: "Notion",
-    src: "https://cdn.simpleicons.org/notion/A9A9A9",
+    src: "/clients/clients03.webp",
   },
   {
     id: 4,
-    name: "Linear",
-    src: "https://cdn.simpleicons.org/linear/A9A9A9",
+    src: "/clients/clients04.webp",
   },
   {
     id: 5,
-    name: "Figma",
-    src: "https://cdn.simpleicons.org/figma/A9A9A9",
+    src: "/clients/clients05.webp",
   },
   {
     id: 6,
-    name: "Supabase",
-    src: "https://cdn.simpleicons.org/supabase/A9A9A9",
+    src: "/clients/clients06.webp",
+  },
+  {
+    id: 7,
+    src: "/clients/clients07.webp",
+  },
+  {
+    id: 8,
+    src: "/clients/clients08.webp",
   },
 ];
 
@@ -182,17 +184,14 @@ const PageHero = ({
                       variants={logoItemVariants}
                       initial="hidden"
                       animate="visible"
-                      className="flex min-w-[96px] shrink-0 items-center justify-center gap-2 sm:min-w-[112px] lg:min-w-[126px]"
+                      className="flex min-w-[140px] shrink-0 items-center justify-center px-4 sm:min-w-[165px] sm:px-5 lg:min-w-[190px] lg:px-6"
                     >
                       <img
                         src={logo.src}
-                        alt={`${logo.name} logo`}
-                        className="h-5 w-5 object-contain sm:h-6 sm:w-6"
+                        alt={logo.name ? `${logo.name} logo` : `Client logo ${logo.id}`}
+                        className="h-12 w-auto max-w-[130px] shrink-0 object-contain sm:h-14 sm:max-w-[150px] lg:max-w-[170px]"
                         loading="lazy"
                       />
-                      <span className="text-sm font-semibold text-[#A9A9A9] sm:text-base">
-                        {logo.name}
-                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -243,7 +242,7 @@ const PageHero = ({
         }
 
         .logo-track {
-          animation: aboutLogoMarquee 18s linear infinite;
+          animation: aboutLogoMarquee 36s linear infinite;
         }
 
         .logo-group {

@@ -3,43 +3,35 @@
 const logos = [
   {
     id: 1,
-    name: "Vercel",
-    src: "https://cdn.simpleicons.org/vercel/111111",
+    src: "/clients/clients01.webp",
   },
   {
     id: 2,
-    name: "Stripe",
-    src: "https://cdn.simpleicons.org/stripe/635BFF",
+    src: "/clients/clients02.webp",
   },
   {
     id: 3,
-    name: "Notion",
-    src: "https://cdn.simpleicons.org/notion/2F3437",
+    src: "/clients/clients03.webp",
   },
   {
     id: 4,
-    name: "Linear",
-    src: "https://cdn.simpleicons.org/linear/5E6AD2",
+    src: "/clients/clients04.webp",
   },
   {
     id: 5,
-    name: "Figma",
-    src: "https://cdn.simpleicons.org/figma/F24E1E",
+    src: "/clients/clients05.webp",
   },
   {
     id: 6,
-    name: "Supabase",
-    src: "https://cdn.simpleicons.org/supabase/3ECF8E",
+    src: "/clients/clients06.webp",
   },
   {
     id: 7,
-    name: "Railway",
-    src: "https://cdn.simpleicons.org/railway/7C3AED",
+    src: "/clients/clients07.webp",
   },
   {
     id: 8,
-    name: "Resend",
-    src: "https://cdn.simpleicons.org/resend/000000",
+    src: "/clients/clients08.webp",
   },
 ];
 
@@ -56,8 +48,8 @@ export default function LogoSlider() {
         {track.map((logo, i) => (
           <LogoCard
             key={`${logo.id}-${i}`}
-            name={logo.name}
             src={logo.src}
+            index={logo.id}
           />
         ))}
       </div>
@@ -73,26 +65,20 @@ export default function LogoSlider() {
 }
 
 function LogoCard({
-  name,
   src,
+  index,
 }: {
-  name: string;
   src: string;
+  index: number;
 }) {
   return (
-    <div className="flex h-12 min-w-[140px] shrink-0 select-none items-center justify-center gap-2 bg-white px-4 sm:min-w-[155px] sm:px-5 lg:min-w-[170px] lg:px-6">
+    <div className="flex h-16 min-w-[140px] shrink-0 select-none items-center justify-center bg-white px-4 sm:min-w-[165px] sm:px-5 lg:min-w-[190px] lg:px-6">
       <img
         src={src}
-        alt={`${name} logo`}
-        className="h-7 w-7 shrink-0 object-contain"
+        alt={`Client logo ${index}`}
+        className="h-12 w-auto max-w-[130px] shrink-0 object-contain sm:h-14 sm:max-w-[150px] lg:max-w-[170px]"
         loading="lazy"
       />
-      <span
-        className="text-[11px] font-medium tracking-wide text-[#888] sm:text-[12px] lg:text-[13px]"
-        style={{ fontFamily: "'Georgia', serif" }}
-      >
-        {name}
-      </span>
     </div>
   );
 }
