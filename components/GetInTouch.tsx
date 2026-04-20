@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { countryPhoneOptions } from "@/data/countryPhoneOptions";
+import { useContactForm } from "@/components/useContactForm";
 
 const contactPoints = [
   {
@@ -54,6 +55,8 @@ const contactPoints = [
 export default function GetInTouchSection() {
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
+  const { handleSubmit, isSubmitting, submitMessage, submitStatus } =
+    useContactForm("Home page", () => setSelectedCountryCode("US"));
   const countryMenuRef = useRef<HTMLDivElement | null>(null);
   const flagComponents = FlagIcons as Record<
     string,
@@ -123,9 +126,9 @@ export default function GetInTouchSection() {
 
           <p className="mx-auto max-w-[1050px] text-sm leading-relaxed text-[#8a8a8a] sm:text-base md:text-lg">
             Your journey toward global growth starts with a single conversation.
-            Whether you're looking to build a legacy through publishing or scale
-            your brand through high-performance digital infrastructure, our team
-            is here to lead the way.
+            Whether you&apos;re looking to build a legacy through publishing or
+            scale your brand through high-performance digital infrastructure,
+            our team is here to lead the way.
           </p>
         </div>
 
@@ -141,7 +144,7 @@ export default function GetInTouchSection() {
                   Strategic Consultation:
                 </p>
                 <p className="mt-[3px] text-base leading-[1.45] text-[#7f7f7f]">
-                  We don't just provide services; we build growth ecosystems.
+                  We don&apos;t just provide services; we build growth ecosystems.
                 </p>
               </div>
 
@@ -166,7 +169,7 @@ export default function GetInTouchSection() {
             </div>
 
             <p className="mx-auto mt-[8px] max-w-[500px] text-base leading-[1.55] text-[#7f7f7f] sm:mx-0">
-              Stop managing vendors. Start aligning with an ecosystem. Let's
+              Stop managing vendors. Start aligning with an ecosystem. Let&apos;s
               build something extraordinary.
             </p>
 
@@ -201,17 +204,21 @@ export default function GetInTouchSection() {
               FILL THIS FORM TO GET FASTER RESPONSE
             </h3>
 
-            <form className="mt-[18px] space-y-[18px]">
+            <form className="mt-[18px] space-y-[18px]" onSubmit={handleSubmit}>
               <input
+                name="name"
                 type="text"
                 placeholder="Name"
+                required
                 className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 
               <div className="grid grid-cols-1 items-start gap-[16px] sm:grid-cols-[210px_minmax(0,1fr)]">
                 <input
+                  name="email"
                   type="email"
                   placeholder="Email"
+                  required
                   className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                 />
 
@@ -281,24 +288,47 @@ export default function GetInTouchSection() {
                   </div>
 
                   <input
+                    type="hidden"
+                    name="countryCode"
+                    value={selectedCountry?.dialCode ?? "+1"}
+                  />
+                  <input
+                    name="phone"
                     type="tel"
                     placeholder="Phone Number"
+                    required
                     className="h-full min-w-0 w-full bg-transparent pl-2 text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                   />
                 </div>
               </div>
 
               <textarea
+                name="message"
                 placeholder="Message"
+                required
                 className="min-h-[146px] w-full resize-none rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] py-[12px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 
+              {submitMessage ? (
+                <p
+                  className={`text-sm ${
+                    submitStatus === "success"
+                      ? "text-[#247a39]"
+                      : "text-[#b3261e]"
+                  }`}
+                >
+                  {submitMessage}
+                </p>
+              ) : null}
+
               <motion.button
+                type="submit"
+                disabled={isSubmitting}
                 style={{
                   background:
                     "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                 }}
-                className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg py-3 text-base font-light text-white md:text-lg"
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg py-3 text-base font-light text-white disabled:cursor-not-allowed disabled:opacity-70 md:text-lg"
                 whileHover={{
                   y: -3,
                   scale: 1.02,
@@ -307,7 +337,7 @@ export default function GetInTouchSection() {
                 whileTap={{ y: 0, scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 320, damping: 20 }}
               >
-                Let's Talk
+                {isSubmitting ? "Sending..." : "Let's Talk"}
                 <motion.span
                   whileHover={{ x: 4, y: -2 }}
                   transition={{

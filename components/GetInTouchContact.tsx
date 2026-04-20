@@ -5,6 +5,7 @@ import * as FlagIcons from "country-flag-icons/react/3x2";
 import { countryPhoneOptions } from "@/data/countryPhoneOptions";
 import { motion } from "motion/react";
 import { TfiArrowTopRight } from "react-icons/tfi";
+import { useContactForm } from "@/components/useContactForm";
 
 type FlagIconComponent = React.ComponentType<
   React.SVGProps<SVGSVGElement> & { title?: string }
@@ -77,6 +78,8 @@ const contactItems = [
 const GetInTouchContact = () => {
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const { handleSubmit, isSubmitting, submitMessage, submitStatus } =
+    useContactForm("Contact page", () => setSelectedCountryCode("US"));
   const countryDropdownRef = useRef<HTMLDivElement>(null);
   const selectedCountry =
     countryPhoneOptions.find(
@@ -154,17 +157,21 @@ const GetInTouchContact = () => {
               Fill This Form To Get Faster Response
             </h3>
 
-            <form className="mt-5 space-y-4">
+            <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
               <input
+                name="name"
                 type="text"
                 placeholder="Name"
+                required
                 className="h-[42px] w-full font-mulish rounded-[5px] border border-[#bababa] bg-transparent px-3 text-[13px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
 
               <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-[250px_300px] sm:gap-x-3">
                 <input
+                  name="email"
                   type="email"
                   placeholder="Email"
+                  required
                   className="h-[42px] w-full rounded-[5px] border border-[#bababa] bg-transparent px-3 font-mulish text-[13px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a] sm:w-[250px]"
                 />
 
@@ -204,8 +211,10 @@ const GetInTouchContact = () => {
                       value={selectedCountry.dialCode}
                     />
                     <input
+                      name="phone"
                       type="tel"
                       placeholder="Phone Number"
+                      required
                       className="font-mulish min-w-0 flex-1 bg-transparent px-3 text-[13px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
                     />
                   </div>
@@ -257,17 +266,33 @@ const GetInTouchContact = () => {
               </div>
 
               <textarea
+                name="message"
                 placeholder="Message"
+                required
                 rows={5}
                 className="w-full font-mulish rounded-[5px] border border-[#bababa] bg-transparent px-3 py-3 text-[13px] text-[#4a4a4a] outline-none placeholder:text-[#9a9a9a]"
               />
 
+              {submitMessage ? (
+                <p
+                  className={`text-sm ${
+                    submitStatus === "success"
+                      ? "text-[#247a39]"
+                      : "text-[#b3261e]"
+                  }`}
+                >
+                  {submitMessage}
+                </p>
+              ) : null}
+
               <motion.button
+                type="submit"
+                disabled={isSubmitting}
                 style={{
                   background:
                     "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                 }}
-                className="mt-4 font-mulish flex w-full items-center justify-center gap-2 rounded-lg px-7 py-2 text-base font-light text-white sm:w-full md:text-lg"
+                className="mt-4 font-mulish flex w-full items-center justify-center gap-2 rounded-lg px-7 py-2 text-base font-light text-white disabled:cursor-not-allowed disabled:opacity-70 sm:w-full md:text-lg"
                 whileHover={{
                   y: -3,
                   scale: 1.02,
@@ -276,7 +301,7 @@ const GetInTouchContact = () => {
                 whileTap={{ y: 0, scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 320, damping: 20 }}
               >
-                Let's Talk
+                {isSubmitting ? "Sending..." : "Let's Talk"}
                 <motion.span
                   whileHover={{ x: 4, y: -2 }}
                   transition={{
