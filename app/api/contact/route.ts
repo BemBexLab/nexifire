@@ -1,8 +1,15 @@
-import nodemailer, { type Transporter } from "nodemailer";
+import {
+  getPublicMailErrorMessage,
+  getRequiredEnv,
+  getSmtpHelpMessage,
+  isSmtpAuthError,
+  isSmtpConnectionError,
+  sendMailWithConfiguredTransport,
+} from "@/lib/smtp";
 
 export const runtime = "nodejs";
 
-const recipientEmail = getOptionalEnv("CONTACT_EMAIL") || "contact@nexifire.com";
+const recipientEmail = process.env.CONTACT_EMAIL?.trim() || "contact@nexifire.com";
 
 type ContactRequest = {
   name?: unknown;
@@ -12,57 +19,6 @@ type ContactRequest = {
   message?: unknown;
   source?: unknown;
 };
-
-let transporter: Transporter | null = null;
-
-function getOptionalEnv(name: string) {
-  return process.env[name]?.trim();
-}
-
-function getRequiredEnv(name: string) {
-  const value = getOptionalEnv(name);
-
-  if (!value) {
-    throw new Error(`Missing ${name}`);
-  }
-
-  return value;
-}
-
-function getSmtpPassword(host: string) {
-  const password = getRequiredEnv("SMTP_PASSWORD");
-
-  if (host === "smtp.gmail.com") {
-    return password.replace(/\s/g, "");
-  }
-
-  return password;
-}
-
-function getTransporter() {
-  if (!transporter) {
-    const host = getRequiredEnv("SMTP_HOST");
-    const port = Number(process.env.SMTP_PORT || "465");
-    const timeout = Number(process.env.SMTP_CONNECTION_TIMEOUT || "10000");
-
-    transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: process.env.SMTP_SECURE
-        ? process.env.SMTP_SECURE === "true"
-        : port === 465,
-      auth: {
-        user: getRequiredEnv("SMTP_USER"),
-        pass: getSmtpPassword(host),
-      },
-      connectionTimeout: timeout,
-      greetingTimeout: timeout,
-      socketTimeout: timeout,
-    });
-  }
-
-  return transporter;
-}
 
 function normalizeString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -79,24 +35,6 @@ function escapeHtml(value: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
-}
-
-function isSmtpAuthError(error: unknown) {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    error.code === "EAUTH"
-  );
-}
-
-function isSmtpConnectionError(error: unknown) {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error.code === "ESOCKET" || error.code === "ETIMEDOUT")
-  );
 }
 
 export async function POST(request: Request) {
@@ -154,7 +92,7 @@ export async function POST(request: Request) {
   `;
 
   try {
-    await getTransporter().sendMail({
+    await sendMailWithConfiguredTransport({
       from: `"NexiFire Website" <${getRequiredEnv("SMTP_USER")}>`,
       to: recipientEmail,
       replyTo: email,
@@ -168,8 +106,7 @@ export async function POST(request: Request) {
     if (isSmtpAuthError(error)) {
       return Response.json(
         {
-          error:
-            "SMTP login failed. For Gmail, use a Google App Password in SMTP_PASSWORD, then restart the dev server.",
+          error: getPublicMailErrorMessage("contact"),
         },
         { status: 500 },
       );
@@ -178,15 +115,14 @@ export async function POST(request: Request) {
     if (isSmtpConnectionError(error)) {
       return Response.json(
         {
-          error:
-            "SMTP server is unreachable. Check SMTP_HOST, SMTP_PORT, and SMTP_SECURE in .env.",
+          error: getPublicMailErrorMessage("contact"),
         },
         { status: 500 },
       );
     }
 
     return Response.json(
-      { error: "Unable to send your message right now." },
+      { error: getPublicMailErrorMessage("contact") },
       { status: 500 },
     );
   }
