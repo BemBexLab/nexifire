@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { useSidebarSectionNavigation } from "@/components/legal/useSidebarSectionNavigation";
 
 const sections = [
   { id: "use-website", title: "Use of Website" },
@@ -15,42 +16,8 @@ const sections = [
 ];
 
 const TermsContent = () => {
-  const [activeTab, setActiveTab] = useState(sections[0].id);
-  const activeIndex = sections.findIndex((section) => section.id === activeTab);
-
-  useEffect(() => {
-    let frameId = 0;
-
-    const updateActiveTab = () => {
-      const activationLine = window.innerHeight * 0.35;
-      const currentSection = sections.reduce((activeSection, section) => {
-        const heading = document.querySelector(`#${section.id} h2`);
-        if (!heading) return activeSection;
-
-        const { top } = heading.getBoundingClientRect();
-        if (top <= activationLine) return section.id;
-
-        return activeSection;
-      }, sections[0].id);
-
-      setActiveTab(currentSection);
-    };
-
-    const handleScroll = () => {
-      cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(updateActiveTab);
-    };
-
-    updateActiveTab();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
+  const { activeTab, activeIndex, handleSectionClick } =
+    useSidebarSectionNavigation(sections);
 
   return (
     <div className="font-jakarta mx-auto max-w-7xl bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-6 lg:py-20">
@@ -77,10 +44,7 @@ const TermsContent = () => {
                   href={`#${section.id}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    const el = document.getElementById(section.id);
-                    if (el)
-                      el.scrollIntoView({ behavior: "smooth", block: "start" });
-                    setActiveTab(section.id);
+                    handleSectionClick(section.id);
                   }}
                   className={`flex min-h-[36px] items-center rounded-[5px] border px-[14px] py-2 text-[14px] font-normal leading-tight tracking-[0.01em] transition-all duration-200 sm:px-[18px] sm:text-[15px]
                   ${
