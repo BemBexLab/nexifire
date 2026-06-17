@@ -63,15 +63,17 @@ export default function NavBar() {
     >
       <div className="flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6 xl:px-10">
         <div className="flex shrink-0 items-center gap-2.5 justify-self-start">
-          <Image
-            src="/images/Group 427320850.png"
-            alt="NexiFire Logo"
-            width={240}
-            height={64}
-            sizes="auto"
-            className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px] xl:h-[70px]"
-            priority
-          />
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/images/Group 427320850.png"
+              alt="NexiFire Logo"
+              width={240}
+              height={64}
+              sizes="auto"
+              className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px] xl:h-[70px]"
+              priority
+            />
+          </Link>
         </div>
 
         {/* ── Desktop Nav Links ─────────────────────────────────────── */}
