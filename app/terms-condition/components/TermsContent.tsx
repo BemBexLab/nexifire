@@ -132,7 +132,9 @@ const TermsContent = () => {
           </section>
 
           <section id="contact">
-            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">Contact</h2>
+            <h2 className="mb-4 text-[28px] bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-transparent inline-block font-medium leading-tight  sm:text-3xl lg:mb-6 lg:text-4xl">
+              Contact
+            </h2>
             <p className="mb-6 text-base text-gray-500 sm:text-lg lg:mb-8">
               If you have any questions regarding these Terms and Conditions,
               please contact us through our official contact page.
@@ -147,7 +149,19 @@ const TermsContent = () => {
                   href="tel:+14703751520"
                   className="text-base text-gray-500 hover:underline sm:text-lg"
                 >
-                  (470) 375 - 1520
+                  <b>United States:</b> (470) 470-7520
+                </a>
+              </div>
+
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                  <FaPhoneAlt color="#FFFFFF" size={18} />
+                </div>
+                <a
+                  href="tel:+61468285539"
+                  className="text-base text-gray-500 hover:underline sm:text-lg"
+                >
+                  <b>Australia:</b> (0468) 285-539
                 </a>
               </div>
 
@@ -167,8 +181,19 @@ const TermsContent = () => {
                 <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
                   <FaLocationDot color="#FFFFFF" size={18} />
                 </div>
-                <span className="text-base text-gray-500 uppercase sm:text-lg">
-                  2500 Lakeview Pkwy, Alpharetta, GA 30009
+                <span className="text-base text-gray-500 sm:text-lg">
+                  <b>United States Office:</b> 2300 Lakeview Pkwy, Alpharetta,
+                  GA 30009
+                </span>
+              </div>
+
+              <div className="flex items-start gap-3 sm:items-center sm:gap-4">
+                <div className="shrink-0 rounded bg-[#B24002] p-2 text-white">
+                  <FaLocationDot color="#FFFFFF" size={18} />
+                </div>
+                <span className="text-base text-gray-500 sm:text-lg">
+                  <b>Australian Office:</b> 16A Fox Cl, Kariong NSW 2250,
+                  Australia
                 </span>
               </div>
             </div>
