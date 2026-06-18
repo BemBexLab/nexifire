@@ -31,7 +31,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Phone",
-    label: "United States: (470) 470-7520",
+    label: <><b>United States:</b> (470) 470-7520</>,
     href: "tel:+14704707520",
   },
   {
@@ -51,7 +51,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Phone",
-    label: "Australia: (0468) 285-539",
+    label: <><b>Australia:</b> (0468) 285-539</>,
     href: "tel:+61468285539",
   },
   {
@@ -91,7 +91,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Location",
-    label: "United States Office: 2300 Lakeview Pkwy Alpharetta, GA 30009",
+    label: <><b>United States Office:</b> 2300 Lakeview Pkwy Alpharetta, GA 30009</>,
   },
   {
     id: "address-au",
@@ -110,7 +110,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Location",
-    label: "Australian Office: 16A Fox Cl, Kariong NSW 2250, Australia",
+    label: <><b>Australian Office:</b> 16A Fox Cl, Kariong NSW 2250, Australia</>,
   },
 ] as const;
 
