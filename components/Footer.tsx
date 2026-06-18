@@ -92,13 +92,13 @@ const FooterCTA = () => {
                 <li className="flex items-center">
                   <LuPhoneCall className="shrink-0" />
                   <a href="tel:+14704707520" className="ml-2 break-words">
-                    United States Office: (470) 470-7520
+                    United States: (470) 470-7520
                   </a>
                 </li>
                 <li className="flex items-center">
                   <LuPhoneCall className="shrink-0" />
                   <a href="tel:+61468285539" className="ml-2 break-words">
-                    Australian Office: (0468) 285-539
+                    Australia: (0468) 285-539
                   </a>
                 </li>
                 <li className="flex items-center">
@@ -113,7 +113,13 @@ const FooterCTA = () => {
                 <li className="flex items-start">
                   <SlLocationPin className="mt-1 shrink-0" />
                   <a href="" className="ml-2 break-words">
-                    2300 LAKEVIEW PKWY ALPHARETTA, GA 30009
+                    United States Office: 2300 Lakeview Pkwy Alpharetta, GA 30009
+                  </a>
+                </li>
+                <li className="flex items-start">
+                  <SlLocationPin className="mt-1 shrink-0" />
+                  <a href="" className="ml-2 break-words">
+                    Australian Office: 16A Fox Cl, Kariong NSW 2250, Australia
                   </a>
                 </li>
               </ul>

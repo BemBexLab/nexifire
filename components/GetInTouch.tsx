@@ -20,7 +20,7 @@ const contactPoints = [
         <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.49a1 1 0 011 1c0 1.25.19 2.46.57 3.58a1 1 0 01-.25 1.01l-2.19 2.2z" />
       </svg>
     ),
-    text: "United States Office: (470) 470-7520",
+    text: "United States: (470) 470-7520",
   },
   {
     href: "tel:+61468285539",
@@ -34,7 +34,7 @@ const contactPoints = [
         <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.49a1 1 0 011 1c0 1.25.19 2.46.57 3.58a1 1 0 01-.25 1.01l-2.19 2.2z" />
       </svg>
     ),
-    text: "Australian Office: (0468) 285-539",
+    text: "Australia: (0468) 285-539",
   },
   {
     href: "mailto:contact@nexifire.com",
@@ -62,7 +62,21 @@ const contactPoints = [
         <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
       </svg>
     ),
-    text: "2300 LAKEVIEW PKWY ALPHARETTA, GA 30009",
+    text: "United States Office: 2300 Lakeview Pkwy Alpharetta, GA 30009",
+  },
+  {
+    href: null,
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="h-[16px] w-[16px] text-white"
+        aria-hidden="true"
+      >
+        <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+      </svg>
+    ),
+    text: "Australian Office: 16A Fox Cl, Kariong NSW 2250, Australia",
   },
 ];
 

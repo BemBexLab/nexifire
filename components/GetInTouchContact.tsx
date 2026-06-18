@@ -31,7 +31,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Phone",
-    label: "United States Office: (470) 470-7520",
+    label: "United States: (470) 470-7520",
     href: "tel:+14704707520",
   },
   {
@@ -51,7 +51,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Phone",
-    label: "Australian Office: (0468) 285-539",
+    label: "Australia: (0468) 285-539",
     href: "tel:+61468285539",
   },
   {
@@ -75,7 +75,7 @@ const contactItems = [
     href: "mailto:contact@nexifire.com",
   },
   {
-    id: "address",
+    id: "address-us",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,26 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Location",
-    label: "2300 Lakeview Pkwy Alpharetta, GA 30009",
+    label: "United States Office: 2300 Lakeview Pkwy Alpharetta, GA 30009",
+  },
+  {
+    id: "address-au",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23.068"
+        height="23.068"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="M11.5339 11.0535C10.8966 11.0535 10.2854 10.8004 9.83475 10.3497C9.38411 9.89908 9.13095 9.28788 9.13095 8.65058C9.13095 8.01328 9.38411 7.40209 9.83475 6.95145C10.2854 6.50081 10.8966 6.24765 11.5339 6.24765C12.1712 6.24765 12.7824 6.50081 13.233 6.95145C13.6837 7.40209 13.9368 8.01328 13.9368 8.65058C13.9368 8.96614 13.8747 9.27861 13.7539 9.57015C13.6331 9.86168 13.4561 10.1266 13.233 10.3497C13.0099 10.5728 12.745 10.7498 12.4534 10.8706C12.1619 10.9914 11.8494 11.0535 11.5339 11.0535ZM11.5339 1.92236C9.74945 1.92236 8.0381 2.63123 6.77631 3.89301C5.51453 5.1548 4.80566 6.86615 4.80566 8.65058C4.80566 13.6967 11.5339 21.1458 11.5339 21.1458C11.5339 21.1458 18.2621 13.6967 18.2621 8.65058C18.2621 6.86615 17.5532 5.1548 16.2915 3.89301C15.0297 2.63123 13.3183 1.92236 11.5339 1.92236Z"
+          fill="white"
+        />
+      </svg>
+    ),
+    iconAlt: "Location",
+    label: "Australian Office: 16A Fox Cl, Kariong NSW 2250, Australia",
   },
 ] as const;
 
@@ -139,9 +158,10 @@ const GetInTouchContact = () => {
 
           <div className="mx-auto mt-8 w-fit space-y-5 lg:mx-0">
             {contactItems.map((item) => {
+              const isAddressItem = item.id.startsWith("address");
               const contentClassName =
-                item.id === "address"
-                  ? "text-md font-normal uppercase tracking-[-0.01em] text-[#777777]"
+                isAddressItem
+                  ? "text-md font-normal tracking-[-0.01em] text-[#777777]"
                   : "text-md font-normal text-[#777777] transition-colors hover:text-[#B24002]";
 
               return (
