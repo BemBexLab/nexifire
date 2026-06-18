@@ -51,7 +51,7 @@ const contactItems = [
       </svg>
     ),
     iconAlt: "Phone",
-    label: "Australian Office: 0468 285 539",
+    label: "Australian Office: (0468) 285-539",
     href: "tel:+61468285539",
   },
   {
