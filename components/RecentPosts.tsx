@@ -8,7 +8,7 @@ const RecentPosts = () => {
   const posts = getRecentBlogPosts(3);
 
   return (
-    <aside className="w-full font-jakarta min-w-[350px]">
+    <aside className="w-full min-w-0 font-jakarta">
       <h3 className="text-[22px] font-semibold leading-none text-[#B24002]">
         Recent Posts
       </h3>
