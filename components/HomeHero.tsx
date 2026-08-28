@@ -92,7 +92,7 @@ const HomeHero = () => {
   const cursorY = useMotionValue(0);
   const heroDescription =
     "NexiFire is a collective of specialized brands delivering strategy, \nmarketing, content, and digital systems designed to grow businesses with clarity and precision.";
-  const businessHeading = "Built For Businesses \nThat Are Serious AboutGrowth";
+  const businessHeading = "Built For Businesses \nThat Are Serious About Growth";
   const giftRibbonShapes = [
     { x: -40, y: -32, rotate: -62, scale: 1.05, delay: 0.05 },
     { x: 62, y: -42, rotate: -20, scale: 0.72, delay: 0.12 },
@@ -578,12 +578,12 @@ const HomeHero = () => {
                     </motion.div>
 
                     {/* Flex Text */}
-                    <p className="text-xs text-white md:text-sm">
+                    <p className="shrink-0 whitespace-nowrap text-xs! leading-tight! text-white md:text-sm!">
                       Strategy. Execution. Scale.
                     </p>
                   </div>
 
-                  <p className="w-full max-w-[240px] text-[20px] font-medium leading-tight text-white md:max-w-[290px] md:text-[26px] xl:max-w-[320px] 2xl:absolute 2xl:mt-8">
+                  <p className="w-full max-w-[240px] text-[20px]! font-medium leading-tight! text-white md:max-w-[290px] md:text-[26px]! xl:max-w-[320px]">
                     <RichTextLetterReveal
                       text={businessHeading}
                       enabled={shouldAnimate}
