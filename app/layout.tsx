@@ -34,6 +34,12 @@ const nunito = localFont({
   display: "swap",
 });
 
+// All routes rendered through this layout must be generated at build time.
+// A production build will fail if a page accidentally introduces request-time
+// data, preventing an unnoticed fallback to server-side rendering.
+export const dynamic = "error";
+export const revalidate = false;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nexifire.com"),
   title: "NexiFire: Create, Build, Grow",

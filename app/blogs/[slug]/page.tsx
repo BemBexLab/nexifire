@@ -10,6 +10,9 @@ type BlogPageProps = {
   }>;
 };
 
+// Only posts included in the build-time data set are valid routes.
+export const dynamicParams = false;
+
 export const generateStaticParams = () =>
   blogPosts.map((post) => ({
     slug: post.slug,

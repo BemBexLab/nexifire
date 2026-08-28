@@ -26,6 +26,19 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Windows uses a reserved scrollbar gutter at these compact desktop widths.
+   Keep the page scrollable without leaving a contrasting strip beside the
+   fixed navbar. */
+@media (min-width: 1280px) and (max-width: 1328px) {
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Project-wide heading scale. Kept outside Tailwind layers so component
    utilities cannot accidentally create inconsistent heading typography. */
 :where(h1, h2, h3, h4, h5, h6) {
