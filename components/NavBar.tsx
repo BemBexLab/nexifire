@@ -57,32 +57,33 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-[100] w-full bg-[#F6F6F6] rounded-b-4xl py-[5px] transition-transform duration-300 ${
+      aria-label="Primary navigation"
+      className={`fixed inset-x-0 top-0 z-[100] w-full rounded-b-4xl bg-[#F6F6F6] py-[5px] transition-transform duration-300 ${
         isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6 xl:px-10">
-        <div className="flex shrink-0 items-center gap-2.5 justify-self-start">
-          <Link href="/" className="flex items-center gap-2">
+      <div className="flex min-h-16 w-full items-center justify-between gap-3 px-3 py-2 sm:min-h-18 sm:px-5 md:px-8 xl:grid xl:grid-cols-[auto_minmax(0,1fr)_auto] xl:gap-6 xl:px-10">
+        <div className="flex shrink-0 items-center justify-self-start">
+          <Link href="/" className="flex items-center" aria-label="NexiFire home">
             <Image
               src="/images/Group 427320850.png"
               alt="NexiFire Logo"
               width={250}
               height={96}
-              sizes="auto"
-              className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px]"
-              priority
+              sizes="(max-width: 639px) 132px, (max-width: 767px) 165px, (max-width: 1279px) 190px, 200px"
+              className="block h-auto w-[132px] shrink-0 sm:w-[165px] md:w-[190px] xl:w-[200px]"
+              preload
             />
           </Link>
         </div>
 
         {/* ── Desktop Nav Links ─────────────────────────────────────── */}
-        <ul className="hidden flex-1 items-center justify-center gap-13 font-jakarta text-lg lg:flex">
+        <ul className="hidden min-w-0 items-center justify-center gap-[clamp(1.5rem,2.5vw,3.25rem)] font-jakarta text-base xl:flex">
           {navLinks.map((link) => {
             const isActive = isActiveLink(link.href);
-            const className = `whitespace-nowrap text-md transition-colors duration-150 ${
+            const className = `whitespace-nowrap transition-colors duration-150 ${
               isActive
-                ? "text-black font-regular border-b-2 border-[#c0784a] pb-0.5"
+                ? "border-b-2 border-[#c0784a] pb-0.5 font-normal text-black"
                 : "text-[#5f5f5f] hover:text-[#1c1c1c] font-normal"
             }`;
 
@@ -103,10 +104,10 @@ export default function NavBar() {
         </ul>
 
         {/* ── CTA Button ───────────────────────────────────────────── */}
-        <div className="hidden min-h-[48px] items-center justify-end font-jakarta lg:flex">
+        <div className="hidden min-h-12 shrink-0 items-center justify-end font-jakarta xl:flex">
           <Link
             href="/contact"
-            className="flex items-center justify-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/24 px-5 py-[9px] text-md font-medium text-[#c0784a] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white hover:shadow-[0_10px_24px_rgba(178,64,2,0.24)]"
+            className="flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#c0784a]/70 bg-white/24 px-5 py-[9px] text-base font-medium text-[#c0784a] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white hover:shadow-[0_10px_24px_rgba(178,64,2,0.24)]"
           >
             Free Consultation
             <CalendarIcon />
@@ -115,31 +116,37 @@ export default function NavBar() {
 
         {/* ── Mobile Hamburger ─────────────────────────────────────── */}
         <button
-          className="flex flex-col gap-[5px] rounded-lg border border-white/45 bg-white/25 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl lg:hidden"
+          type="button"
+          className="flex size-10 shrink-0 flex-col items-center justify-center gap-[5px] rounded-lg border border-white/45 bg-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-xl xl:hidden"
           onClick={() => setMobileOpen((p) => !p)}
-          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
         >
           <span
-            className={`block w-5 h-[1.5px] bg-[#555] transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""}`}
+            className={`block h-[1.5px] w-5 origin-center bg-[#555] transition-all duration-300 ${mobileOpen ? "translate-y-[6.5px] rotate-45" : ""}`}
           />
           <span
-            className={`block w-5 h-[1.5px] bg-[#555] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+            className={`block h-[1.5px] w-5 bg-[#555] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-5 h-[1.5px] bg-[#555] transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`}
+            className={`block h-[1.5px] w-5 origin-center bg-[#555] transition-all duration-300 ${mobileOpen ? "-translate-y-[6.5px] -rotate-45" : ""}`}
           />
         </button>
       </div>
 
       {/* ── Mobile Dropdown ───────────────────────────────────────── */}
       {mobileOpen && (
-        <div className="mx-3 mt-2 flex flex-col gap-3 rounded-lg border border-white/55 bg-white/72 px-6 py-4 font-jakarta shadow-[0_18px_45px_rgba(31,31,31,0.13),inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl backdrop-saturate-150 sm:mx-4 md:mx-6 lg:hidden">
+        <div
+          id="mobile-navigation"
+          className="mx-3 mt-2 flex max-h-[calc(100dvh-5.75rem)] flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg border border-white/55 bg-white/90 px-3 py-3 font-jakarta shadow-[0_18px_45px_rgba(31,31,31,0.13),inset_0_1px_0_rgba(255,255,255,0.75)] backdrop-blur-2xl backdrop-saturate-150 sm:mx-5 sm:px-4 md:mx-8 xl:hidden"
+        >
           {navLinks.map((link) => {
             const isActive = isActiveLink(link.href);
-            const className = `text-sm py-1 transition-colors duration-150 ${
+            const className = `block w-full rounded-md px-3 py-2.5 text-sm transition-colors duration-150 ${
               isActive
-                ? "text-[#c0784a] font-semibold"
-                : "text-[#5a5a5a] hover:text-[#1c1c1c]"
+                ? "bg-[#c0784a]/8 font-semibold text-[#c0784a]"
+                : "text-[#5a5a5a] hover:bg-black/5 hover:text-[#1c1c1c]"
             }`;
 
             return link.href === "#" ? (
@@ -165,7 +172,7 @@ export default function NavBar() {
           <Link
             href="/contact"
             onClick={() => setMobileOpen(false)}
-            className="font-jakarta mt-2 flex w-fit items-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/20 px-5 py-2 text-sm font-medium text-[#c0784a] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white"
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border border-[#c0784a]/70 bg-white/20 px-5 py-2.5 font-jakarta text-sm font-medium text-[#c0784a] backdrop-blur-xl transition-all duration-200 hover:bg-[#c0784a] hover:text-white sm:w-fit"
           >
             Free Consultation
             <CalendarIcon />
