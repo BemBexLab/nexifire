@@ -108,17 +108,22 @@ const HomeHero = () => {
 
   useEffect(() => {
     const handleLoaderComplete = () => setLoaderComplete(true);
-
-    if (document.documentElement.dataset.nexifireLoaderComplete === "true") {
-      setLoaderComplete(true);
-    }
+    const loaderCompletionTimer =
+      document.documentElement.dataset.nexifireLoaderComplete === "true"
+        ? window.setTimeout(handleLoaderComplete, 0)
+        : undefined;
 
     window.addEventListener("nexifire:loader-complete", handleLoaderComplete);
-    return () =>
+    return () => {
+      if (loaderCompletionTimer !== undefined) {
+        window.clearTimeout(loaderCompletionTimer);
+      }
+
       window.removeEventListener(
         "nexifire:loader-complete",
         handleLoaderComplete,
       );
+    };
   }, []);
 
   useEffect(() => {
