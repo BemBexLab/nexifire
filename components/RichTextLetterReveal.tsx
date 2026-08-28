@@ -19,7 +19,9 @@ export default function RichTextLetterReveal({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const mountedTimer = window.setTimeout(() => setMounted(true), 0);
+
+    return () => window.clearTimeout(mountedTimer);
   }, []);
 
   const normalizedText = useMemo(() => text.replaceAll("\\n", "\n"), [text]);
@@ -39,21 +41,35 @@ export default function RichTextLetterReveal({
     const renderNode = (node: ChildNode, path: string): ReactNode => {
       if (node.nodeType === Node.TEXT_NODE) {
         const value = node.textContent ?? "";
-        return value.split("").map((char, i) => {
-          const key = `${path}-char-${i}`;
-          const delay = baseDelay + charIndex * stepDelay;
-          charIndex += 1;
+        return value.split(/(\s+)/).map((segment, segmentIndex) => {
+          if (/^\s+$/.test(segment)) {
+            charIndex += segment.length;
+            return segment;
+          }
 
           return (
-            <motion.span
-              key={key}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.16, ease: "easeOut", delay }}
-              className="inline-block"
+            <span
+              key={`${path}-word-${segmentIndex}`}
+              className="inline-block whitespace-nowrap"
             >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
+              {segment.split("").map((char, characterIndex) => {
+                const key = `${path}-word-${segmentIndex}-char-${characterIndex}`;
+                const delay = baseDelay + charIndex * stepDelay;
+                charIndex += 1;
+
+                return (
+                  <motion.span
+                    key={key}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.16, ease: "easeOut", delay }}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                );
+              })}
+            </span>
           );
         });
       }

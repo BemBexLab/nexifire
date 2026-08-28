@@ -92,7 +92,7 @@ const HomeHero = () => {
   const cursorY = useMotionValue(0);
   const heroDescription =
     "NexiFire is a collective of specialized brands delivering strategy, \nmarketing, content, and digital systems designed to grow businesses with clarity and precision.";
-  const businessHeading = "Built For Businesses \nThat Are Serious About Growth";
+  const businessHeading = "Built For Businesses That Are Serious About Growth";
   const giftRibbonShapes = [
     { x: -40, y: -32, rotate: -62, scale: 1.05, delay: 0.05 },
     { x: 62, y: -42, rotate: -20, scale: 0.72, delay: 0.12 },
