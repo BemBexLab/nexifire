@@ -10,7 +10,7 @@ import { SlLocationPin } from "react-icons/sl";
 
 const FooterCTA = () => {
   return (
-    <section className="w-full font-jakarta bg-[#F3F3F3] px-5 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+    <section className="w-full bg-[#F3F3F3] px-5 pb-8 pt-12 font-jakarta sm:px-8 sm:pb-2 sm:pt-16 lg:pt-20">
       <div className="mx-auto flex w-full max-w-[1600px] flex-col">
         <div className="grid w-full grid-cols-1 justify-items-center gap-16 xl:grid-cols-[minmax(0,700px)_minmax(0,725px)] xl:items-start xl:justify-center xl:gap-20 2xl:gap-28">
           {/* Left Col div */}
@@ -54,14 +54,14 @@ const FooterCTA = () => {
           </div>
 
           {/* Right Col div */}
-          <div className="grid md:mt-15 w-full grid-cols-1 justify-center gap-8 sm:grid-cols-2 lg:grid-cols-[130px_minmax(240px,430px)_165px] lg:gap-1">
+          <div className="mt-10 grid w-full grid-cols-1 justify-center gap-12 sm:grid-cols-2 sm:gap-14 md:mt-15 md:grid-cols-[minmax(140px,0.85fr)_minmax(300px,2.3fr)_minmax(160px,1fr)] md:gap-x-14 md:gap-y-10">
             <div className="w-full">
-              <h4 className="mb-2 text-lg font-medium text-[#B24002]">
+              <h4 className="mb-5 text-lg font-medium text-[#B24002]">
                 Quick Links
               </h4>
-              <ul className="list-inside list-disc space-y-2 text-base text-[#777777]">
+              <ul className="list-inside list-disc space-y-4 text-base text-[#777777]">
                 <li>
-                  <a href="/">Home</a>
+                  <Link href="/">Home</Link>
                 </li>
                 <li>
                   <a href="/about">About us</a>
@@ -76,7 +76,7 @@ const FooterCTA = () => {
                   <a href="/brands">Our Brands</a>
                 </li>
                 <li>
-                  <a href="/blogs">Blogs</a>
+                  <Link href="/blogs">Blogs</Link>
                 </li>
                 <li>
                   <a href="/contact">Contact</a>
@@ -84,52 +84,52 @@ const FooterCTA = () => {
               </ul>
             </div>
 
-            <div className="w-full sm:col-span-2 lg:col-span-1">
-              <h4 className="mb-2 text-lg font-medium text-[#B24002]">
+            <div className="w-full sm:col-span-2 md:col-span-1">
+              <h4 className="mb-5 text-lg font-medium text-[#B24002]">
                 Contact Info
               </h4>
-              <ul className="space-y-2 text-base text-[#777777]">
-                <li className="flex items-center">
+              <ul className="space-y-4 text-base text-[#777777]">
+                <li className="flex items-center gap-3">
                   <LuPhoneCall className="shrink-0" />
-                  <a href="tel:+14704707520" className="ml-2 break-words">
+                  <a href="tel:+14704707520" className="break-words">
                     United States: (470) 470-7520
                   </a>
                 </li>
-                <li className="flex items-center">
+                <li className="flex items-center gap-3">
                   <LuPhoneCall className="shrink-0" />
-                  <a href="tel:+61468285539" className="ml-2 break-words">
+                  <a href="tel:+61468285539" className="break-words">
                     Australia: (0468) 285-539
                   </a>
                 </li>
-                <li className="flex items-center">
+                <li className="flex items-center gap-3">
                   <MdOutlineEmail className="shrink-0" />
                   <a
                     href="mailto:contact@nexifire.com"
-                    className="ml-2 break-words"
+                    className="break-words"
                   >
                     contact@nexifire.com
                   </a>
                 </li>
-                <li className="flex items-start">
+                <li className="flex items-start gap-3">
                   <SlLocationPin className="mt-1 shrink-0" />
-                  <a href="" className="ml-2 break-words">
+                  <a href="" className="break-words">
                     United States Office: 2300 Lakeview Pkwy Alpharetta, GA 30009
                   </a>
                 </li>
-                <li className="flex items-start">
+                <li className="flex items-start gap-3">
                   <SlLocationPin className="mt-1 shrink-0" />
-                  <a href="" className="ml-2 break-words">
+                  <a href="" className="break-words">
                     Australian Office: 16A Fox Cl, Kariong NSW 2250, Australia
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div className="w-[170px]">
-              <h4 className="mb-2 text-lg font-medium text-[#B24002]">
+            <div className="w-full">
+              <h4 className="mb-5 text-lg font-medium text-[#B24002]">
                 Support
               </h4>
-              <ul className="list-inside list-disc space-y-2 text-base text-[#777777]">
+              <ul className="list-outside list-disc space-y-4 pl-5 text-base text-[#777777]">
                 <li>
                   <a href="/privacy-policy">Privacy policy</a>
                 </li>
@@ -141,12 +141,12 @@ const FooterCTA = () => {
           </div>
         </div>
 
-        <div className="mt-12 w-full">
+        <div className="mt-16 w-full">
           {/* Divider */}
           <div className="border-t border-[#77777766]" />
 
           {/* Bottom */}
-          <p className="py-2 text-center text-sm font-medium text-[#777777]">
+          <p className="py-4 text-center text-sm font-medium text-[#777777]">
             &copy; 2026 NexiFire All Rights Reserved.
           </p>
         </div>
