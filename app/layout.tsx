@@ -35,6 +35,7 @@ const nunito = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.nexifire.com"),
   title: "NexiFire",
   description: "Create, Build, Grow.",
 };

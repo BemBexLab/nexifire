@@ -6,7 +6,10 @@ import OurValues from "@/components/OurValues";
 import PageHero from "@/components/PageHero";
 import WhoWeAre from "@/components/WhoWeAre";
 import WhyNexifire from "@/components/WhyNexifire";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import React from "react";
+
+export const metadata = createCanonicalMetadata("/about");
 
 const page = () => {
   return (

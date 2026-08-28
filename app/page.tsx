@@ -9,6 +9,9 @@ import NotAnAgency from "@/components/NotAnAgency";
 import TestimonialsSection from "@/components/Testimonials";
 import WhatWeDo from "@/components/WhatWeDo";
 import { whatWeDoCards } from "@/data/whatWeDoCards";
+import { createCanonicalMetadata } from "@/lib/metadata";
+
+export const metadata = createCanonicalMetadata("/");
 
 export default function Home() {
   return (

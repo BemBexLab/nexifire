@@ -1,6 +1,9 @@
 import GetInTouchContact from "@/components/GetInTouchContact";
 import PageHero from "@/components/PageHero";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import React from "react";
+
+export const metadata = createCanonicalMetadata("/contact");
 
 const page = () => {
   return (

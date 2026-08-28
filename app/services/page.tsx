@@ -6,6 +6,9 @@ import React from "react";
 import BuildSmarter from "@/components/BuildSmarter";
 import FAQs from "@/components/FAQs";
 import GetInTouchSection from "@/components/GetInTouch";
+import { createCanonicalMetadata } from "@/lib/metadata";
+
+export const metadata = createCanonicalMetadata("/services");
 
 const page = () => {
   return (

@@ -1,7 +1,10 @@
 import BlogsGrid from "@/components/BlogsGrid";
 import GetInTouchSection from "@/components/GetInTouch";
 import PageHero from "@/components/PageHero";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import React from "react";
+
+export const metadata = createCanonicalMetadata("/blogs");
 
 const page = () => {
   return (

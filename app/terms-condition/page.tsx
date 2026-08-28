@@ -1,6 +1,8 @@
-
 import PageHero from "@/components/PageHero";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import LazyTermsContent from "./components/LazyTermsContent";
+
+export const metadata = createCanonicalMetadata("/terms-condition");
 
 const page = () => {
   return (

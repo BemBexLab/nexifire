@@ -2,7 +2,10 @@ import CareerApplicationForm from "@/components/CareerApplicationForm";
 import HowWeWork from "@/components/HowWeWork";
 import PageHero from "@/components/PageHero";
 import WhyYouBelongHere from "@/components/WhyYouBelongHere";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import React from "react";
+
+export const metadata = createCanonicalMetadata("/careers");
 
 const page = () => {
   return (

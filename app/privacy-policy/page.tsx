@@ -1,5 +1,8 @@
 import PageHero from "@/components/PageHero";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import LazyPrivacyContent from "./components/LazyPrivacyContent";
+
+export const metadata = createCanonicalMetadata("/privacy-policy");
 
 const page = () => {
   return (

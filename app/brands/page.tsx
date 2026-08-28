@@ -2,7 +2,10 @@ import BuildSmarter from "@/components/BuildSmarter";
 import GetInTouchSection from "@/components/GetInTouch";
 import OurBrands from "@/components/OurBrands";
 import PageHero from "@/components/PageHero";
+import { createCanonicalMetadata } from "@/lib/metadata";
 import React from "react";
+
+export const metadata = createCanonicalMetadata("/brands");
 
 const page = () => {
   return (

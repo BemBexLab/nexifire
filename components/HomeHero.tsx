@@ -438,7 +438,7 @@ const HomeHero = () => {
                   onAnimationComplete={() => setCardTiltDone(true)}
                   style={{ transformOrigin: "left bottom" }}
                 >
-                  <p className="text-center tabular-nums text-[56px] leading-none text-black sm:text-[64px] md:text-8xl xl:text-[72px] 2xl:text-8xl 2xl:pb-3">
+                  <p className="text-center tabular-nums text-[56px]! leading-none! text-black sm:text-[64px]! md:text-8xl! xl:text-[72px]! 2xl:pb-3 2xl:text-8xl!">
                     {animatedCount}+
                   </p>
                   <p className="w-full text-[#5C5D5F] xl:text-[15px] 2xl:text-base">
