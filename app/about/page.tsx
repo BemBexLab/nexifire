@@ -24,7 +24,7 @@ const page = () => {
         paragraphs={[
           {
             text: "NexiFire is built differently.",
-            className: "text-2xl font-semibold text-[#282828] sm:text-3xl",
+            className: "text-2xl! font-semibold! text-[#282828] sm:text-3xl!",
           },
           "NexiFire is a multi dimensional growth ecosystem built on the principle of specialized excellence. Instead of managing everything in one place, we have built a group of focused brands, each one specialized in a specific area.",
           "This means every challenge, whether it is book services, writing, polishing it, working on book promotion and optimization on different platforms, content development for websites, website development on different e-commerce platforms, or marketing, is handled by experts who do that one thing exceptionally well and in an organized way.",
