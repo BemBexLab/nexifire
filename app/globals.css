@@ -6,10 +6,6 @@
   --heading-line-height: 1.2;
   --heading-letter-spacing: -0.015em;
   --heading-word-spacing: 0.08em;
-  --paragraph-font-size: 1rem;
-  --paragraph-line-height: 1.65;
-  --paragraph-letter-spacing: 0;
-  --paragraph-word-spacing: 0.04em;
 }
 
 @theme inline {
@@ -64,16 +60,6 @@ h5 {
 
 h6 {
   font-size: 0.875rem;
-}
-
-/* Project-wide paragraph rhythm. Like the heading scale, this remains
-   authoritative over component utilities to prevent typography drift. */
-p {
-  font-size: var(--paragraph-font-size);
-  line-height: var(--paragraph-line-height);
-  letter-spacing: var(--paragraph-letter-spacing);
-  word-spacing: var(--paragraph-word-spacing);
-  overflow-wrap: anywhere;
 }
 
 .font-mulish {
