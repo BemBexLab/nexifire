@@ -37,7 +37,7 @@ const Blog = ({ post }: BlogProps) => {
 
               {post.content.map((section, index) => (
                 <React.Fragment
-                  key={`${section.heading ?? "intro"}-${index}`}
+                  key={`section-${index}`}
                 >
                   {section.heading && (
                     section.headingLevel === 3 ? (
