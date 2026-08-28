@@ -81,6 +81,7 @@ const contactPoints = [
 ];
 
 export default function GetInTouchSection() {
+  const [isHydrated, setIsHydrated] = useState(false);
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
   const { handleSubmit, isSubmitting, submitMessage, submitStatus } =
@@ -106,6 +107,8 @@ export default function GetInTouchSection() {
     : undefined;
 
   useEffect(() => {
+    const hydrationTimer = window.setTimeout(() => setIsHydrated(true), 0);
+
     const handlePointerDown = (event: MouseEvent) => {
       if (
         countryMenuRef.current &&
@@ -125,6 +128,7 @@ export default function GetInTouchSection() {
     document.addEventListener("keydown", handleEscape);
 
     return () => {
+      window.clearTimeout(hydrationTimer);
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleEscape);
     };
@@ -232,13 +236,15 @@ export default function GetInTouchSection() {
               FILL THIS FORM TO GET FASTER RESPONSE
             </h3>
 
-            <form
-              className="mt-[18px] space-y-[18px]"
-              onSubmit={handleSubmit}
-              autoComplete="off"
-              data-form-type="other"
-              data-lpignore="true"
-            >
+            <div className="mt-[18px] min-h-[344px]">
+              {isHydrated ? (
+                <form
+                  className="space-y-[18px]"
+                  onSubmit={handleSubmit}
+                  autoComplete="off"
+                  data-form-type="other"
+                  data-lpignore="true"
+                >
               <input
                 name="name"
                 type="text"
@@ -396,7 +402,9 @@ export default function GetInTouchSection() {
                   <TfiArrowTopRight size={20} />
                 </motion.span>
               </motion.button>
-            </form>
+                </form>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

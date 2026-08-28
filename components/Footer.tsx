@@ -15,7 +15,7 @@ const FooterCTA = () => {
         <div className="grid w-full grid-cols-1 justify-items-center gap-16 xl:grid-cols-[minmax(0,700px)_minmax(0,725px)] xl:items-start xl:justify-center xl:gap-20 2xl:gap-28">
           {/* Left Col div */}
           <div className="flex w-full max-w-[700px] flex-col items-center text-center font-jakarta lg:items-start lg:text-left">
-            <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text py-3 text-center font-jakarta text-4xl font-normal leading-tight text-transparent sm:text-5xl lg:text-left lg:text-7xl">
+            <h2 className="bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text py-3 text-center font-jakarta text-4xl! font-normal leading-tight! text-transparent sm:text-5xl! lg:text-left lg:text-7xl!">
               <span className="whitespace-nowrap">Got A Project</span>
               <br /> In Mind?
             </h2>
