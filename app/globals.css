@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --heading-line-height: 1.2;
+  --heading-letter-spacing: -0.015em;
+  --heading-word-spacing: 0.08em;
+  --paragraph-font-size: 1rem;
+  --paragraph-line-height: 1.65;
+  --paragraph-letter-spacing: 0;
+  --paragraph-word-spacing: 0.04em;
 }
 
 @theme inline {
@@ -23,6 +30,50 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Project-wide heading scale. Kept outside Tailwind layers so component
+   utilities cannot accidentally create inconsistent heading typography. */
+:where(h1, h2, h3, h4, h5, h6) {
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  word-spacing: var(--heading-word-spacing);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, calc(3vw + 1rem), 4.25rem);
+}
+
+h2 {
+  font-size: clamp(2rem, calc(2vw + 1rem), 3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, calc(0.5vw + 1rem), 1.5rem);
+}
+
+h4 {
+  font-size: clamp(1.125rem, calc(0.25vw + 1rem), 1.25rem);
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+/* Project-wide paragraph rhythm. Like the heading scale, this remains
+   authoritative over component utilities to prevent typography drift. */
+p {
+  font-size: var(--paragraph-font-size);
+  line-height: var(--paragraph-line-height);
+  letter-spacing: var(--paragraph-letter-spacing);
+  word-spacing: var(--paragraph-word-spacing);
+  overflow-wrap: anywhere;
 }
 
 .font-mulish {

@@ -24,9 +24,9 @@ const TermsContent = () => {
       <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
         {/* --- Sidebar (Table of Contents) --- */}
         <aside className="w-full lg:sticky lg:top-24 lg:w-[360px] lg:self-start">
-          <h2 className="border-b border-[#ECECEC] pb-2 text-[20px] font-semibold leading-none tracking-[-0.01em] text-[#3E3E3E] md:text-[21px]">
+          <h3 className="border-b border-[#ECECEC] pb-2 font-semibold text-[#3E3E3E]">
             Table Of Content
-          </h2>
+          </h3>
           <div className="mt-[18px] flex flex-col gap-[10px] sm:gap-[12px]">
             {sections.map((section, index) => {
               const isActive = activeTab === section.id;

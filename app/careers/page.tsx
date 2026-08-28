@@ -10,7 +10,7 @@ const page = () => {
       <PageHero
         eyebrow="Career"
         title={`Join NexiFire`}
-        description={`Join a growing ecosystem of specialized brands where your skills are\nvalued, your growth is supported, and your work contributes to creating the\nresults you want`}
+        description={`Join a growing ecosystem of specialized brands where your skills are valued, your growth is supported, and your work contributes to creating the results you want`}
       />
       <HowWeWork />
       <WhyYouBelongHere />

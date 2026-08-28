@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { type ReactNode } from "react";
 import { LazyMotion, domAnimation, m } from "motion/react";
@@ -67,17 +67,17 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="mx-auto mt-20 flex w-full max-w-[1330px] flex-col items-center justify-center px-4 md:mt-28 md:px-6 xl:mt-30">
+      <section className="mx-auto mt-16 flex w-full max-w-[1440px] min-w-0 flex-col items-center justify-center px-4 sm:mt-20 sm:px-6 md:mt-24 lg:mt-28 lg:px-8 xl:mt-30">
         <div
-          className={`relative flex w-full flex-col gap-5 md:gap-6 ${
+          className={`relative grid w-full min-w-0 grid-cols-1 gap-4 sm:gap-5 md:gap-6 ${
             hasDescription
-              ? "xl:min-h-[90px] xl:flex-row xl:items-center"
-              : "items-center"
+              ? "lg:grid-cols-[minmax(0,1fr)_minmax(280px,370px)] lg:items-end lg:gap-8"
+              : "place-items-center"
           }`}
         >
-          <m.h1
-            className={`whitespace-pre-line bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text text-4xl font-jakarta font-medium uppercase tracking-tight text-transparent md:text-5xl xl:text-6xl ${
-              hasDescription ? "xl:absolute xl:left-0" : "text-center"
+          <m.h2
+            className={`max-w-full break-words whitespace-pre-line bg-gradient-to-r from-[#282828] to-[#8C8C8C] bg-clip-text font-jakarta text-3xl font-medium uppercase leading-tight tracking-tight text-transparent sm:text-4xl md:text-5xl xl:text-6xl ${
+              hasDescription ? "text-left" : "text-center"
             } ${getTextClassName(
               heading,
             )}`}
@@ -87,10 +87,10 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {getTextValue(heading)}
-          </m.h1>
+          </m.h2>
           {hasDescription && description && (
             <m.p
-              className={`w-full max-w-[370px] whitespace-pre-line text-sm text-[#777777] md:text-base xl:absolute xl:-right-19 ${getTextClassName(
+              className={`w-full max-w-[370px] justify-self-start break-words whitespace-pre-line text-sm leading-relaxed text-[#777777] sm:text-base lg:justify-self-end ${getTextClassName(
                 description,
               )}`}
               initial={{ opacity: 0, y: 18 }}
@@ -103,7 +103,7 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
           )}
         </div>
 
-        <div className="mt-10 grid w-full grid-cols-1 gap-10 sm:grid-cols-2 xl:mt-10 xl:grid-cols-4">
+        <div className="mt-8 grid w-full min-w-0 grid-cols-1 items-stretch gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4 xl:gap-5 2xl:gap-8">
           {cards.map((card, index) => (
             <m.div
               key={getKeyValue(card.title, `what-we-do-card-${index}`)}
@@ -115,15 +115,15 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
                 ease: "easeOut",
                 delay: index * 0.08,
               }}
-              className={`min-h-[180px] w-full origin-bottom-left rounded-2xl p-5 transition-transform duration-300 ease-out hover:-rotate-4 hover:shadow-[0_22px_50px_rgba(17,17,17,0.12)] md:p-6 xl:h-[200px] xl:w-[320px] ${
+              className={`h-full min-h-[170px] min-w-0 w-full origin-bottom-left rounded-2xl p-5 transition-transform duration-300 ease-out hover:-rotate-2 hover:shadow-[0_22px_50px_rgba(17,17,17,0.12)] sm:min-h-[180px] sm:p-6 xl:min-h-[200px] ${
                 card.featured
                   ? "bg-white shadow-[0_0_0_1px_rgba(17,17,17,0.05),0_18px_38px_rgba(17,17,17,0.1)]"
                   : "bg-white shadow-[0_0_0_1px_rgba(17,17,17,0.04),0_10px_24px_rgba(17,17,17,0.06)]"
               }`}
             >
-              <div className="mb-4">{card.icon}</div>
+              <div className="mb-4 flex h-9 items-center">{card.icon}</div>
               <p
-                className={`mb-2 whitespace-pre-line font-jakarta text-md font-medium text-gray-900 ${getTextClassName(
+                className={`mb-2 break-words whitespace-pre-line font-jakarta text-base font-medium leading-snug text-gray-900 sm:text-lg ${getTextClassName(
                   card.title,
                 )}`}
               >
@@ -131,7 +131,7 @@ const WhatWeDo = ({ heading, description, cards }: WhatWeDoProps) => {
               </p>
               {hasTextContent(card.description) && card.description && (
                 <div
-                  className={`whitespace-pre-line text-[14px] font-jakarta leading-relaxed text-gray-500 ${getTextClassName(
+                  className={`break-words whitespace-pre-line font-jakarta text-sm leading-relaxed text-gray-500 ${getTextClassName(
                     card.description,
                   )}`}
                 >

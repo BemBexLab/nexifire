@@ -67,10 +67,10 @@ export default function NavBar() {
             <Image
               src="/images/Group 427320850.png"
               alt="NexiFire Logo"
-              width={240}
-              height={64}
+              width={250}
+              height={96}
               sizes="auto"
-              className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px] xl:h-[70px]"
+              className="h-auto w-[130px] shrink-0 sm:w-[190px] xl:w-[200px]"
               priority
             />
           </Link>

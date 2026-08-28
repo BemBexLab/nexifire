@@ -232,12 +232,21 @@ export default function GetInTouchSection() {
               FILL THIS FORM TO GET FASTER RESPONSE
             </h3>
 
-            <form className="mt-[18px] space-y-[18px]" onSubmit={handleSubmit}>
+            <form
+              className="mt-[18px] space-y-[18px]"
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              data-form-type="other"
+              data-lpignore="true"
+            >
               <input
                 name="name"
                 type="text"
                 placeholder="Name"
                 required
+                autoComplete="name"
+                data-form-type="other"
+                data-lpignore="true"
                 className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 
@@ -247,6 +256,9 @@ export default function GetInTouchSection() {
                   type="email"
                   placeholder="Email"
                   required
+                  autoComplete="email"
+                  data-form-type="other"
+                  data-lpignore="true"
                   className="h-[48px] w-full rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                 />
 
@@ -319,12 +331,16 @@ export default function GetInTouchSection() {
                     type="hidden"
                     name="countryCode"
                     value={selectedCountry?.dialCode ?? "+1"}
+                    data-lpignore="true"
                   />
                   <input
                     name="phone"
                     type="tel"
                     placeholder="Phone Number"
                     required
+                    autoComplete="tel"
+                    data-form-type="other"
+                    data-lpignore="true"
                     className="h-full min-w-0 w-full bg-transparent pl-2 text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
                   />
                 </div>
@@ -334,6 +350,9 @@ export default function GetInTouchSection() {
                 name="message"
                 placeholder="Message"
                 required
+                autoComplete="off"
+                data-form-type="other"
+                data-lpignore="true"
                 className="min-h-[146px] w-full resize-none rounded-[6px] border border-[#a9a9a9] bg-transparent px-[14px] py-[12px] text-[13px] text-[#4d4d4d] outline-none placeholder:text-[#9a9a9a]"
               />
 

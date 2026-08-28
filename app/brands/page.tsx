@@ -10,7 +10,7 @@ const page = () => {
       <PageHero
         eyebrow="Our Brands"
         title={`BRANDS BUILT WITH PURPOSE`}
-        description={`A strategic network of specialized entities, each meticulously engineered to solve complex growth\nchallenges and provide high level infrastructure in the global market.`}
+        description={`A strategic network of specialized entities, each meticulously engineered to solve complex growth challenges and provide high level infrastructure in the global market.`}
       />
       <OurBrands />
       <BuildSmarter

@@ -38,7 +38,7 @@ const LatestBlogs = () => {
                   delay: index * 0.08,
                 }}
               >
-                <div className="relative h-[190px] w-full overflow-hidden rounded-t-2xl sm:h-[210px] md:h-[180px] lg:h-[160px]">
+                <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl bg-[#F3F3F3]">
                   <Image
                     src={blog.image}
                     alt={blog.title}

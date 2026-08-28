@@ -54,7 +54,7 @@ const brands: BrandItem[] = [
     name: "Web Geeks Global",
     description:
       "Web Geeks Global specializes in the science of ‘Attention-to-Revenue’ and provides an omnichannel marketing approach across Google, Meta, LinkedIn, YouTube, and TikTok to confirm that your brand resonates where your customers live. From precision-targeted ad campaigns, website development, digital marketing, to high-impact content creation, build automated systems designed to capture attention and convert it into high-value ROI.",
-    url: "#",
+    url: "https://webgeeksglobal.com/",
     image: {
       src: "/icons/Group.png",
       alt: "Web Geeks Logo",

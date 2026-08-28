@@ -102,7 +102,6 @@ const NotAnAgency = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               Not an Agency. A
-              <br />
               Growth Ecosystem
             </m.h2>
 

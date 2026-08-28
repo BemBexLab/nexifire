@@ -9,7 +9,7 @@ const page = () => {
       <PageHero
         eyebrow="Blog"
         title={`Our Latest Blogs`}
-        description={`Stay updated with practical ideas and system driven strategies across publishing, digital growth, and\ntechnology. Our team is built to help you scale with clarity.`}
+        description={`Stay updated with practical ideas and system driven strategies across publishing, digital growth, and technology. Our team is built to help you scale with clarity.`}
       />
       <BlogsGrid />
       <GetInTouchSection />
