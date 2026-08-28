@@ -2,10 +2,15 @@ import CareerApplicationForm from "@/components/CareerApplicationForm";
 import HowWeWork from "@/components/HowWeWork";
 import PageHero from "@/components/PageHero";
 import WhyYouBelongHere from "@/components/WhyYouBelongHere";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
 
-export const metadata = createCanonicalMetadata("/careers");
+export const metadata = createPageMetadata({
+  title: "Careers: Join the NexiFire Growth Ecosystem",
+  description:
+    "Build your career with NexiFire's network of specialized brands. Explore internships and open roles in tech, marketing, and content.",
+  pathname: "/careers",
+});
 
 const page = () => {
   return (

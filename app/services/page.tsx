@@ -6,9 +6,14 @@ import React from "react";
 import BuildSmarter from "@/components/BuildSmarter";
 import FAQs from "@/components/FAQs";
 import GetInTouchSection from "@/components/GetInTouch";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = createCanonicalMetadata("/services");
+export const metadata = createPageMetadata({
+  title: "Services: Specialized Growth Systems by NexiFire",
+  description:
+    "NexiFire deploys specialized brands for brand strategy, digital marketing, content creation, and website systems built to scale your business.",
+  pathname: "/services",
+});
 
 const page = () => {
   return (

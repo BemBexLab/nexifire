@@ -36,8 +36,12 @@ const nunito = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nexifire.com"),
-  title: "NexiFire",
-  description: "Create, Build, Grow.",
+  title: {
+    default: "NexiFire | Create, Build, Grow",
+    template: "%s | NexiFire",
+  },
+  description:
+    "NexiFire is a global growth ecosystem connecting specialized expertise across publishing, technology, content, marketing, and digital strategy.",
 };
 
 export default function RootLayout({

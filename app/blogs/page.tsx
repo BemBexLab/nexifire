@@ -1,10 +1,15 @@
 import BlogsGrid from "@/components/BlogsGrid";
 import GetInTouchSection from "@/components/GetInTouch";
 import PageHero from "@/components/PageHero";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
 
-export const metadata = createCanonicalMetadata("/blogs");
+export const metadata = createPageMetadata({
+  title: "Blog: Insights on Growth From NexiFire",
+  description:
+    "Read NexiFire's latest articles on publishing, content strategy, and digital growth systems designed to help brands scale with clarity.",
+  pathname: "/blogs",
+});
 
 const page = () => {
   return (

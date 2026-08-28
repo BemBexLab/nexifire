@@ -9,9 +9,14 @@ import NotAnAgency from "@/components/NotAnAgency";
 import TestimonialsSection from "@/components/Testimonials";
 import WhatWeDo from "@/components/WhatWeDo";
 import { whatWeDoCards } from "@/data/whatWeDoCards";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = createCanonicalMetadata("/");
+export const metadata = createPageMetadata({
+  title: "NexiFire: Growth Ecosystem for Brands That Scale",
+  description:
+    "NexiFire is a growth ecosystem of specialized brands delivering strategy, marketing, content, and digital systems that help businesses scale.",
+  pathname: "/",
+});
 
 export default function Home() {
   return (

@@ -1,9 +1,14 @@
 import GetInTouchContact from "@/components/GetInTouchContact";
 import PageHero from "@/components/PageHero";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
 
-export const metadata = createCanonicalMetadata("/contact");
+export const metadata = createPageMetadata({
+  title: "Let's Talk Growth",
+  description:
+    "Get in touch with NexiFire to discuss your brand's growth strategy. Reach our US or Australia offices, or fill out our contact form.",
+  pathname: "/contact",
+});
 
 const page = () => {
   return (

@@ -6,10 +6,15 @@ import OurValues from "@/components/OurValues";
 import PageHero from "@/components/PageHero";
 import WhoWeAre from "@/components/WhoWeAre";
 import WhyNexifire from "@/components/WhyNexifire";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
 
-export const metadata = createCanonicalMetadata("/about");
+export const metadata = createPageMetadata({
+  title: "About NexiFire: A Global Ecosystem of Brands",
+  description:
+    "Learn how NexiFire's parent organization guides specialized brands in publishing, tech, and marketing to deliver focused, scalable growth.",
+  pathname: "/about",
+});
 
 const page = () => {
   return (

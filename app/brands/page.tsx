@@ -2,10 +2,15 @@ import BuildSmarter from "@/components/BuildSmarter";
 import GetInTouchSection from "@/components/GetInTouch";
 import OurBrands from "@/components/OurBrands";
 import PageHero from "@/components/PageHero";
-import { createCanonicalMetadata } from "@/lib/metadata";
+import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
 
-export const metadata = createCanonicalMetadata("/brands");
+export const metadata = createPageMetadata({
+  title: "Our Brands: The NexiFire Portfolio of Growth",
+  description:
+    "Explore NexiFire's family of brands, including Ink Founders, Story Loom, Web Geeks Global, Ink2Audiobook, and Web Founders USA.",
+  pathname: "/brands",
+});
 
 const page = () => {
   return (
