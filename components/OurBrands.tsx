@@ -145,7 +145,7 @@ const OurBrands = () => {
                 {brand.name}
               </h3>
 
-              <p className="mt-4 text-[14px] leading-[1.4] text-[#444444]">
+              <p className="mt-4 text-[14px] leading-loose text-[#444444]">
                 {brand.description}
               </p>
 
