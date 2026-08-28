@@ -407,7 +407,11 @@ export const getBlogPostBySlug = (slug: string) =>
 export const getRecentBlogPosts = (limit = 3) =>
   [...blogPosts]
     .sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+      (a, b) => {
+        const publishedAtDifference =
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+
+        return publishedAtDifference || b.id - a.id;
+      },
     )
     .slice(0, limit);
