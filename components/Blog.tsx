@@ -24,7 +24,6 @@ const Blog = ({ post }: BlogProps) => {
                 priority
                 sizes="(max-width: 1024px) 100vw, 850px"
                 className="block h-auto w-full"
-                unoptimized
               />
             </div>
 

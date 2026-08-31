@@ -85,7 +85,11 @@ const HomeHero = () => {
   const [cardTiltDone, setCardTiltDone] = useState(false);
   const [isDesktopLayout, setIsDesktopLayout] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
-  const isHeroInView = useInView(heroRef, { amount: 0.25, once: true });
+  const isHeroInView = useInView(heroRef, {
+    amount: 0.25,
+    once: true,
+    initial: true,
+  });
   const shouldAnimate = isHeroInView;
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);

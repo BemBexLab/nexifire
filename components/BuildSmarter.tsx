@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 
@@ -86,9 +87,11 @@ const BuildSmarter = ({
         {/* HERO CARD */}
         <div className="relative min-h-[560px] w-full overflow-hidden rounded-[8px] sm:min-h-[520px] md:min-h-[600px] lg:min-h-[630px]">
           {/* Background Image */}
-          <img
+          <Image
             src={backgroundImageSrc}
             alt={backgroundImageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, 1600px"
             className="absolute inset-0 h-full w-full object-cover"
           />
 

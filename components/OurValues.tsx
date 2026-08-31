@@ -100,13 +100,12 @@ const OurValues = () => {
                     className="absolute h-[360px] w-[270px] sm:h-[390px] sm:w-[300px] md:h-[420px] md:w-[330px] origin-bottom-center overflow-hidden rounded-[14px] shadow-[0_25px_50px_rgba(0,0,0,0.18)]"
                   >
                     <Image
-                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+                      src="/images/Frame 418.png"
                       alt="Team collaboration"
                       fill
                       sizes="(max-width: 640px) 270px, (max-width: 768px) 300px, 330px"
                       className="object-cover"
                       loading="lazy"
-                      unoptimized
                     />
                   </motion.div>
 
@@ -119,13 +118,12 @@ const OurValues = () => {
                     className="absolute z-[5] h-[375px] w-[285px] sm:h-[405px] sm:w-[315px] md:h-[435px] md:w-[345px] origin-bottom-center overflow-hidden rounded-[14px] shadow-[0_28px_55px_rgba(0,0,0,0.20)]"
                   >
                     <Image
-                      src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"
+                      src="/images/Frame 419.png"
                       alt="Team meeting"
                       fill
                       sizes="(max-width: 640px) 285px, (max-width: 768px) 315px, 345px"
                       className="object-cover"
                       loading="lazy"
-                      unoptimized
                     />
                   </motion.div>
 
@@ -138,13 +136,12 @@ const OurValues = () => {
                     className="absolute z-10 h-[400px] w-[305px] sm:h-[430px] sm:w-[335px] md:h-[460px] md:w-[370px] origin-bottom-center overflow-hidden rounded-[18px] shadow-[0_30px_65px_rgba(0,0,0,0.25)]"
                   >
                     <Image
-                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+                      src="/images/Rectangle 9.png"
                       alt="Our values team"
                       fill
                       sizes="(max-width: 640px) 305px, (max-width: 768px) 335px, 370px"
                       className="object-cover"
                       loading="lazy"
-                      unoptimized
                     />
                   </motion.div>
                 </div>

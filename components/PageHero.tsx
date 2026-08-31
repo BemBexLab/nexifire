@@ -186,11 +186,13 @@ const PageHero = ({
                       animate="visible"
                       className="flex min-w-[140px] shrink-0 items-center justify-center px-4 sm:min-w-[165px] sm:px-5 lg:min-w-[190px] lg:px-6"
                     >
-                      <img
+                      <Image
                         src={logo.src}
                         alt={logo.name ? `${logo.name} logo` : `Client logo ${logo.id}`}
+                        width={190}
+                        height={56}
                         className="h-12 w-auto max-w-[130px] shrink-0 object-contain sm:h-14 sm:max-w-[150px] lg:max-w-[170px]"
-                        loading="lazy"
+                        sizes="(max-width: 639px) 130px, (max-width: 1023px) 150px, 170px"
                       />
                     </motion.div>
                   ))}

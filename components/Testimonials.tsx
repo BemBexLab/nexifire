@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 
 type Testimonial = {
   id: number;
@@ -34,21 +35,21 @@ const testimonials: Testimonial[] = [
   {
     id: 4,
     name: "Sophie Lane",
-    avatar: "https://i.pravatar.cc/100?img=4",
+    avatar: "/images/Ellipse 16.png",
     review:
       "Their process gave me confidence from day one. Every milestone was clearly planned, and the team made sure my project moved forward smoothly without confusion or delays.",
   },
   {
     id: 5,
     name: "Marcus Lee",
-    avatar: "https://i.pravatar.cc/100?img=6",
+    avatar: "/images/Ellipse 16 (1).png",
     review:
     "From branding to launch, everything felt organized and intentional. I appreciated how responsive the team was and how they connected every part of the work into one clear strategy.",
   },
   {
     id: 6,
     name: "Elena Cruz",
-    avatar: "https://i.pravatar.cc/100?img=5",
+    avatar: "/images/Ellipse 16 (2).png",
     review:
       "Working with them made the whole journey stress-free. They handled details carefully, communicated well, and delivered a polished result that felt aligned with my goals.",
   },
@@ -138,10 +139,13 @@ export default function TestimonialsSection() {
                     </p>
 
                     <div className="mt-auto flex items-center gap-[12px] pt-[18px]">
-                      <img
+                      <Image
                         src={item.avatar}
                         alt={item.name}
+                        width={64}
+                        height={64}
                         className="h-[64px] w-[64px] rounded-full object-cover"
+                        sizes="64px"
                       />
                       <span className="text-[16px] font-medium text-[#4d4d4d]">
                         {item.name}

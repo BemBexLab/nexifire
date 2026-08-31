@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const logos = [
   {
     id: 1,
@@ -73,11 +75,13 @@ function LogoCard({
 }) {
   return (
     <div className="flex h-16 min-w-[140px] shrink-0 select-none items-center justify-center bg-white px-4 sm:min-w-[165px] sm:px-5 lg:min-w-[190px] lg:px-6">
-      <img
+      <Image
         src={src}
         alt={`Client logo ${index}`}
+        width={190}
+        height={56}
         className="h-12 w-auto max-w-[130px] shrink-0 object-contain sm:h-14 sm:max-w-[150px] lg:max-w-[170px]"
-        loading="lazy"
+        sizes="(max-width: 639px) 130px, (max-width: 1023px) 150px, 170px"
       />
     </div>
   );

@@ -44,7 +44,6 @@ const LatestBlogs = () => {
                     alt={blog.title}
                     fill
                     className="object-cover"
-                    unoptimized
                     loading="lazy"
                     sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   />

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function Clients() {
   const [animatedCount, setAnimatedCount] = useState(0);
@@ -9,11 +10,11 @@ export default function Clients() {
   const [hasAnimated, setHasAnimated] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const avatars = [
-    "https://randomuser.me/api/portraits/women/44.jpg",
-    "https://randomuser.me/api/portraits/men/32.jpg",
-    "https://randomuser.me/api/portraits/men/45.jpg",
-    "https://randomuser.me/api/portraits/women/68.jpg",
-    "https://randomuser.me/api/portraits/women/21.jpg",
+    "/images/Ellipse 16.png",
+    "/images/Ellipse 16 (1).png",
+    "/images/Ellipse 16 (2).png",
+    "/images/Ellipse 16.png",
+    "/images/Ellipse 16 (1).png",
   ];
 
   useEffect(() => {
@@ -71,11 +72,14 @@ export default function Clients() {
         {/* Overlapping avatar stack */}
         <div className="flex max-w-full items-center pl-2 md:pl-0">
           {avatars.map((src, i) => (
-            <img
+            <Image
               key={i}
               src={src}
               alt={`Client ${i + 1}`}
+              width={72}
+              height={72}
               className="h-12 w-12 rounded-full border-[3px] border-[#f0f0f0] object-cover md:h-16 md:w-16 xl:h-18 xl:w-18"
+              sizes="(max-width: 767px) 48px, 64px"
               style={{ marginLeft: i === 0 ? 0 : "-12px", zIndex: i }}
             />
           ))}

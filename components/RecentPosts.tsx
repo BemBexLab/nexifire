@@ -27,7 +27,6 @@ const RecentPosts = () => {
                 fill
                 className="object-cover"
                 loading="lazy"
-                unoptimized
               />
             </div>
 
