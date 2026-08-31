@@ -450,12 +450,16 @@ const HomeHero = () => {
               {/* Right div */}
               <div
                 className="relative h-[270px] w-full overflow-hidden rounded-3xl bg-cover bg-center bg-no-repeat sm:h-[320px] md:h-[350px] xl:w-[286px] 2xl:w-[370px]"
-                style={{
-                  backgroundImage: "url('/images/Rectangle 23805.png')",
-                }}
                 role="img"
                 aria-label="Second Col Corporate image"
               >
+                <Image
+                  src="/images/Rectangle 23805.png"
+                  alt="Corporate growth team"
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 370px"
+                  className="object-cover"
+                />
                 {/* Overlapping SVG */}
                 <div className="absolute left-6 top-6 z-10 flex h-[64px] w-[64px] items-center justify-center rounded-full bg-black md:left-10 md:top-15 md:h-[80px] md:w-[80px]">
                   <motion.svg

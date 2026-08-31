@@ -1,7 +1,7 @@
-import BuildSmarter from "@/components/BuildSmarter";
 import FAQs from "@/components/FAQs";
-import GetInTouchSection from "@/components/GetInTouch";
 import LazyLatestBlogs from "@/components/LazyLatestBlogs";
+import LazyBuildSmarter from "@/components/LazyBuildSmarter";
+import LazyGetInTouch from "@/components/LazyGetInTouch";
 import OurValues from "@/components/OurValues";
 import PageHero from "@/components/PageHero";
 import WhoWeAre from "@/components/WhoWeAre";
@@ -45,7 +45,7 @@ const page = () => {
       />
       <WhyNexifire />
       <OurValues />
-      <BuildSmarter
+      <LazyBuildSmarter
         title={`Ready to Align with\na Higher Standard\nof Growth?`}
         description={`Stop searching for a vendor and start partnering with an ecosystem. Let the\nNexiFire Group provide the specialized expertise and strategic\ninfrastructure your brand needs to lead its industry.`}
         primaryButtonText="Explore Our Portfolio"
@@ -57,7 +57,7 @@ const page = () => {
       />
       <FAQs />
       <LazyLatestBlogs />
-      <GetInTouchSection />
+      <LazyGetInTouch />
     </section>
   );
 };

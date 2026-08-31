@@ -3,9 +3,9 @@ import WhatWeDo from "@/components/WhatWeDo";
 import WhoWeAre from "@/components/WhoWeAre";
 import { serviceWhatWeDoCards } from "./data";
 import React from "react";
-import BuildSmarter from "@/components/BuildSmarter";
+import LazyBuildSmarter from "@/components/LazyBuildSmarter";
 import FAQs from "@/components/FAQs";
-import GetInTouchSection from "@/components/GetInTouch";
+import LazyGetInTouch from "@/components/LazyGetInTouch";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -53,7 +53,7 @@ const page = () => {
       <div className="mb-13">
         <WhatWeDo heading="The NexiFire Model" cards={serviceWhatWeDoCards} />
       </div>
-      <BuildSmarter
+      <LazyBuildSmarter
         title={`Get a Custom Growth\nSystem and Build Your\nEcosystem`}
         description={`We design and deploy the system that makes sure each service is handled\nby a specialist.`}
         primaryButtonText="Consult With NexiFire"
@@ -64,7 +64,7 @@ const page = () => {
         backgroundImageAlt="Team meeting"
       />
       <FAQs />
-      <GetInTouchSection />
+      <LazyGetInTouch />
     </section>
   );
 };

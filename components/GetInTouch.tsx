@@ -1,11 +1,14 @@
 "use client";
 
-import * as FlagIcons from "country-flag-icons/react/3x2";
 import { motion } from "motion/react";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { AU, US } from "country-flag-icons/react/3x2";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { countryPhoneOptions } from "@/data/countryPhoneOptions";
 import { useContactForm } from "@/components/useContactForm";
+
+type FlagIconComponent = typeof US;
+type FlagIconMap = Record<string, FlagIconComponent>;
 
 const contactPoints = [
   {
@@ -84,14 +87,10 @@ export default function GetInTouchSection() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
+  const [flagComponents, setFlagComponents] = useState<FlagIconMap>({ US, AU });
   const { handleSubmit, isSubmitting, submitMessage, submitStatus } =
     useContactForm("Home page", () => setSelectedCountryCode("US"));
   const countryMenuRef = useRef<HTMLDivElement | null>(null);
-  const flagComponents = FlagIcons as Record<
-    string,
-    React.ComponentType<React.SVGProps<SVGSVGElement>>
-  >;
-
   const selectedCountry = useMemo(
     () =>
       countryPhoneOptions.find(
@@ -101,10 +100,6 @@ export default function GetInTouchSection() {
       countryPhoneOptions[0],
     [selectedCountryCode]
   );
-
-  const SelectedFlagIcon = selectedCountry
-    ? flagComponents[selectedCountry.code]
-    : undefined;
 
   useEffect(() => {
     const hydrationTimer = window.setTimeout(() => setIsHydrated(true), 0);
@@ -137,15 +132,20 @@ export default function GetInTouchSection() {
   const renderFlag = (countryCode: string) => {
     const FlagIcon = flagComponents[countryCode];
 
-    if (!FlagIcon) {
-      return (
-        <span className="text-[13px] font-medium text-[#6f6f6f]">
-          {countryCode}
-        </span>
-      );
+    if (FlagIcon) {
+      return <FlagIcon className="h-[16px] w-[22px] rounded-[2px]" />;
     }
 
-    return <FlagIcon className="h-[16px] w-[22px] rounded-[2px]" />;
+    return (
+      <span className="text-[10px] font-semibold text-[#6f6f6f]">
+        {countryCode}
+      </span>
+    );
+  };
+
+  const loadCountryFlags = async () => {
+    const flags = await import("country-flag-icons/react/3x2");
+    setFlagComponents(flags as unknown as FlagIconMap);
   };
 
   return (
@@ -277,17 +277,18 @@ export default function GetInTouchSection() {
                       type="button"
                       aria-label="Select country calling code"
                       aria-expanded={isCountryMenuOpen}
-                      onClick={() => setIsCountryMenuOpen((open) => !open)}
+                      onClick={() => {
+                        setIsCountryMenuOpen((open) => {
+                          if (!open && Object.keys(flagComponents).length <= 2) {
+                            void loadCountryFlags();
+                          }
+                          return !open;
+                        });
+                      }}
                       className="flex h-full w-fit max-w-[132px] items-center gap-[5px] bg-transparent pr-[2px] text-[#6f6f6f] outline-none"
                     >
                       <span className="flex items-center justify-center">
-                        {SelectedFlagIcon ? (
-                          <SelectedFlagIcon className="h-[16px] w-[22px] rounded-[2px]" />
-                        ) : (
-                          <span className="text-[13px] font-medium">
-                            {selectedCountry?.code ?? "US"}
-                          </span>
-                        )}
+                        {renderFlag(selectedCountry?.code ?? "US")}
                       </span>
                       <span className="whitespace-nowrap text-[13px] leading-none text-[#6f6f6f]">
                         {selectedCountry?.dialCode ?? "+1"}

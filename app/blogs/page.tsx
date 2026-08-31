@@ -1,5 +1,5 @@
 import BlogsGrid from "@/components/BlogsGrid";
-import GetInTouchSection from "@/components/GetInTouch";
+import LazyGetInTouch from "@/components/LazyGetInTouch";
 import PageHero from "@/components/PageHero";
 import { createPageMetadata } from "@/lib/metadata";
 import React from "react";
@@ -20,7 +20,7 @@ const page = () => {
         description={`Stay updated with practical ideas and system driven strategies across publishing, digital growth, and technology. Our team is built to help you scale with clarity.`}
       />
       <BlogsGrid />
-      <GetInTouchSection />
+      <LazyGetInTouch />
     </section>
   );
 };

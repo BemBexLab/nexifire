@@ -12,7 +12,7 @@ type BuildSmarterStat = {
   label: string;
 };
 
-type BuildSmarterProps = {
+export type BuildSmarterProps = {
   title: string;
   description: string;
   primaryButtonText: string;
@@ -101,11 +101,11 @@ const BuildSmarter = ({
           {/* Left Content */}
           <div className="relative z-10 flex min-h-[560px] items-end py-8 sm:min-h-[520px] sm:py-10 md:min-h-[600px] md:items-center md:py-16 lg:min-h-[630px]">
             <div className="w-fit max-w-full px-5 pt-16 font-jakarta sm:px-8 md:px-12 md:pt-24 lg:pt-[120px]">
-              <h2 className="whitespace-pre-line font-normal uppercase text-white">
+              <h2 className="whitespace-pre-line md:max-w-3/6 font-normal uppercase text-white">
                 {title}
               </h2>
 
-              <p className="mt-5 w-fit max-w-full whitespace-pre-line text-sm font-light leading-7 text-white/80 sm:text-base md:mt-6 md:text-[20px] md:leading-8">
+              <p className="mt-5 w-fit md:max-w-1/2 sm:max-w-full whitespace-pre-line text-sm font-light leading-7 text-white/80 sm:text-base md:mt-6 md:text-[20px] md:leading-8">
                 {description}
               </p>
 

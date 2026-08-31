@@ -1,21 +1,21 @@
 "use client";
 
-import * as FlagIcons from "country-flag-icons/react/3x2";
 import { motion } from "motion/react";
+import { AU, US } from "country-flag-icons/react/3x2";
 import React, { useEffect, useRef, useState } from "react";
 import { FiChevronDown, FiPlus } from "react-icons/fi";
 import { TfiArrowTopRight } from "react-icons/tfi";
-import { countryPhoneOptions } from "@/data/countryPhoneOptions";
+import {
+  countryPhoneOptions,
+} from "@/data/countryPhoneOptions";
 
-type FlagIconComponent = React.ComponentType<
-  React.SVGProps<SVGSVGElement> & { title?: string }
->;
-
-const flagIcons = FlagIcons as unknown as Record<string, FlagIconComponent>;
+type FlagIconComponent = typeof US;
+type FlagIconMap = Record<string, FlagIconComponent>;
 
 const CareerApplicationForm = () => {
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [flagIcons, setFlagIcons] = useState<FlagIconMap>({ US, AU });
   const [resumeName, setResumeName] = useState("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
     "idle",
@@ -26,8 +26,11 @@ const CareerApplicationForm = () => {
   const selectedCountry =
     countryPhoneOptions.find((country) => country.code === selectedCountryCode) ??
     countryPhoneOptions[0];
-  const SelectedFlag = flagIcons[selectedCountry.code];
 
+  const loadCountryFlags = async () => {
+    const flags = await import("country-flag-icons/react/3x2");
+    setFlagIcons(flags as unknown as FlagIconMap);
+  };
   useEffect(() => {
     const closeDropdown = (event: MouseEvent) => {
       if (
@@ -127,20 +130,30 @@ const CareerApplicationForm = () => {
                   aria-expanded={isCountryOpen}
                   aria-haspopup="listbox"
                   aria-label="Select country calling code"
-                  onClick={() => setIsCountryOpen((isOpen) => !isOpen)}
+                  onClick={() => {
+                    setIsCountryOpen((isOpen) => {
+                      if (!isOpen && Object.keys(flagIcons).length <= 2) {
+                        void loadCountryFlags();
+                      }
+                      return !isOpen;
+                    });
+                  }}
                   className="flex h-full w-fit max-w-[132px] shrink-0 items-center gap-[5px] bg-transparent pr-1 text-[#6f6f6f] outline-none"
                 >
                   <span className="flex h-[14px] w-[21px] shrink-0 items-center overflow-hidden rounded-[2px]">
-                    {SelectedFlag ? (
-                      <SelectedFlag
-                        title={selectedCountry.name}
-                        className="h-full w-full"
-                      />
-                    ) : (
-                      <span className="text-[10px] font-semibold text-[#6f6f6f]">
-                        {selectedCountry.code}
-                      </span>
-                    )}
+                    {(() => {
+                      const SelectedFlag = flagIcons[selectedCountry.code];
+                      return SelectedFlag ? (
+                        <SelectedFlag
+                          title={selectedCountry.name}
+                          className="h-full w-full"
+                        />
+                      ) : (
+                        <span className="text-[10px] font-semibold text-[#6f6f6f]">
+                          {selectedCountry.code}
+                        </span>
+                      );
+                    })()}
                   </span>
                   <span className="whitespace-nowrap text-[12px] font-medium leading-none text-[#6f6f6f]">
                     {selectedCountry.dialCode}
@@ -170,8 +183,6 @@ const CareerApplicationForm = () => {
                     className="absolute left-0 top-[calc(100%+6px)] z-50 max-h-[220px] w-[min(82vw,280px)] overflow-y-auto rounded-[5px] border border-[#cfcfcf] bg-white py-1 shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
                   >
                     {countryPhoneOptions.map((country) => {
-                      const CountryFlag = flagIcons[country.code];
-
                       return (
                         <button
                           key={country.code}
@@ -189,16 +200,19 @@ const CareerApplicationForm = () => {
                           }`}
                         >
                           <span className="flex h-[14px] w-[21px] shrink-0 items-center overflow-hidden rounded-[2px]">
-                            {CountryFlag ? (
-                              <CountryFlag
-                                title={country.name}
-                                className="h-full w-full"
-                              />
-                            ) : (
-                              <span className="text-[10px] font-semibold text-[#6f6f6f]">
-                                {country.code}
-                              </span>
-                            )}
+                            {(() => {
+                              const CountryFlag = flagIcons[country.code];
+                              return CountryFlag ? (
+                                <CountryFlag
+                                  title={country.name}
+                                  className="h-full w-full"
+                                />
+                              ) : (
+                                <span className="text-[10px] font-semibold text-[#6f6f6f]">
+                                  {country.code}
+                                </span>
+                              );
+                            })()}
                           </span>
                           <span className="min-w-0 flex-1 truncate">
                             {country.name}

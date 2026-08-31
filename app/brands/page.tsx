@@ -1,5 +1,5 @@
-import BuildSmarter from "@/components/BuildSmarter";
-import GetInTouchSection from "@/components/GetInTouch";
+import LazyBuildSmarter from "@/components/LazyBuildSmarter";
+import LazyGetInTouch from "@/components/LazyGetInTouch";
 import OurBrands from "@/components/OurBrands";
 import PageHero from "@/components/PageHero";
 import { createPageMetadata } from "@/lib/metadata";
@@ -21,7 +21,7 @@ const page = () => {
         description={`A strategic network of specialized entities, each meticulously engineered to solve complex growth challenges and provide high level infrastructure in the global market.`}
       />
       <OurBrands />
-      <BuildSmarter
+      <LazyBuildSmarter
         title={`Build your brand the\nway it should’ve been\nbuilt from day one`}
         description={`Choose the brands that are perfect for your goals—each one is created to\ntake your business forward with clarity and control.\n\nIf you're serious about building something that lasts, this is where it starts.`}
         primaryButtonText="Let's Talk"
@@ -31,7 +31,7 @@ const page = () => {
         backgroundImageSrc="/images/Frame 417 (1).png"
         backgroundImageAlt="Team meeting"
       />
-      <GetInTouchSection />
+      <LazyGetInTouch />
     </section>
   );
 };

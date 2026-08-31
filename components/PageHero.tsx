@@ -118,7 +118,7 @@ const PageHero = ({
   logos = defaultLogos,
 }: PageHeroProps) => {
   const hasEyebrow = eyebrow.trim().length > 0;
-  const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
+  const marqueeLogos = [...logos, ...logos];
 
   return (
     <section className="w-full bg-white">

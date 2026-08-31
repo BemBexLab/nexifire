@@ -1,6 +1,6 @@
-import BuildSmarter from "@/components/BuildSmarter";
-import GetInTouchSection from "@/components/GetInTouch";
 import HomeHero from "@/components/HomeHero";
+import LazyBuildSmarter from "@/components/LazyBuildSmarter";
+import LazyGetInTouch from "@/components/LazyGetInTouch";
 import LazyLatestBlogs from "@/components/LazyLatestBlogs";
 import LazyTestimonials from "@/components/LazyTestimonials";
 import LogoSlider from "@/components/LogoSlider";
@@ -38,10 +38,9 @@ areas.`}
         cards={whatWeDoCards}
       />
       <NotAnAgency />
-      <BuildSmarter
-        title={`BUILD SMARTER.
-GROW FASTER.`}
-        description={`Whether you're building a brand or scaling one, NexiFire\ngives you the structure, strategy, and execution to\nmove forward with clarity.`}
+      <LazyBuildSmarter
+        title={`BUILD SMARTER. GROW FASTER.`}
+        description={`Whether you're building a brand or scaling one, NexiFire gives you the structure, strategy, and execution to move forward with clarity.`}
         primaryButtonText="Let's Talk"
         primaryButtonHref="/contact"
         secondaryButtonText="See Our Work"
@@ -57,7 +56,7 @@ GROW FASTER.`}
       />
       <LazyTestimonials />
       <LazyLatestBlogs />
-      <GetInTouchSection />
+      <LazyGetInTouch />
     </section>
   );
 }

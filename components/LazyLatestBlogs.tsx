@@ -1,8 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 
 const LatestBlogs = dynamic(() => import("./LatestBlogs"), {
+  ssr: false,
   loading: () => (
     <section className="w-full bg-[#f5f5f5] py-16 md:py-20">
       <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
@@ -29,4 +31,40 @@ const LatestBlogs = dynamic(() => import("./LatestBlogs"), {
   ),
 });
 
-export default LatestBlogs;
+export default function LazyLatestBlogs() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      const fallbackTimer = window.setTimeout(() => setShouldLoad(true), 0);
+      return () => window.clearTimeout(fallbackTimer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "700px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={sectionRef}>
+      {shouldLoad ? (
+        <LatestBlogs />
+      ) : (
+        <div className="min-h-[430px]" aria-hidden="true" />
+      )}
+    </div>
+  );
+}

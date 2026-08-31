@@ -1,8 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 
 const TestimonialsSection = dynamic(() => import("./Testimonials"), {
+  ssr: false,
   loading: () => (
     <section className="w-full py-20">
       <div className="mx-auto max-w-[1480px] px-4">
@@ -54,4 +56,40 @@ const TestimonialsSection = dynamic(() => import("./Testimonials"), {
   ),
 });
 
-export default TestimonialsSection;
+export default function LazyTestimonials() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      const fallbackTimer = window.setTimeout(() => setShouldLoad(true), 0);
+      return () => window.clearTimeout(fallbackTimer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "700px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={sectionRef}>
+      {shouldLoad ? (
+        <TestimonialsSection />
+      ) : (
+        <div className="min-h-[470px]" aria-hidden="true" />
+      )}
+    </div>
+  );
+}

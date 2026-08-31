@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "motion/react";
-import React from "react";
 import Link from "next/link";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { LuPhoneCall } from "react-icons/lu";
@@ -23,33 +19,19 @@ const FooterCTA = () => {
               Nexifire is here to guide you to the right strategy and the right
               system.
             </p>
-            <Link href="/contact" className="mt-4 w-full sm:w-fit">
-              <motion.button
+            <Link href="/contact" className="group mt-4 w-full sm:w-fit">
+              <button
                 style={{
                   background:
                     "linear-gradient(90deg, #B24002 0%, #FF5B01 100%)",
                 }}
-                className="mt-2 flex min-h-[38px] w-full items-center justify-center gap-2 rounded-lg px-5 py-2 text-sm font-light text-white sm:w-auto sm:text-base"
-                whileHover={{
-                  y: -3,
-                  scale: 1.02,
-                  boxShadow: "0 10px 24px rgba(178,64,2,0.35)",
-                }}
-                whileTap={{ y: 0, scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                className="mt-2 flex min-h-[38px] w-full items-center justify-center gap-2 rounded-lg px-5 py-2 text-sm font-light text-white transition-transform duration-200 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_10px_24px_rgba(178,64,2,0.35)] active:translate-y-0 active:scale-[0.98] sm:w-auto sm:text-base"
               >
                 Schedule a Free Consultation
-                <motion.span
-                  whileHover={{ x: 4, y: -2 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 18,
-                  }}
-                >
+                <span className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-0.5">
                   <TfiArrowTopRight size={20} />
-                </motion.span>
-              </motion.button>
+                </span>
+              </button>
             </Link>
           </div>
 

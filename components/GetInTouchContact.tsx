@@ -1,17 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import * as FlagIcons from "country-flag-icons/react/3x2";
+import { AU, US } from "country-flag-icons/react/3x2";
 import { countryPhoneOptions } from "@/data/countryPhoneOptions";
 import { motion } from "motion/react";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { useContactForm } from "@/components/useContactForm";
 
-type FlagIconComponent = React.ComponentType<
-  React.SVGProps<SVGSVGElement> & { title?: string }
->;
-
-const flagIcons = FlagIcons as unknown as Record<string, FlagIconComponent>;
+type FlagIconComponent = typeof US;
+type FlagIconMap = Record<string, FlagIconComponent>;
 
 const contactItems = [
   {
@@ -117,6 +114,7 @@ const contactItems = [
 const GetInTouchContact = () => {
   const [selectedCountryCode, setSelectedCountryCode] = useState("US");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [flagIcons, setFlagIcons] = useState<FlagIconMap>({ US, AU });
   const { handleSubmit, isSubmitting, submitMessage, submitStatus } =
     useContactForm("Contact page", () => setSelectedCountryCode("US"));
   const countryDropdownRef = useRef<HTMLDivElement>(null);
@@ -124,8 +122,11 @@ const GetInTouchContact = () => {
     countryPhoneOptions.find(
       (country) => country.code === selectedCountryCode,
     ) ?? countryPhoneOptions[0];
-  const SelectedFlag = flagIcons[selectedCountry.code];
 
+  const loadCountryFlags = async () => {
+    const flags = await import("country-flag-icons/react/3x2");
+    setFlagIcons(flags as unknown as FlagIconMap);
+  };
   useEffect(() => {
     const closeDropdown = (event: MouseEvent) => {
       if (
@@ -224,20 +225,32 @@ const GetInTouchContact = () => {
                       type="button"
                       aria-expanded={isCountryOpen}
                       aria-haspopup="listbox"
-                      onClick={() => setIsCountryOpen((isOpen) => !isOpen)}
+                      onClick={() => {
+                        setIsCountryOpen((isOpen) => {
+                          if (!isOpen && Object.keys(flagIcons).length <= 2) {
+                            void loadCountryFlags();
+                          }
+                          return !isOpen;
+                        });
+                      }}
                       className="flex h-full shrink-0 items-center gap-2 px-3"
                     >
                       <span className="flex h-[14px] w-[21px] items-center overflow-hidden rounded-[2px]">
-                        {SelectedFlag ? (
-                          <SelectedFlag
-                            title={selectedCountry.name}
-                            className="h-full w-full"
-                          />
-                        ) : (
-                          <span className="text-[10px] font-semibold text-[#6f6f6f]">
-                            {selectedCountry.code}
-                          </span>
-                        )}
+                        <span className="text-[16px] leading-none" aria-hidden="true">
+                          {(() => {
+                            const FlagIcon = flagIcons[selectedCountry.code];
+                            return FlagIcon ? (
+                              <FlagIcon
+                                title={selectedCountry.name}
+                                className="h-full w-full"
+                              />
+                            ) : (
+                              <span className="text-[10px] font-semibold text-[#6f6f6f]">
+                                {selectedCountry.code}
+                              </span>
+                            );
+                          })()}
+                        </span>
                       </span>
                       <span className="text-[12px] font-medium text-[#6f6f6f]">
                         {selectedCountry.dialCode}
@@ -265,8 +278,6 @@ const GetInTouchContact = () => {
                       className="absolute left-0 top-[46px] z-50 max-h-[220px] w-full overflow-y-auto rounded-[5px] border border-[#bababa] bg-white py-1 shadow-[0_10px_24px_rgba(0,0,0,0.12)] sm:w-[300px]"
                     >
                       {countryPhoneOptions.map((country) => {
-                        const CountryFlag = flagIcons[country.code];
-
                         return (
                           <button
                             key={country.code}
@@ -280,16 +291,19 @@ const GetInTouchContact = () => {
                             className="flex w-full items-center gap-2 px-3 py-2 text-left text-[12px] text-[#4a4a4a] transition hover:bg-[#f2f2f2]"
                           >
                             <span className="flex h-[14px] w-[21px] shrink-0 items-center overflow-hidden rounded-[2px]">
-                              {CountryFlag ? (
-                                <CountryFlag
-                                  title={country.name}
-                                  className="h-full w-full"
-                                />
-                              ) : (
-                                <span className="text-[10px] font-semibold text-[#6f6f6f]">
-                                  {country.code}
-                                </span>
-                              )}
+                              {(() => {
+                                const CountryFlag = flagIcons[country.code];
+                                return CountryFlag ? (
+                                  <CountryFlag
+                                    title={country.name}
+                                    className="h-full w-full"
+                                  />
+                                ) : (
+                                  <span className="text-[10px] font-semibold text-[#6f6f6f]">
+                                    {country.code}
+                                  </span>
+                                );
+                              })()}
                             </span>
                             <span className="min-w-0 flex-1 truncate">
                               {country.name}
