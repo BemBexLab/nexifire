@@ -83,11 +83,10 @@ const TriangleParticle = ({
 const HomeHero = () => {
   const [animatedCount, setAnimatedCount] = useState(0);
   const [cardTiltDone, setCardTiltDone] = useState(false);
-  const [loaderComplete, setLoaderComplete] = useState(false);
   const [isDesktopLayout, setIsDesktopLayout] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
   const isHeroInView = useInView(heroRef, { amount: 0.25, once: true });
-  const shouldAnimate = loaderComplete && isHeroInView;
+  const shouldAnimate = isHeroInView;
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   const heroDescription =
@@ -105,26 +104,6 @@ const HomeHero = () => {
     { x: -36, y: 178, rotate: -48, scale: 0.76, delay: 0.56 },
     { x: -48, y: 72, rotate: -30, scale: 0.66, delay: 0.62 },
   ];
-
-  useEffect(() => {
-    const handleLoaderComplete = () => setLoaderComplete(true);
-    const loaderCompletionTimer =
-      document.documentElement.dataset.nexifireLoaderComplete === "true"
-        ? window.setTimeout(handleLoaderComplete, 0)
-        : undefined;
-
-    window.addEventListener("nexifire:loader-complete", handleLoaderComplete);
-    return () => {
-      if (loaderCompletionTimer !== undefined) {
-        window.clearTimeout(loaderCompletionTimer);
-      }
-
-      window.removeEventListener(
-        "nexifire:loader-complete",
-        handleLoaderComplete,
-      );
-    };
-  }, []);
 
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1280px)");

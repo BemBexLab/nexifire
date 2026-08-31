@@ -1,10 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-
-const FIRST_VISIT_KEY = "nexifire-loader-seen";
-const LOADER_COMPLETE_EVENT = "nexifire:loader-complete";
+import { useEffect, useState } from "react";
 
 type LoaderOverlayProps = {
   label?: string;
@@ -51,108 +47,25 @@ export function LoaderOverlay({
   );
 }
 
-const SiteLoadingScreen = () => {
-  const pathname = usePathname();
+type DelayedLoaderOverlayProps = LoaderOverlayProps & {
+  delayMs?: number;
+};
+
+export function DelayedLoaderOverlay({
+  label,
+  delayMs = 180,
+}: DelayedLoaderOverlayProps) {
   const [visible, setVisible] = useState(false);
-  const [label, setLabel] = useState("Preparing the ecosystem");
-  const showTimer = useRef<number | null>(null);
-  const hideTimer = useRef<number | null>(null);
-  const maxTimer = useRef<number | null>(null);
-  const previousPathname = useRef(pathname);
-  const pendingNavigation = useRef(false);
-
-  const clearTimers = () => {
-    [showTimer, hideTimer, maxTimer].forEach((timer) => {
-      if (timer.current !== null) {
-        window.clearTimeout(timer.current);
-        timer.current = null;
-      }
-    });
-  };
-
-  const completeLoading = () => {
-    setVisible(false);
-    document.documentElement.dataset.nexifireLoaderComplete = "true";
-    window.dispatchEvent(new Event(LOADER_COMPLETE_EVENT));
-  };
 
   useEffect(() => {
-    const hasSeenLoader = window.sessionStorage.getItem(FIRST_VISIT_KEY);
+    const timer = window.setTimeout(() => setVisible(true), delayMs);
 
-    if (!hasSeenLoader) {
-      window.sessionStorage.setItem(FIRST_VISIT_KEY, "true");
-      setLabel("Preparing the ecosystem");
-      setVisible(true);
-      hideTimer.current = window.setTimeout(completeLoading, 1450);
-    } else {
-      window.requestAnimationFrame(completeLoading);
-    }
-
-    return clearTimers;
-  }, []);
-
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (
-        event.defaultPrevented ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey ||
-        event.button !== 0
-      ) {
-        return;
-      }
-
-      const link = (event.target as HTMLElement | null)?.closest("a");
-      if (!link) return;
-
-      const href = link.getAttribute("href");
-      const target = link.getAttribute("target");
-      if (!href || target === "_blank" || href.startsWith("#")) return;
-
-      const url = new URL(href, window.location.href);
-      const isSameOrigin = url.origin === window.location.origin;
-      const isSamePath = url.pathname === window.location.pathname;
-      if (!isSameOrigin || isSamePath) return;
-
-      clearTimers();
-      pendingNavigation.current = true;
-      setLabel("Loading the next page");
-      showTimer.current = window.setTimeout(() => setVisible(true), 180);
-      maxTimer.current = window.setTimeout(() => {
-        pendingNavigation.current = false;
-        completeLoading();
-      }, 2600);
-    };
-
-    document.addEventListener("click", handleDocumentClick, true);
-    return () =>
-      document.removeEventListener("click", handleDocumentClick, true);
-  }, []);
-
-  useEffect(() => {
-    if (previousPathname.current === pathname) return;
-    previousPathname.current = pathname;
-
-    if (showTimer.current !== null) {
-      window.clearTimeout(showTimer.current);
-      showTimer.current = null;
-    }
-
-    if (pendingNavigation.current) {
-      pendingNavigation.current = false;
-      if (visible) {
-        hideTimer.current = window.setTimeout(completeLoading, 420);
-      } else {
-        completeLoading();
-      }
-    }
-  }, [pathname, visible]);
+    return () => window.clearTimeout(timer);
+  }, [delayMs]);
 
   if (!visible) return null;
 
   return <LoaderOverlay label={label} />;
-};
+}
 
-export default SiteLoadingScreen;
+export default DelayedLoaderOverlay;
