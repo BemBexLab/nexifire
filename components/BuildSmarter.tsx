@@ -100,8 +100,8 @@ const BuildSmarter = ({
 
           {/* Left Content */}
           <div className="relative z-10 flex min-h-[560px] items-end py-8 sm:min-h-[520px] sm:py-10 md:min-h-[600px] md:items-center md:py-16 lg:min-h-[630px]">
-            <div className="w-fit max-w-full px-5 pt-16 font-jakarta sm:px-8 md:px-12 md:pt-24 lg:pt-[120px]">
-              <h2 className="whitespace-pre-line md:max-w-3/6 font-normal uppercase text-white">
+            <div className="w-full max-w-full px-5 pt-16 font-jakarta sm:px-8 md:px-12 md:pt-24 lg:pt-[120px]">
+              <h2 className="w-full font-normal uppercase text-white md:max-w-[50%]">
                 {title}
               </h2>
 
