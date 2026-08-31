@@ -19,7 +19,7 @@ const getScrollOffset = () => {
   return nav.getBoundingClientRect().height + EXTRA_SCROLL_OFFSET;
 };
 
-const scrollToSection = (sectionId: string, behavior: ScrollBehavior) => {
+const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
 
   if (!section) {
@@ -31,7 +31,6 @@ const scrollToSection = (sectionId: string, behavior: ScrollBehavior) => {
 
   window.scrollTo({
     top: Math.max(nextTop, 0),
-    behavior,
   });
 
   return true;
@@ -75,7 +74,7 @@ export const useSidebarSectionNavigation = (sections: readonly Section[]) => {
       frameId = requestAnimationFrame(updateActiveTab);
     };
 
-    const syncHashSection = (behavior: ScrollBehavior = "auto") => {
+    const syncHashSection = () => {
       const hashSectionId = window.location.hash.replace("#", "");
 
       if (!hashSectionId || !sections.some(({ id }) => id === hashSectionId)) {
@@ -86,7 +85,7 @@ export const useSidebarSectionNavigation = (sections: readonly Section[]) => {
       setActiveTab(hashSectionId);
 
       requestAnimationFrame(() => {
-        scrollToSection(hashSectionId, behavior);
+        scrollToSection(hashSectionId);
         scheduleUpdate();
       });
     };
@@ -115,7 +114,7 @@ export const useSidebarSectionNavigation = (sections: readonly Section[]) => {
       window.history.pushState(null, "", `#${sectionId}`);
     }
 
-    scrollToSection(sectionId, "smooth");
+    scrollToSection(sectionId);
   };
 
   return {

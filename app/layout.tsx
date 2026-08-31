@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import FooterCTA from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 
 const mulish = localFont({
   src: "../public/fonts/Mulish,Plus_Jakarta_Sans/Mulish/Mulish-VariableFont_wght.ttf",
@@ -52,10 +51,10 @@ export default function RootLayout({
         <div className="relative z-[100]">
           <NavBar />
         </div>
-        <SmoothScroll>
+        <>
           {children}
           <FooterCTA />
-        </SmoothScroll>
+        </>
       </body>
     </html>
   );
