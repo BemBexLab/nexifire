@@ -22,8 +22,8 @@ const page = () => {
       />
       <OurBrands />
       <LazyBuildSmarter
-        title={`Build your brand the\nway it should’ve been\nbuilt from day one`}
-        description={`Choose the brands that are perfect for your goals—each one is created to\ntake your business forward with clarity and control.\n\nIf you're serious about building something that lasts, this is where it starts.`}
+        title={`Build your brand the way it should’ve been built from day one`}
+        description={`Choose the brands that are perfect for your goals—each one is created to take your business forward with clarity and control.\n\nIf you're serious about building something that lasts, this is where it starts.`}
         primaryButtonText="Let's Talk"
         primaryButtonHref="/contact"
         secondaryButtonText="See Our Work"

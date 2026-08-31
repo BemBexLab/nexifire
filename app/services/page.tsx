@@ -54,8 +54,8 @@ const page = () => {
         <WhatWeDo heading="The NexiFire Model" cards={serviceWhatWeDoCards} />
       </div>
       <LazyBuildSmarter
-        title={`Get a Custom Growth\nSystem and Build Your\nEcosystem`}
-        description={`We design and deploy the system that makes sure each service is handled\nby a specialist.`}
+        title={`Get a Custom Growth System and Build Your Ecosystem`}
+        description={`We design and deploy the system that makes sure each service is handled by a specialist.`}
         primaryButtonText="Consult With NexiFire"
         primaryButtonHref="/contact"
         secondaryButtonText="Visit Our Brands"
