@@ -34,24 +34,24 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Sophie Lane",
+    name: "Olivia James",
     avatar: "/images/Ellipse 16.png",
     review:
-      "Their process gave me confidence from day one. Every milestone was clearly planned, and the team made sure my project moved forward smoothly without confusion or delays.",
+      "Before Nexifre, I was trying to manage everything separately, but after working with them, we finally have a clear direction and structured approach towards success. They handled marketing content creation for my website and my book marketing as well.  I felt so satisfied with their work. I worked with Web Geeks Global company and The Quill Book. The biggest difference was how everything worked together. Each part of the process was handled by the right specialists, but it all felt connected and well-managed.",
   },
   {
     id: 5,
-    name: "Marcus Lee",
+    name: "Alex Williams",
     avatar: "/images/Ellipse 16 (1).png",
     review:
-    "From branding to launch, everything felt organized and intentional. I appreciated how responsive the team was and how they connected every part of the work into one clear strategy.",
+    "My name is Alex, and I am running an IT services company. I have worked with the Nexifire brand, and I would say their work is very professional, as they deliver to me on time, as well as whatever content and illustrations for my website they created, I liked them. I also made some edits in them, which were done with great attention, and that's what impressed me the most.",
   },
   {
     id: 6,
-    name: "Elena Cruz",
+    name: "Ernest Santillanes",
     avatar: "/images/Ellipse 16 (2).png",
     review:
-      "Working with them made the whole journey stress-free. They handled details carefully, communicated well, and delivered a polished result that felt aligned with my goals.",
+      "I am using Ink Founders for my fictional book, and they have been incredible with editing, formatting, and publishing. They follow my instructions carefully for every chapter and make adjustments based on my edits. I’m also very impressed with how they optimized my book for Amazon after publishing.",
   },
 ];
 
@@ -134,9 +134,14 @@ export default function TestimonialsSection() {
                   >
                     <Stars />
 
-                    <p className="text-base leading-[1.58] text-[#7a7a7a]">
-                      {item.review}
-                    </p>
+                    <div
+                      className="reviews-scroll h-[150px] overflow-y-scroll pr-2"
+                      aria-label={`${item.name} review`}
+                    >
+                      <p className="text-base leading-[1.58] text-[#7a7a7a]">
+                        {item.review}
+                      </p>
+                    </div>
 
                     <div className="mt-auto flex items-center gap-[12px] pt-[18px]">
                       <Image
@@ -174,6 +179,17 @@ export default function TestimonialsSection() {
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .reviews-scroll {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        .reviews-scroll::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }
