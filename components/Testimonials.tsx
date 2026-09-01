@@ -35,21 +35,21 @@ const testimonials: Testimonial[] = [
   {
     id: 4,
     name: "Olivia James",
-    avatar: "/images/Ellipse 16.png",
+    avatar: "https://i.pravatar.cc/100?img=4",
     review:
       "Before Nexifre, I was trying to manage everything separately, but after working with them, we finally have a clear direction and structured approach towards success. They handled marketing content creation for my website and my book marketing as well.  I felt so satisfied with their work. I worked with Web Geeks Global company and The Quill Book. The biggest difference was how everything worked together. Each part of the process was handled by the right specialists, but it all felt connected and well-managed.",
   },
   {
     id: 5,
     name: "Alex Williams",
-    avatar: "/images/Ellipse 16 (1).png",
+    avatar: "https://i.pravatar.cc/100?img=6",
     review:
     "My name is Alex, and I am running an IT services company. I have worked with the Nexifire brand, and I would say their work is very professional, as they deliver to me on time, as well as whatever content and illustrations for my website they created, I liked them. I also made some edits in them, which were done with great attention, and that's what impressed me the most.",
   },
   {
     id: 6,
     name: "Ernest Santillanes",
-    avatar: "/images/Ellipse 16 (2).png",
+    avatar: "https://i.pravatar.cc/100?img=5",
     review:
       "I am using Ink Founders for my fictional book, and they have been incredible with editing, formatting, and publishing. They follow my instructions carefully for every chapter and make adjustments based on my edits. I’m also very impressed with how they optimized my book for Amazon after publishing.",
   },
@@ -87,6 +87,8 @@ export default function TestimonialsSection() {
   }, []);
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedTestimonial, setSelectedTestimonial] =
+    useState<Testimonial | null>(null);
 
   useEffect(() => {
     if (slides.length <= 1) return;
@@ -97,6 +99,19 @@ export default function TestimonialsSection() {
 
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  useEffect(() => {
+    if (!selectedTestimonial) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedTestimonial(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedTestimonial]);
 
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20">
@@ -135,13 +150,22 @@ export default function TestimonialsSection() {
                     <Stars />
 
                     <div
-                      className="reviews-scroll h-[150px] overflow-y-scroll pr-2"
+                      className="review-preview h-[150px] overflow-hidden"
                       aria-label={`${item.name} review`}
                     >
                       <p className="text-base leading-[1.58] text-[#7a7a7a]">
                         {item.review}
                       </p>
                     </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTestimonial(item)}
+                      className="mt-4 self-start text-sm font-semibold text-[#B24002] underline underline-offset-4 transition-colors hover:text-[#8f3200] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B24002] focus-visible:ring-offset-2"
+                      aria-label={`Read the full testimonial from ${item.name}`}
+                    >
+                      Read more
+                    </button>
 
                     <div className="mt-auto flex items-center gap-[12px] pt-[18px]">
                       <Image
@@ -180,14 +204,63 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        .reviews-scroll {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+      {selectedTestimonial && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedTestimonial(null);
+            }
+          }}
+        >
+          <div
+            className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[12px] bg-white p-6 shadow-2xl sm:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`testimonial-title-${selectedTestimonial.id}`}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedTestimonial(null)}
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-2xl leading-none text-[#4d4d4d] transition-colors hover:bg-[#f3f3f3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B24002]"
+              aria-label="Close testimonial"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
 
-        .reviews-scroll::-webkit-scrollbar {
-          display: none;
+            <div className="pr-8">
+              <Stars />
+              <div className="mb-4 flex items-center gap-3">
+                <Image
+                  src={selectedTestimonial.avatar}
+                  alt={selectedTestimonial.name}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 rounded-full object-cover"
+                  sizes="56px"
+                />
+                <h3
+                  id={`testimonial-title-${selectedTestimonial.id}`}
+                  className="text-xl font-semibold text-[#4d4d4d]"
+                >
+                  {selectedTestimonial.name}
+                </h3>
+              </div>
+              <p className="text-base leading-[1.7] text-[#7a7a7a]">
+                {selectedTestimonial.review}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        .review-preview p {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 6;
         }
       `}</style>
     </section>
