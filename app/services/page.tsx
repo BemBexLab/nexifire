@@ -24,7 +24,7 @@ const page = () => {
         description={`NexiFire connects strategy, execution, and specialized expertise through a network of focused brands, so every part of your business is built to scale.`}
         primaryButtonText="Explore Our Portfolio"
         primaryButtonHref="/brands"
-        secondaryButtonText="Consult with the Head Office"
+        secondaryButtonText="Get a Growth Strategy"
         secondaryButtonHref="/contact"
       />
       <WhoWeAre
