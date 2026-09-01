@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
     name: "Olivia James",
     avatar: "https://i.pravatar.cc/100?img=4",
     review:
-      "Before Nexifre, I was trying to manage everything separately, but after working with them, we finally have a clear direction and structured approach towards success. They handled marketing content creation for my website and my book marketing as well.  I felt so satisfied with their work. I worked with Web Geeks Global company and The Quill Book. The biggest difference was how everything worked together. Each part of the process was handled by the right specialists, but it all felt connected and well-managed.",
+      "Before Nexifire, I was trying to manage everything separately, but after working with them, we finally have a clear direction and structured approach towards success. They handled marketing content creation for my website and my book marketing as well.  I felt so satisfied with their work. I worked with Web Geeks Global company and The Quill Book. The biggest difference was how everything worked together. Each part of the process was handled by the right specialists, but it all felt connected and well-managed.",
   },
   {
     id: 5,
