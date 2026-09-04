@@ -34,6 +34,11 @@ export const metadata: Metadata = {
   title: "NexiFire: Create, Build, Grow",
   description:
     "NexiFire is a global growth ecosystem connecting specialized expertise across publishing, technology, content, marketing, and digital strategy.",
+  alternates: {
+    languages: {
+      "en-US": "https://www.nexifire.com",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -42,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
+<html
+      lang="en-US"
       suppressHydrationWarning
       className={`${mulish.variable} ${jakartaSans.variable} ${nunito.variable} h-full antialiased`}
     >
