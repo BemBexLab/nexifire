@@ -46,7 +46,7 @@ function createRestrictedCountryResponse(): NextResponse {
       :root {
         color-scheme: light;
         font-family: Arial, Helvetica, sans-serif;
-        background: #f6f6f6;
+        background: #f3f1ed;
         color: #1f1f1f;
       }
 
@@ -54,90 +54,141 @@ function createRestrictedCountryResponse(): NextResponse {
 
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        background:
-          radial-gradient(circle at 15% 10%, rgba(178, 64, 2, 0.12), transparent 30%),
-          #f6f6f6;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(24px, 4vw, 56px) clamp(20px, 6vw, 96px);
+        background: #f3f1ed;
+        border-left: 6px solid #b24002;
       }
 
-      main {
-        width: min(100%, 680px);
-        padding: clamp(32px, 7vw, 72px);
-        border: 1px solid rgba(31, 31, 31, 0.12);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.86);
-        box-shadow: 0 24px 80px rgba(31, 31, 31, 0.1);
-        text-align: center;
+      header,
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      header {
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba(31, 31, 31, 0.22);
       }
 
       .mark {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 48px;
+        margin: 0;
         color: #b24002;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
-        letter-spacing: 0.16em;
+        letter-spacing: -0.02em;
         text-transform: uppercase;
       }
 
-      .mark::before {
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #b24002;
-        box-shadow: 0 0 0 7px rgba(178, 64, 2, 0.12);
-      }
-
-      .eyebrow {
-        margin: 0 0 16px;
-        color: #b24002;
-        font-size: 13px;
-        font-weight: 700;
+      .header-note,
+      .code {
+        color: #6b6965;
+        font-size: 11px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
+      main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 28%);
+        align-items: center;
+        gap: clamp(40px, 9vw, 150px);
+        width: 100%;
+        max-width: 1480px;
+        padding: clamp(72px, 12vh, 160px) 0;
+      }
+
       h1 {
-        max-width: 520px;
-        margin: 0 auto 20px;
-        font-size: clamp(36px, 7vw, 64px);
-        line-height: 0.98;
-        letter-spacing: -0.05em;
+        max-width: 980px;
+        margin: 0;
+        font-size: clamp(58px, 10vw, 164px);
+        font-weight: 700;
+        line-height: 0.84;
+        letter-spacing: -0.085em;
       }
 
-      p {
-        max-width: 480px;
-        margin: 0 auto;
-        color: #5f5f5f;
-        font-size: 17px;
-        line-height: 1.65;
+      h1 span {
+        display: block;
+        color: #b24002;
       }
 
-      .code {
-        margin-top: 40px;
-        color: #969696;
+      .copy {
+        max-width: 320px;
+        padding-left: 24px;
+        border-left: 1px solid rgba(31, 31, 31, 0.35);
+      }
+
+      .eyebrow {
+        margin: 0 0 20px;
+        color: #b24002;
         font-size: 12px;
-        letter-spacing: 0.08em;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .copy p {
+        margin: 0;
+        color: #55524e;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      footer {
+        padding-top: 24px;
+        border-top: 1px solid rgba(31, 31, 31, 0.22);
+      }
+
+      .footer-line {
+        width: 72px;
+        height: 3px;
+        background: #b24002;
+      }
+
+      @media (max-width: 720px) {
+        body { border-left-width: 4px; }
+
+        .header-note { display: none; }
+
+        main {
+          display: block;
+          padding: 84px 0;
+        }
+
+        h1 {
+          font-size: clamp(58px, 17vw, 112px);
+        }
+
+        .copy {
+          margin-top: 64px;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
+    <header>
       <div class="mark">NexiFire</div>
-      <p class="eyebrow">A little patience</p>
-      <h1>Coming soon to your country.</h1>
-      <p>
-        NexiFire is currently unavailable in your region. We are working to
-        bring our ecosystem to more countries. Please check back soon.
-      </p>
-      <div class="code">HTTP 403 · REGION RESTRICTED</div>
+      <div class="header-note">Global growth ecosystem</div>
+    </header>
+    <main>
+      <h1>Coming <span>soon.</span></h1>
+      <div class="copy">
+        <p class="eyebrow">Not available in your country</p>
+        <p>
+          NexiFire is not currently available in your region. We are working
+          to bring our ecosystem to more countries. Please check back soon.
+        </p>
+      </div>
     </main>
+    <footer>
+      <div class="footer-line" aria-hidden="true"></div>
+      <div class="code">HTTP 403 · Region restricted</div>
+    </footer>
   </body>
 </html>`,
     {
